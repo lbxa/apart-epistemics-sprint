@@ -4,6 +4,7 @@
 
 Every record, newest first. See [README](./README.md) for when and how to write one.
 
+- [Parallel sandbox lifecycle and stepped mechanics tests](./parallel-sandbox-lifecycle-and-stepped-mechanics-tests.md) — 2026-11-14
 - [Completed C1 results extend the frozen paper cohort](./completed-c1-results-extend-the-frozen-paper-cohort.md) — 2026-11-09
 - [Report editorial pass preserves audited evidence](./report-editorial-pass-preserves-audited-evidence.md) — 2026-11-09
 - [Report examples use monochrome model tabs](./report-examples-use-monochrome-model-tabs.md) — 2026-11-09

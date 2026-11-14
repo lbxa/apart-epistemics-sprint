@@ -16,16 +16,18 @@ async def test_actual_network_filesystem_and_identity_isolation(tmp_path):
         policy_dir = tmp_path / "policy"
         policy_dir.mkdir()
         gateway = await asyncio.to_thread(arena.start_gateway, policy_dir, "Interface")
-        sandboxes, identities = [], {}
+        documents = {}
         for actor in ("creator", "challenger"):
             docs = tmp_path / actor
             docs.mkdir(mode=0o755)
             (docs / "rules.md").write_text("Public game rules")
-            sandbox, address = await asyncio.to_thread(
-                arena.start_participant, actor, docs, gateway
-            )
-            sandboxes.append((sandbox, address))
-            identities[address] = Identity(actor_id=actor, token=f"private-{actor}")
+            documents[actor] = docs
+        started = await arena.start_participants(documents, gateway)
+        sandboxes = list(started.values())
+        identities = {
+            address: Identity(actor_id=actor, token=f"private-{actor}")
+            for actor, (_, address) in started.items()
+        }
         policy = GatewayPolicy(
             upstream="http://unreachable.invalid",
             episode_id="episode-isolation",

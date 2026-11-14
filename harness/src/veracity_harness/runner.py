@@ -888,6 +888,7 @@ async def run_experiment(
                                 if smoke
                                 else experiment.actor_ids
                             )
+                            mounts = {}
                             for actor in active_actors:
                                 stage = "participant_setup"
                                 docs = episode_dir / "documents" / actor
@@ -910,9 +911,10 @@ async def run_experiment(
                                 mounted = arena.staging / actor
                                 shutil.copytree(docs, mounted)
                                 mounted.chmod(0o755)
-                                sandbox, address = await asyncio.to_thread(
-                                    arena.start_participant, actor, mounted, gateway, shared
-                                )
+                                mounts[actor] = mounted
+                            stage = "participant_setup"
+                            sandboxes = await arena.start_participants(mounts, gateway, shared)
+                            for actor, (sandbox, address) in sandboxes.items():
                                 identities[address] = Identity(actor_id=actor, token=f"dev-{actor}")
                                 memory_root = (
                                     directory / "memory"
