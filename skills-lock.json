@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "agentlens-tracing-instrument": {
+      "source": "wandb/skills",
+      "sourceType": "github",
+      "skillPath": "skills/agentlens-tracing-instrument/SKILL.md",
+      "computedHash": "06fe347a41d27f25b63e699602c326a445b6b4923bdef051e18102a83e375c10"
+    },
     "deep-agents-core": {
       "source": "langchain-ai/langchain-skills",
       "sourceType": "github",
@@ -132,6 +138,24 @@
       "sourceType": "github",
       "skillPath": "config/skills/swarm/SKILL.md",
       "computedHash": "4091bd7cf88d408a0724d4cc2be2c0c0fdf6fbe4bd3e700c4cabed58900823bb"
+    },
+    "wandb-autoresearch": {
+      "source": "wandb/skills",
+      "sourceType": "github",
+      "skillPath": "skills/wandb-autoresearch/SKILL.md",
+      "computedHash": "73a6d5e34eaea41a01b76ea4ff178756d201b401fd485b35a99c2ca38dceccf3"
+    },
+    "wandb-eval-tables": {
+      "source": "wandb/skills",
+      "sourceType": "github",
+      "skillPath": "skills/wandb-eval-tables/SKILL.md",
+      "computedHash": "5fbcf6c8193624961a4ce77c026e894ef4d991651807396a87275f4dcb2a26e3"
+    },
+    "wandb-primary": {
+      "source": "wandb/skills",
+      "sourceType": "github",
+      "skillPath": "skills/wandb-primary/SKILL.md",
+      "computedHash": "5a7183618af4ec794e1ac794507b33b0e444b49e9074f09362e8b31ab3d14963"
     }
   }
 }
