@@ -10,7 +10,7 @@ tests, pinned Foundry formatting/unit/fuzz/invariant tests, deployment artifact
 consistency, `cargo fmt --all -- --check`, Clippy with warnings denied, Cargo tests
 (including doctests), builds all workspace targets, and runs Python harness
 regressions plus real Python → Rust → Anvil acceptance tests. Dependencies must
-match `Cargo.lock` and `harness/requirements.lock`; setup creates `harness/.venv`.
+match `Cargo.lock` and `harness/uv.lock`; setup creates `harness/.venv`.
 The Rust toolchain is pinned in `rust-toolchain.toml`.
 
 Iterate with `cargo test -p veracity-game-service <test_name>` or the owning crate's

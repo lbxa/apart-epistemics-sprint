@@ -66,16 +66,16 @@ Identify:
 
 Protect likely change points. Do not abstract things just because they exist.
 
-Common marketplace and workflow axes of change:
+Common experiment and protocol axes of change:
 
-- Marketplaces will change
+- Model providers and experiment treatments will change
 - Vendor APIs will fail differently
-- Merchant rules will vary
-- Listing statuses will multiply
+- Participant observation rules will vary
+- Episode and transaction lifecycles will evolve
 - Retry behavior will become more nuanced
 - Operators will need better diagnostics
-- Pricing logic will become more strategic
-- Sync jobs will need resumability
+- Cost accounting must remain auditable
+- Chain recovery and experiment sessions need resumability
 - Rate limits will become a first-class concern
 
 ## Ownership Rules
@@ -173,9 +173,9 @@ For each invariant, specify:
 
 Examples:
 
-- A listing cannot be removed if it is already sold
-- A merchant sync run cannot complete if child marketplace jobs are still pending
-- A product price cannot go below landed cost unless liquidation mode is explicitly enabled
+- A reveal must match the juror's confirmed commitment
+- Settlement cannot run before the contract's reveal deadline
+- Participant history settings cannot delete the operator's retained audit transcript
 - A retry cannot create duplicate external side effects
 - A status transition must be valid from the current state
 
@@ -207,11 +207,11 @@ If business logic answers "should we", "can we", "how much", "which option", or 
 
 Examples:
 
-- RemovalEligibilityPolicy
-- PriceFloorPolicy
+- GatewayPolicy
+- Treatment
 - RetryEligibilityPolicy
-- MerchantSyncPriorityPolicy
-- ListingPublicationPolicy
+- SessionBudget
+- ChatPolicy
 
 Policies must be deterministic where possible and easy to unit test.
 
@@ -249,10 +249,10 @@ Repositories must expose intention-revealing methods.
 
 Prefer:
 
-- claimNextPendingJob()
-- markListingAlreadyClosed()
-- recordRemovalFailure()
-- loadActiveSyncRun()
+- `reserve()`
+- `record_receipt()`
+- `pending_operations()`
+- `get_episode()`
 
 Avoid:
 
@@ -339,10 +339,10 @@ Prefer vertical slices by business capability.
 
 Good:
 
-- listing-removal/
-- merchant-sync/
-- email-routing/
-- product-classification/
+- `core/src/game/`
+- `core/src/chain/`
+- `core/src/chat/`
+- `core/src/forum/`
 
 Avoid dumping code into:
 

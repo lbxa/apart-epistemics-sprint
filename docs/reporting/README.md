@@ -4,6 +4,13 @@ Use these standards when planning, writing, illustrating, or reviewing the
 project's LaTeX research report. They encode recurring decisions and observable
 checks; routine LaTeX syntax remains reference material.
 
+The active project is Epistemics Sprint, targeting Apart's AI x Epistemics
+Research Sprint. Its research question and track remain open in the brief.
+Use the `editor` skill while developing the report alongside cloud experiments.
+The active draft remains structural until results support material prose.
+Existing reports and evidence registers are imported
+historical material; their old sprint tracks and deadlines do not govern new work.
+
 ## Table of contents
 
 | Read | File | Use it for |
@@ -14,8 +21,11 @@ checks; routine LaTeX syntax remains reference material.
 | 4 | [Visuals](visuals.md) | Publication chart style, Matplotlib mean/SD figures, typography, palettes, tables, and diagrams |
 | 5 | [LaTeX](latex.md) | Compiler, packages, notation, equations, and references |
 | 6 | [Review](review.md) | Scientific support, reproducibility, PDF inspection, and completion |
+| Active report | [Epistemics Sprint scaffold](../../report/epistemics/README.md) | Current title, metadata, section placeholders, and build command |
+| Template | [Apart template provenance](../../report/template/epistemics.md) | User-supplied PDF, formatting, section order, and official source |
 | Report | [Sectioned baseline report](../../report/README.md) | Editable manuscript under `report/`; admitted two-episode smoke evidence, using the supplied preprint style |
-| Report | [Swarm Alignment report](../../report/agentic/README.md) | Seeded recruitment, completed C1 results, source-pinned cloud registry, controls and review gaps; October case studies retained separately |
+| Report | [Historical seeded recruitment report](../../report/agentic/README.md) | Imported November manuscript, completed C1 results, source-pinned cloud registry, controls and review gaps; October case studies retained separately |
+| Archive | [Historical venues](historical-venues.md) | Original sprint rules and template provenance for imported manuscripts |
 | Lookup | [Writing sources](sources/writing-sources.md) | Knuth; Peyton Jones; Gopen and Swan; Williams and Bizup; Pinker; The Craft of Research |
 | Lookup | [Visual sources](sources/visual-sources.md) | Rougier; Booktabs; PGF/TikZ |
 | Lookup | [LaTeX sources](sources/latex-sources.md) | AMS guide; The LaTeX Companion; official venue sources |

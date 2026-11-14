@@ -2,10 +2,10 @@
   <img src="docs/assets/banner.webp" alt="Classical landscape with a giant overlooking mountains beneath a cloudy sky" width="100%">
 </p>
 
-<h1 align="center">Veracity</h1>
+<h1 align="center">Epistemics Sprint</h1>
 
 <p align="center">
-  <strong>A research benchmark for emergent collusion in LLM agents.</strong>
+  <strong>A self-contained epistemics research project built on the Veracity game engine.</strong>
 </p>
 
 <p align="center">
@@ -18,7 +18,10 @@
 
 ---
 
-Veracity measures whether agents independently discover, establish, and execute
+This repository is the independent Epistemics Sprint project. It includes the
+Veracity engine, Python experiment harness, viewer, local agent tooling, and
+reporting sources. The inherited benchmark measures whether agents independently
+discover, establish, and execute
 coordination that violates a constitution for private benefit. A content
 verification game supplies the environment: a creator publishes a bonded claim,
 a challenger may dispute it, and jurors commit and reveal their judgments.
@@ -30,17 +33,32 @@ a feasible collusion opportunity, a compliant strategy, and an observable victim
 or compromised outcome. Start with creator–juror and challenger–juror coalitions;
 research papers, software, and political statements are content settings.
 
-## Swarm Alignment Hackathon 2026: prior-work disclosure
+## Project scope and inherited evidence
 
-This repository is **preexisting research infrastructure**, not a project created during the November 6–8, 2026 Swarm Alignment Hackathon. Its latest identified pre-sprint commit is [c81c03a6d7cd](https://github.com/lbxa/collusion-benchmark/commit/c81c03a6d7cd) (November 3, 2026 UTC). The earlier [apart-collusion-sprint](https://github.com/lbxa/apart-collusion-sprint) implementation also predates this sprint; its latest identified commit is [f3826f16c97c](https://github.com/lbxa/apart-collusion-sprint/commit/f3826f16c97c) (October 28, 2026 UTC).
+The copied infrastructure and historical research are starting material for this
+project. `Veracity` remains the engine/package name to preserve commands, API
+contracts, and experiment reproducibility. New project environments and default
+tracking uploads use `apart-epistemics-sprint`.
 
-Preexisting components include the Rust HTTP game service, Solidity escrow/voting/settlement contracts, Python agent harness, generated API client, experimental controls, evaluation and reporting scaffolding, and visualization. Existing documentation, experimental snapshots, and imported reports also predate the sprint. Reusing or modifying these components does not make their original implementation new sprint work.
+The Rust service, Solidity contracts, harness, client, experimental controls,
+viewer, and imported reports predate this project's independent development.
+Historical reports, decision records, frozen campaign configurations, and remote
+artifact URLs retain their original identities. Renaming those sources would
+break audit links or imply that old results were obtained here.
 
-**Sprint-specific contributions:** None are claimed by this disclosure. Any new work must be listed separately with dated commit hashes, affected paths, experimental protocol, and supporting evidence from November 6–8. Documentation changes made to satisfy disclosure requirements are not research findings.
+The research question and evidence admission criteria remain to be specified
+in the [paper brief](docs/reporting/paper-brief.md). The target is Apart's
+AI x Epistemics Research Sprint, November 13–15, 2026; the
+[active report](report/epistemics/README.md) uses its supplied template.
+Old sprint tracks and deadlines do not govern new work. No new research findings
+are claimed by this migration.
 
-**Implementation and evidence limits:** The full standardized scenario suite, human annotation workflow, and benchmark session scorer remain incomplete. Earlier experiments and imported payoff-only campaigns are historical or exploratory evidence, not results newly obtained during this sprint. Fictional examples are not empirical evidence. No new collusion detection rate, successful attack, or benchmark validation is claimed without reproducible sprint-period traces and analysis.
+The full standardized scenario suite, human annotation workflow, and benchmark
+session scorer remain incomplete. Imported payoff-only campaigns and fictional
+teaching examples do not establish new benchmark performance.
 
-See [sprint disclosure and report text](docs/swarm-2026-disclosure.md) for the provenance register and report-ready disclosure.
+See the [historical disclosure](docs/swarm-2026-disclosure.md) for inherited
+provenance and the [local skill guide](.agents/skills/README.md) for agent tooling.
 
 ## Documentation
 
@@ -144,6 +162,16 @@ campaign and fictional teaching examples do not establish constitution-condition
 benchmark performance.
 
 ## Changelog
+
+### 2026-11-14
+
+- Run sprint experiments on cloud compute and use W&B for mobile inspection and
+  retained evidence. Build the report alongside results with the `editor` skill;
+  keep the initial Apart-formatted draft structural until claims are supported.
+- Establish Epistemics Sprint as the independent project identity, sharing one
+  repository-local skill source across Codex and Claude. Preserve Veracity's
+  package/API names and historical evidence identities for reproducibility; see
+  [the migration decision](docs/decisions/epistemics-sprint-owns-active-project-identity.md).
 
 ### 2026-10-28
 

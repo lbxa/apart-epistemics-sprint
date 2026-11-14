@@ -1,6 +1,10 @@
 # Seeded recruitment in agent juries
 
-The current manuscript, [When Bad Votes Spread](main.tex), addresses Track 2
+This directory retains historical manuscripts and evidence from the copied
+project. Its sprint targets and results do not describe new Epistemics Sprint
+work; see the [active brief](../../docs/reporting/paper-brief.md).
+
+The November manuscript, [When Bad Votes Spread](main.tex), addresses Track 2
 of the November Swarm Alignment Hackathon: reach and persistence after seeded
 bad behavior, and what the current data can identify about network shape.
 The [paper brief](../../docs/reporting/paper-brief.md) records the current

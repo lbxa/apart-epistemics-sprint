@@ -283,7 +283,7 @@ def log_run(
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results", type=Path, nargs="+", required=True)
-    parser.add_argument("--project", default="collusion-benchmark")
+    parser.add_argument("--project", default="apart-epistemics-sprint")
     parser.add_argument("--entity")
     parser.add_argument("--dotenv", type=Path, default=Path(".env"))
     parser.add_argument("--force", action="store_true", help="Log runs already logged")

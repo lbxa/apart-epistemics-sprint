@@ -6,6 +6,25 @@ import pytest
 from veracity_harness.tracking import check_secrets, run_metrics, uploadable
 
 
+@pytest.mark.parametrize("project", [None, "historical-reproduction"])
+def test_upload_cli_uses_independent_project_and_honors_override(tmp_path, monkeypatch, project):
+    import sys
+
+    from veracity_harness import tracking
+
+    run = write_run(tmp_path)
+    uploads = []
+    monkeypatch.setattr(
+        tracking, "log_run", lambda directory, target, **kwargs: uploads.append(target)
+    )
+    args = ["veracity-harness-wandb", "--results", str(run), "--dotenv", str(tmp_path / ".env")]
+    if project is not None:
+        args.extend(["--project", project])
+    monkeypatch.setattr(sys, "argv", args)
+    tracking.main()
+    assert uploads == [project or "apart-epistemics-sprint"]
+
+
 def write_run(root):
     run = root / "run-abc"
     case = run / "VR-1"

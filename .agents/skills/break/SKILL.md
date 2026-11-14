@@ -8,9 +8,12 @@ disable-model-invocation: true
 
 This skill takes one component and renders it on a fresh page under every scenario that can actually reach it. That page is the deliverable: a visual report the user scrolls through, every state side by side, with the breaks marked. A component built against one happy path looks finished right up until real content arrives.
 
-It observes rather than judges. A finding here is something that visibly broke on the page, named in the vocabulary of the domain skill that owns the fix. Reviewing code against a standard is `interface-review` and `better-interface`; exploring design alternatives is `variant`.
+Use this skill for the existing React viewer in `visualizer/`. Import its real
+components and use its Vite environment; do not create a second app. It observes
+visible failures. Assign findings to the owning component or stylesheet; external
+design skill packs are not required.
 
-Where `variant` insists on the real page, this skill isolates on purpose. You are not judging how the component looks in context. You are checking whether it defends itself when the content is worst-case.
+This skill isolates the component to check whether it handles worst-case content.
 
 The whole run is build, look once, report: minutes, not a session. The work is rendering an existing component with different props, and nothing in it justifies instrumentation, browser debugging or a second pass.
 
@@ -54,14 +57,15 @@ Report findings as a table, broken scenarios first:
 
 | Scenario | Observed | Owner |
 | --- | --- | --- |
-| One unbreakable 60-character string | Overflows the card, no wrap and no truncation | `better-typography` |
-| Zero items | Blank region with no message | `better-writing` |
+| One unbreakable 60-character string | Overflows the card, no wrap and no truncation | Component stylesheet |
+| Zero items | Blank region with no message | Component empty-state rendering |
 
-The owner column names the domain skill whose rules diagnose the break, so the fix starts in the right place. This skill owns no domain rules and issues no verdict.
+The owner column names the actual component or stylesheet that needs the fix.
 
 "Everything survived" is a complete and useful report. Say which scenarios are on the page and where it is running, so the user can see every one themselves. End there rather than padding the result with preferences.
 
-Do not fix anything unasked. On a request to fix, follow the owner skill's rules, then re-render the failing scenarios to confirm.
+Do not fix anything unasked. On a request to fix, edit the owning component or
+stylesheet, then re-render the failing scenarios to confirm.
 
 ## 6. Leave the page up, delete it on request
 
@@ -78,7 +82,7 @@ The page is half the report, so it outlives the findings table. Leave it running
 | The harness restyles or re-themes the component | The app's layout, fonts and tokens as they are; labels and widths are all the page adds |
 | A browser launched, debugged or screenshotted per scenario | One load and one look, or hand the URL over and skip the look |
 | Findings phrased as taste | Report what was visible on the page, or nothing |
-| A break reported without an owner | Name the domain skill whose rules diagnose it |
+| A break reported without an owner | Name the component or stylesheet that owns the fix |
 | A clean run padded with suggestions | "Everything survived" plus the scenario list is the report |
 | The viewport resized scenario by scenario | Widths are fixed containers on the page; one load shows them all |
 | A break in the table but unmarked on the page | Note it under the scenario's label; the page reads as the report on its own |

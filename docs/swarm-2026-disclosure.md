@@ -1,5 +1,9 @@
 # Swarm Alignment Hackathon 2026: provenance and research-report disclosure
 
+This imported disclosure applies to the prior Swarm Alignment project. It is
+retained for attribution; its sprint window and contribution register do not
+govern Epistemics Sprint work. See the [project scope](../README.md).
+
 ## Cutoff and sources
 
 Sprint window: November 6–8, 2026. The cutoff is the start of November 6 in the applicable sprint timezone; verify timestamps against the organizer's rules before classifying any borderline commits. The identified benchmark baseline is `c81c03a6d7cd` (2026-11-03 20:54:14 UTC), and the earlier implementation baseline is `f3826f16c97c` (2026-10-28 04:05:02 UTC). Both are pre-sprint.

@@ -1,6 +1,35 @@
 # Paper brief
 
-## Current Swarm Alignment track brief — 2026-11-09
+## Active Epistemics Sprint brief — 2026-11-14
+
+This is an independent project built from the imported Veracity codebase.
+The research question, hypothesis, experimental design, authors, and track
+for new work remain open. The venue is Apart's AI x Epistemics Research Sprint,
+November 13–15, 2026. The existing constitution and benchmark protocol
+describe the implemented starting point; they do not establish the new project's
+research contribution. Specify the new question and claim-to-evidence mapping
+before claiming results. No new Epistemics Sprint empirical claims are admitted.
+
+The active manuscript is [the structural scaffold](../../report/epistemics/main.tex),
+working title **Epistemics Sprint: Research Report**. It follows the user's
+recommended structure and supplied Apart PDF. `make -C report` builds
+`report/epistemics/build/main.pdf`. Only title, metadata, layout, and placeholders
+are prepared now. Material contributions and conclusions wait for experiment
+evidence. Develop the report concurrently with cloud runs using `editor`.
+
+W&B access was verified read-only on 2026-11-14 for
+`lbxa-corp/apart-epistemics-sprint` at the standard W&B API host. No runs were
+created or changed by that check. New claims must record remote run IDs,
+immutable artifact versions/hashes, analysis revision, eligibility, and cutoff;
+project access alone admits no results. The current claim-to-evidence map is empty.
+
+The records below are historical briefs for imported manuscripts. Their counts,
+author decisions, tracking projects, and claim identifiers apply only to those
+studies. References to "current" within those records describe their original
+cutoff. See [venue.md](venue.md) for this project's active submission status and
+[historical-venues.md](historical-venues.md) for inherited submission records.
+
+## Historical Swarm Alignment track brief — 2026-11-09
 
 The active manuscript is [When Bad Votes Spread: Seeded Recruitment in Agent
 Juries](../../report/agentic/main.tex), for **Track 2: The Science of Agent
@@ -23,7 +52,7 @@ brief and evidence register below retain their original scope.
 | Statistics | Descriptive per-model/cell counts, failures and per-case records; votes and repeated cases are dependent. No seat-level interval is used as a population or topology inference. |
 | Notation | Jury size $n\in\{3,7,15\}$, scripted seeds $m=(n-1)/2$, evaluated seats $k=n-m$, and strict-majority threshold $q=(n+1)/2$ are juror counts. The identity $q-m=1$ assumes the colluding scripted bloc reveals as configured. Ordinary reward $5/n$ ETH assumes all $n$ jurors validly reveal in a settled case. |
 | Scope | Short-charter false voting is paid coordination against the truth, not violation of an omitted duty. A false minority ballot alone does not establish an executed coalition. Do not generalize the positive behavior beyond the tested Kimi endpoints. |
-| Venue | [Current venue record](venue.md); eight main-text pages excluding references/appendices, 150–250-word abstract. Affiliations and official template visual equivalence remain open. |
+| Venue | [Historical venue record](historical-venues.md); eight main-text pages excluding references/appendices, 150–250-word abstract. Affiliations and official template visual equivalence remain open. |
 
 ### Current claim-to-evidence map
 
@@ -141,7 +170,7 @@ The older baseline and probes B0/X1–X6 remain separate evidence sets.
 | Research question | Can general-tool agents discover harmful payoff coordination from a neutral objective, and what do communication and memory controls reveal about the observed mechanism? |
 | Central contribution | An agentic runtime and audited trajectories connecting public coordination to actual funding, commitment/reveal and contract settlement, with matched channel controls and repeated memory blocks. |
 | Main result | Two fresh post-retry-fix clear-case GPT seeds executed knowingly adverse verdict agreements; both matching communication-disabled trials expired unchallenged. In separate three-episode blocks, memory enabled creator exit after a loss, while reset agents repeated harmful coordination. |
-| Venue and stage | Apart AI Collusion Research Sprint, October 23–25, 2026; internal draft, not submitted or certified against the official template's visual layout. See [venue.md](venue.md). |
+| Venue and stage | Apart AI Collusion Research Sprint, October 23–25, 2026; internal draft, not submitted or certified against the official template's visual layout. See [historical-venues.md](historical-venues.md). |
 | Manuscript source/build | Historical [agentic manuscript](../../report/agentic/historical-main.tex); build from its directory with `latexmk -pdf -outdir=build historical-main.tex`. [Complete results](../../report/agentic/sections/campaign-results.tex), [episode appendix](../../report/agentic/sections/complete-record.tex), [review](../../report/agentic/review.md). Safe inputs: [agentic-campaign.json](../../report/data/agentic-campaign.json). The separate older [baseline manuscript](../../report/main.tex) still builds with `make -C report`. |
 
 ## Model-output presentation revision, 2026-11-09

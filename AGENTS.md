@@ -2,6 +2,12 @@
 
 ## Project Structure & Module Organization
 
+This is the independent Epistemics Sprint project. Keep active environment and
+default tracking identity as `apart-epistemics-sprint`; retain Veracity's existing
+package/API names. Imported reports, frozen campaigns, remote evidence URLs, and
+append-only decisions keep historical identities and are not new sprint results.
+Read `.agents/skills/README.md` for local skill routing and package-specific checks.
+
 This repository implements the `SPEC.md` game engine and `/v1` API plus the Python experiment harness in `harness/`. `core/src/` contains `api`, `game`, `chain`, `chat`, `forum`, `store`, and configuration modules. `contracts/` owns Solidity rules, Foundry tests, and the deployment artifact. The harness owns agents, treatments, observations, and metrics; it calls HTTP. Keep financial authority in the contract.
 
 `docs/api.md` is the harness integration guide; `docs/architecture.md` records boundaries. `configs/` and `examples/` contain deployment and request templates. Shared skills live in `.agents/skills/`; `.claude/skills` points there. Agent definitions and hooks live in `.codex/` and `.claude/`.
@@ -43,6 +49,63 @@ compromised outcome. Keep evaluator labels and coalition plans out of agent inpu
 The sole harness is `harness/`; its `src/game_api/` owns the retained HTTP client.
 Historical payoff-only campaigns are not constitution-conditioned benchmark evidence.
 
+## Cloud experiments and W&B access
+
+Experiment runs for this sprint execute on cloud compute so Lucas can inspect
+and direct them from another device. Use the repository's `wandb-primary` skill
+for runs, metrics, logs, and artifacts, and its Launch reference when the chosen
+runner uses W&B Launch. W&B tracking alone does not provide compute. Do not run
+weekend campaigns on a laptop or depend on an open local terminal.
+
+The W&B API key has already been supplied. Load `WANDB_API_KEY` from the process
+environment or the ignored root `.env` with `python-dotenv`, preserving existing
+environment values. Never print the key, pass it as a command-line argument,
+commit it, or put it in report sources or run artifacts. Inject it into cloud
+workers through their secret mechanism. Do not ask for it again unless it is
+unavailable or rejected. `bash scripts/setup.sh` installs the locked SDK in
+`harness/.venv`; use that environment for W&B helpers.
+
+Connection scope:
+
+- Use `WANDB_BASE_URL` when explicitly configured. Otherwise the standard API
+  host is `https://api.wandb.ai`. Historical Forge URLs are evidence addresses,
+  not authority to send the supplied key to another host.
+- Use project `apart-epistemics-sprint` for new work. Set `WANDB_ENTITY` to the
+  verified user/team that owns it. If unset, discover the authenticated default
+  entity with `wandb.Api().default_entity` and inspect project access before
+  selecting a team. A read-only check on 2026-11-14 verified the supplied key
+  against `https://api.wandb.ai`, default entity `lbxa-corp`, and accessible
+  project `lbxa-corp/apart-epistemics-sprint`. Use that scope unless the user
+  supplies another one; historical Forge campaigns remain separate.
+- For a read-only connection check, create `wandb.Api(timeout=30)` after loading
+  the environment, then query the target project or known run. Do not create a
+  dummy run with `wandb.init()` to test authentication. On failure, distinguish
+  missing credentials, wrong host/entity, project permissions, and unavailable
+  network. Never dump the environment or raw credential-bearing errors.
+
+Run inspection helpers from the repository root, after loading the W&B variables:
+
+```sh
+harness/.venv/bin/python .agents/skills/wandb-primary/scripts/wandb_run_ops.py \
+  project-snapshot --entity "$WANDB_ENTITY" --project apart-epistemics-sprint --sample 12
+```
+
+At the start of experiment work, recover cloud state before dispatching anything.
+Record the project URL, remote runner/queue identity, run IDs and URLs, source
+revision, configuration, seeds, model versions, budget/spend, and next action in
+the campaign handoff. Keep a durable cloud copy so a fresh checkout can resume
+inspection. Log live status, progress, safe diagnostics, and partial/final
+evidence remotely during execution. The existing `veracity-harness-wandb` CLI
+uploads finished runs and skips running ones; it alone is not live monitoring.
+
+Use versioned artifacts and file hashes when admitting results into `/report`.
+Keep assigned, completed, failed, and missing runs distinguishable. A missing
+upload does not prove an unplayed run. Artifacts exclude recovery SQLite and
+spending ledgers, and raw model calls are opt-in; protect those separately when
+remote recovery needs them. Participant inputs must never receive the W&B key
+or operator-only evidence. Keep existing budget and launch authorization limits;
+the supplied key does not authorize arbitrary spend, deletion, or public sharing.
+
 ## Decision Records
 
 Writing a decision record is part of "done", for every agent and without being
@@ -68,6 +131,9 @@ Use Context7 for current dependency and tool documentation: resolve the library 
 
 A LaTeX research report is a main project deliverable. Before planning, drafting,
 or reviewing a report, use the [reporting guide and table of contents](docs/reporting/README.md).
+Apply the repository's [editor skill](.agents/skills/editor/SKILL.md) to all
+report prose, mathematical exposition, captions, and substantive review, even
+when no separate editing pass is requested.
 Read in this order:
 
 1. [Paper brief](docs/reporting/paper-brief.md): reader, research question, actual evidence, and unresolved claims.
@@ -76,12 +142,36 @@ Read in this order:
 4. [Visuals](docs/reporting/visuals.md) and [LaTeX](docs/reporting/latex.md): figures, tables, diagrams, notation, and build conventions.
 5. [Review](docs/reporting/review.md): evidence, compilation, and rendered-page acceptance checks.
 
+Develop `/report` alongside the experiments. At this early stage, prepare only
+the sprint identity, metadata, section structure, and explicit placeholders.
+Do not write a material contribution, results narrative, or conclusion before
+the experiments support it. As results arrive, update the brief's evidence map
+and then the affected methods, results, discussion, captions, and limitations
+in small coherent revisions. Preserve concurrent edits and inspect the latest
+diff before changing shared report files. Do not overwrite another writer's work.
+
 Update the brief as evidence changes. Do not turn historical, mock, scripted, or
 heuristic outputs into claims about model behavior on the integrated protocol.
 Report completion requires the brief's claim-to-evidence mapping, a reproducible
 PDF build, final-size visual inspection, and a recorded review with open gaps.
 Source notes and reusable examples are indexed in the reporting guide; consult
 them for technical lookup rather than expanding this entry point.
-The current sample lives in `report/main.tex`, with prose in `report/sections/`
-and shared formatting in `report/preamble.tex`. Build it with `make -C report`.
-Its teaching counts remain fictional until replaced with admitted evidence.
+The active structural draft is `report/epistemics/main.tex`; `make -C report`
+builds `report/epistemics/build/main.pdf`. Its working title is **Epistemics
+Sprint: Research Report**, for Apart's **AI x Epistemics Research Sprint,
+November 13–15, 2026**. Authors, affiliations, final title, and track remain
+unconfirmed. Keep the draft visibly provisional until evidence supports prose.
+Use the user's Introduction, Related Work, Methodology, Results, Discussion,
+required Limitations and Dual-Use / Ethical Considerations, and References
+structure, combined with the supplied Apart PDF's front matter, Conclusion,
+Code and Data, optional Author Contributions, and LLM Usage Statement. Keep
+the required ethics section as an appendix, as the live sprint guidelines
+require. Match the supplied template's layout; see `report/template/epistemics.md`.
+Use LaTeX's native Computer Modern text and mathematics, as Lucas requested,
+instead of the supplied PDF's Old Standard TT font.
+
+The inherited baseline manuscript lives in `report/main.tex`, with prose in
+`report/sections/` and shared formatting in `report/preamble.tex`. Build it with
+`make -C report baseline`. Its admitted smoke evidence remains historical; the reusable
+teaching example in `docs/reporting/templates/` uses fictional counts. Neither
+constitutes new Epistemics Sprint evidence.

@@ -1,9 +1,12 @@
 PYTHON ?= python3
 LATEXMK ?= latexmk
 
-.PHONY: all agentic figures agentic-figures tables clean
+.PHONY: all baseline agentic figures agentic-figures tables clean
 
 all:
+	cd epistemics && $(LATEXMK) -pdf -synctex=1 -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex
+
+baseline:
 	$(LATEXMK) -pdf -synctex=1 -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex
 
 agentic:
@@ -23,5 +26,6 @@ tables:
 	$(PYTHON) analysis/model_benchmark.py
 
 clean:
+	cd epistemics && $(LATEXMK) -C -outdir=build main.tex
 	$(LATEXMK) -C -outdir=build main.tex
 	$(LATEXMK) -C main.tex

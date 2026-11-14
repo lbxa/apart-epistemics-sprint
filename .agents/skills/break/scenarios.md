@@ -16,7 +16,8 @@ An axis that stays contributes its scenarios as written here, plus any value the
 | Several sentences | Wrapping, line-height at multiple lines, containers that assumed one line |
 | One unbreakable string | A long URL or `Donaudampfschiffahrtsgesellschaft`: overflow with no wrap opportunity |
 
-Breaks land in `better-typography` for wrapping and truncation, `better-layout` where the container has no room and `better-writing` where the source copy is the problem.
+Assign wrapping, truncation, and container failures to the component stylesheet;
+assign source-copy failures to the component's text or empty-state rendering.
 
 ## Content shape
 
@@ -30,7 +31,7 @@ Breaks land in `better-typography` for wrapping and truncation, `better-layout` 
 | Diacritics and tall scripts | Clipped ascenders and descenders in tight line boxes |
 | Numbers where columns align | Proportional figures wobbling in tables and timers |
 
-Breaks land in `better-typography`; spatial mirroring lands in `better-layout`.
+Assign typography and spatial mirroring failures to the owning stylesheet.
 
 ## Quantity
 
@@ -43,7 +44,8 @@ Breaks land in `better-typography`; spatial mirroring lands in `better-layout`.
 | The realistic count | The baseline |
 | Ten times the realistic count | Missing scroll or pagination, performance collapse, sticky elements unsticking |
 
-Zero-item breaks land in `better-writing` for the empty state and `better-layout` for the region; the rest land in `better-layout`.
+Assign missing empty states to component rendering and region or quantity
+failures to the owning layout.
 
 ## Container
 

@@ -1,6 +1,21 @@
-# Veracity research reports
+# Epistemics Sprint research report
 
-The current manuscript is [When Bad Votes Spread: Seeded Recruitment in Agent Juries](agentic/main.tex),
+The active report is the [Epistemics Sprint scaffold](epistemics/README.md),
+with source in `epistemics/main.tex`. `make -C report` builds
+`epistemics/build/main.pdf`. It follows Apart's current
+[official template](https://docs.google.com/document/d/17b3JWki-ZkaqdmqGI5d0gof-HwlGuWU9Mc1_klNZXKs/edit)
+and contains only sprint identity and explicit section placeholders. Develop
+the report alongside cloud experiments using the `editor` skill; material
+contributions and conclusions must wait for evidence.
+
+## Historical reports
+
+The reports below are imported research retained for reproducibility. They are not
+new Epistemics Sprint findings. The active project scope and venue are recorded
+in [the paper brief](../docs/reporting/paper-brief.md) and
+[venue record](../docs/reporting/venue.md).
+
+The latest inherited manuscript is [When Bad Votes Spread: Seeded Recruitment in Agent Juries](agentic/main.tex),
 for Track 2 of the Swarm Alignment Hackathon.
 Build it with `make -C report agentic`; its PDF is `agentic/build/main.pdf`.
 It uses the frozen [cloud-audited swarm snapshot](data/swarm-track-snapshot.json),
@@ -18,6 +33,8 @@ is pooled with the current replication. The current manuscript's authors are
 Lucas Barbosa and Stefan Gazana.
 
 ## Earlier baseline report
+
+Build the inherited baseline with `make -C report baseline`.
 
 This internal report presents the first all-off jury smoke run, using the
 supplied `arxiv.sty` and the existing sectioned manuscript. It replaces the
@@ -57,12 +74,12 @@ establish an absence of collusion or a treatment effect.
 | [Template provenance](template/README.md) | Attachment attribution, hashes, and adaptation decisions |
 | [Review record](review.md) | Evidence, build, and final-size rendered checks |
 
-Only `main.tex` is a standalone document. Edit prose in `sections/`, keep common
+For this historical baseline, `main.tex` is the standalone document. Edit prose in `sections/`, keep common
 formatting in `preamble.tex`, and change section order through `main.tex`.
 The current figure generator lives in `analysis/`; general style guidance and
 the former fictional example remain in [the reporting guide](../docs/reporting/README.md).
 
-## Build
+## Historical baseline build
 
 ### TeXShop on macOS
 
@@ -91,7 +108,7 @@ stopping a build, then rerun `pdflatexmk` to regenerate them.
 From the repository root:
 
 ```sh
-make -C report
+make -C report baseline
 ```
 
 Requirements: Make, `latexmk`, pdfLaTeX, and the standard
@@ -132,7 +149,7 @@ UV_CACHE_DIR="$PWD/.tools/uv-cache" uv venv --python 3.12 .harness/report-venv
 UV_CACHE_DIR="$PWD/.tools/uv-cache" uv pip sync \
   --python .harness/report-venv/bin/python report/requirements.lock
 make -C report figures PYTHON="$PWD/.harness/report-venv/bin/python"
-make -C report
+make -C report baseline
 ```
 
 This renders vector PDF and 300-dpi PNG figures from the committed safe snapshot.

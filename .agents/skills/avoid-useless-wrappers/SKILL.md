@@ -62,8 +62,8 @@ A factory is appropriate when creation has real ownership, such as:
 - returning lifecycle handles
 - isolating platform or integration construction
 
-Name the pattern directly. Prefer names like `ImageLibObservabilityFactory`,
-`createImageTransformer`, or `catalogueSyncJobFactory` over names like
+Name the pattern directly. Prefer names like `DockerArena`,
+`GatewayPolicy`, or `LocalService` over names like
 `setupThing`, `initStuff`, or `buildOptions` when the code owns creation.
 
 Do not create a factory just because construction exists. Inline simple

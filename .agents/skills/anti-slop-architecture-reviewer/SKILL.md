@@ -121,9 +121,9 @@ For each important invariant, ask:
 
 Examples:
 
-- A listing cannot be removed if it is already sold
-- A sync run cannot complete while child jobs are pending
-- A price cannot go below landed cost unless liquidation mode is enabled
+- A reveal must match the juror's confirmed commitment
+- Settlement cannot run before the contract's reveal deadline
+- Participant history settings cannot delete the operator's retained audit transcript
 - A retry cannot create duplicate external side effects
 - A status transition must be valid from the current state
 
@@ -161,10 +161,10 @@ Repositories should expose intention-revealing methods.
 
 Prefer:
 
-- claimNextPendingJob()
-- markListingAlreadyClosed()
-- recordRemovalFailure()
-- loadActiveSyncRun()
+- `reserve()`
+- `record_receipt()`
+- `pending_operations()`
+- `get_episode()`
 
 Flag:
 
@@ -259,10 +259,10 @@ Prefer vertical slices by business capability.
 
 Good:
 
-- listing-removal/
-- merchant-sync/
-- email-routing/
-- product-classification/
+- `core/src/game/`
+- `core/src/chain/`
+- `core/src/chat/`
+- `core/src/forum/`
 
 Flag generic dumping grounds unless the project already uses them intentionally:
 

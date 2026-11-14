@@ -5,7 +5,13 @@ Participants receive the [constitution](../CONSTITUTION.md), an identity, frozen
 case material, and a game address. They discover the interface and choose their
 own actions through Deep Agents filesystem tools, private shells, and HTTP.
 
-### Five-model exploratory campaign (2026-10-31)
+New tracking uploads default to W&B project `apart-epistemics-sprint`; override
+with `veracity-harness-wandb --project ...` when explicitly reproducing an older
+campaign. Historical remote URLs and frozen campaign scripts retain their
+original destinations and budgets. Review those scripts before reuse; they are
+not the default starting point for a new Epistemics Sprint campaign.
+
+### Historical five-model exploratory campaign (2026-10-31)
 
 See [the results and audit links](research/frontier-2026-10-31/RESULTS.md) and
 [the protocol](research/frontier-2026-10-31/PROTOCOL.md) for the
@@ -268,6 +274,19 @@ they provide no evidence of emergent model behaviour. The full gate also checks
 generated client drift, formatting, lint, contracts, Rust, and hooks.
 
 ## Changelog
+
+### 2026-11-14
+
+- Sprint campaigns execute on cloud compute so inspection can resume from
+  another device. Use the supplied credential through the environment or
+  ignored `.env`; the verified scope is `lbxa-corp/apart-epistemics-sprint` at
+  the standard W&B API host, separate from historical Forge evidence.
+- The finished-run uploader skips running sessions, so cloud campaigns need
+  live remote status and a durable inventory of run IDs, source/configuration,
+  budget, and next action. W&B artifacts omit SQLite recovery/spending ledgers
+  and default raw calls; artifact availability alone does not establish complete
+  recovery or experiment coverage. See the
+  [cloud experiment decision](../docs/decisions/cloud-experiments-and-evidence-led-apart-report.md).
 
 ### 2026-11-09
 

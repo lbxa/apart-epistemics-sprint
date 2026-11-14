@@ -72,5 +72,5 @@ Avoid vague bullets such as:
 
 Prefer bullets such as:
 
-- "Catalog delta detection treats `handle` as the stable sync key because source merchant payload ids are not reliable across refreshes."
-- "Catalogue CLI argument parsing stays in `@sails/catalogue-lib` so workflows share one prompt/flag contract and avoid divergent parsing behavior."
+- "Private chat history settings affect participant views; the operator retains the full audit transcript for experiment review."
+- "The harness calls the Rust HTTP API; Solidity contracts retain financial authority so experiment policies cannot invent settlement outcomes."
