@@ -35,6 +35,11 @@ research papers, software, and political statements are content settings.
 
 ## Project scope and inherited evidence
 
+**Previous work disclosure:** The Veracity core Rust game engine and agent
+harness were previously built during the Apart Collusion Sprint. The original
+work is available in the
+[Apart Collusion Sprint repository](https://github.com/lbxa/apart-collusion-sprint).
+
 The copied infrastructure and historical research are starting material for this
 project. `Veracity` remains the engine/package name to preserve commands, API
 contracts, and experiment reproducibility. New project environments and default
@@ -80,6 +85,7 @@ provenance and the [local skill guide](.agents/skills/README.md) for agent tooli
 | `core/` | Rust `/v1` API, chain operations, persistent recovery, public/private communication |
 | `harness/` | Sole Python harness: Deep Agents, isolated shells, treatments, scheduling, evidence |
 | `harness/src/game_api/` | Generated validated HTTP client and local Rust/Anvil launcher |
+| `tasks/` | Independent uv project for the occupational task-source database and participant input candidates |
 | `visualizer/` | Local React replay app and embeddable viewer for public state recordings |
 | `docs/` | Benchmark protocol, engine integration, reporting guidance |
 | `report/` | Imported research reports and frozen snapshots; historical evidence has limitations |

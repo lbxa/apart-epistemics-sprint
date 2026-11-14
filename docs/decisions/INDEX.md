@@ -7,6 +7,7 @@ Every record, newest first. See [README](./README.md) for when and how to write 
 - [Cloud experiments and an evidence-led Apart report](./cloud-experiments-and-evidence-led-apart-report.md) — 2026-11-14
 - [Epistemics Sprint owns the active project identity](./epistemics-sprint-owns-active-project-identity.md) — 2026-11-14
 - [Report uses native Computer Modern](./report-uses-native-computer-modern.md) — 2026-11-14
+- [Task bank keeps an independent uv project](./task-bank-keeps-an-independent-uv-project.md) — 2026-11-14
 - [Completed C1 results extend the frozen paper cohort](./completed-c1-results-extend-the-frozen-paper-cohort.md) — 2026-11-09
 - [Report editorial pass preserves audited evidence](./report-editorial-pass-preserves-audited-evidence.md) — 2026-11-09
 - [Report examples use monochrome model tabs](./report-examples-use-monochrome-model-tabs.md) — 2026-11-09
