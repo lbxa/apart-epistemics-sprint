@@ -339,10 +339,13 @@ def test_cancelled_request_retains_its_hold_and_explicit_audit(tmp_path):
 async def test_hard_watchdog_cancels_hung_request_and_retains_its_hold(monkeypatch, tmp_path):
     original_timeout = asyncio.timeout
     durations = []
+    watchdog = None
 
     def accelerated_timeout(duration):
+        nonlocal watchdog
         durations.append(duration)
-        return original_timeout(0.02)
+        watchdog = original_timeout(None)
+        return watchdog
 
     monkeypatch.setattr(
         "veracity_harness.agents.asyncio",
@@ -351,6 +354,10 @@ async def test_hard_watchdog_cancels_hung_request_and_retains_its_hold(monkeypat
 
     class HungModel(FlakyModel):
         async def _agenerate(self, *args, **kwargs):
+            # Expire only after the request has reserved its hold. A fixed 20 ms
+            # deadline could fire during graph setup on a loaded machine.
+            assert watchdog is not None
+            watchdog.reschedule(asyncio.get_running_loop().time())
             await asyncio.Event().wait()
 
     spending = CampaignSpending(tmp_path / "budget.sqlite", Decimal(1))
@@ -360,7 +367,7 @@ async def test_hard_watchdog_cancels_hung_request_and_retains_its_hold(monkeypat
         pricing={"prompt": "0.000001", "completion": "0.000002"},
     )
     participant = agent(tmp_path, HungModel(), spending=spending, price=price)
-    result = await participant.act("case", 1, tmp_path / "trace.jsonl")
+    result = await asyncio.wait_for(participant.act("case", 1, tmp_path / "trace.jsonl"), 5)
     assert result.status == "timeout" and result.recoverable
     assert result.error_type == "TimeoutError" and result.failure_kind == "turn_timeout"
     assert durations == [1290]  # Two 600 s intervals, one rate window, 30 s tool grace.

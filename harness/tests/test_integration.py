@@ -1,4 +1,8 @@
-"""Scripted model fixtures validate mechanics, never emergent model behavior."""
+"""Scripted model fixtures validate mechanics, never emergent model behavior.
+
+Use stepped clocks for mechanics; only the dedicated realtime test waits for
+the host clock. Keep research configs' full phase windows in stepped fixtures.
+"""
 
 import json
 import re
@@ -17,6 +21,21 @@ from game_api.generated import RegisterEpisode
 from game_api.local_engine import LocalEngine
 from veracity_harness.config import load_experiment
 from veracity_harness.runner import ROOT, retain_evidence, run_experiment
+from veracity_harness.sandbox import DockerArena
+
+
+@pytest.fixture(scope="module", autouse=True)
+def sandbox_image():
+    # The Dockerfile is fixed for this module; build it once per pytest worker.
+    # Every episode still gets fresh containers, networks, policy, and files.
+    arena = DockerArena("integration-image")
+    try:
+        arena.build_image()
+    finally:
+        arena.close()
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(DockerArena, "build_image", lambda self: None)
+        yield
 
 
 class ProtocolFixtureModel(BaseChatModel):
@@ -469,22 +488,13 @@ async def test_verify_peer_session_serves_vouchers_and_the_peer_proposes_a_split
     experiment = load_experiment(
         ROOT / "harness/research/market/verify-peer.toml", model_name="fixture/protocol"
     )
-    seconds = {
-        name: 12
-        for name in (
-            "posting_duration_secs",
-            "challenge_duration_secs",
-            "commit_duration_secs",
-            "reveal_duration_secs",
-        )
-    }
     experiment = experiment.model_copy(
         update={
             "episodes": 2,
             "schedule": experiment.schedule[:2],
             "opportunities_per_phase": 1,
             "awareness_probe": False,
-            "parameters": experiment.parameters.model_copy(update=seconds),
+            "clock": "stepped",
         }
     )
     directory = await run_experiment(experiment, tmp_path, model=ProtocolFixtureModel())
@@ -528,23 +538,13 @@ async def test_creator_juror_session_mounts_the_mandate_end_to_end(tmp_path):
     experiment = load_experiment(
         ROOT / "harness/research/market/creator-juror.toml", model_name="fixture/protocol"
     )
-    seconds = {
-        # Room for a scripted turn under load; posting lands 20-60% into a window.
-        name: 10
-        for name in (
-            "posting_duration_secs",
-            "challenge_duration_secs",
-            "commit_duration_secs",
-            "reveal_duration_secs",
-        )
-    }
     experiment = experiment.model_copy(
         update={
             "episodes": 1,
             "schedule": experiment.schedule[:1],
             "opportunities_per_phase": 1,
             "awareness_probe": False,
-            "parameters": experiment.parameters.model_copy(update=seconds),
+            "clock": "stepped",
         }
     )
     directory = await run_experiment(experiment, tmp_path, model=ProtocolFixtureModel())
@@ -580,23 +580,13 @@ async def test_challenger_juror_session_runs_end_to_end(tmp_path):
     experiment = load_experiment(
         ROOT / "harness/research/market/challenger-juror.toml", model_name="fixture/protocol"
     )
-    seconds = {
-        # Room for a scripted turn under load; posting lands 20-60% into a window.
-        name: 10
-        for name in (
-            "posting_duration_secs",
-            "challenge_duration_secs",
-            "commit_duration_secs",
-            "reveal_duration_secs",
-        )
-    }
     experiment = experiment.model_copy(
         update={
             "episodes": 1,
             "schedule": experiment.schedule[:1],
             "opportunities_per_phase": 1,
             "awareness_probe": False,
-            "parameters": experiment.parameters.model_copy(update=seconds),
+            "clock": "stepped",
         }
     )
     directory = await run_experiment(experiment, tmp_path, model=ProtocolFixtureModel())
@@ -619,22 +609,13 @@ async def test_scripted_offer_reaches_the_jury_forum_when_voting_opens(tmp_path,
     experiment = load_experiment(
         ROOT / f"harness/research/market/{config}-offer.toml", model_name="fixture/protocol"
     )
-    seconds = {
-        name: 10
-        for name in (
-            "posting_duration_secs",
-            "challenge_duration_secs",
-            "commit_duration_secs",
-            "reveal_duration_secs",
-        )
-    }
     experiment = experiment.model_copy(
         update={
             "episodes": 1,
             "schedule": experiment.schedule[:1],
             "opportunities_per_phase": 1,
             "awareness_probe": False,
-            "parameters": experiment.parameters.model_copy(update=seconds),
+            "clock": "stepped",
         }
     )
     directory = await run_experiment(experiment, tmp_path, model=ProtocolFixtureModel())
@@ -811,6 +792,7 @@ async def test_offer_and_seeded_commit_precede_every_model_juror_commit(tmp_path
 
 
 @pytest.mark.integration
+@pytest.mark.xdist_group(name="swarm")
 @pytest.mark.parametrize(
     "arm",
     [
@@ -876,6 +858,7 @@ async def test_every_swarm_peer_posts_and_commits_before_evaluated_jurors_act(tm
 
 
 @pytest.mark.integration
+@pytest.mark.xdist_group(name="swarm")
 async def test_the_swarm_scale_offer_pays_every_flat_voter_of_the_largest_jury(tmp_path):
     # Contract credit comes only from settlement: the winning publisher must hold enough
     # to pay 10 ETH to all fifteen flat voters.
