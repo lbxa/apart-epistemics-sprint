@@ -1,10 +1,12 @@
 # Epistemics Sprint venue record
 
 The selected venue is **Apart Research: AI x Epistemics Research Sprint,
-November 13–15, 2026**. The track, author list, affiliations, and final project
-title remain open. This is a structural draft, not a submission-ready report.
+November 13–15, 2026**. The first draft is anchored on Track 1, with a related
+Track 2 discussion. Authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc).
+The working title is *Macro-Epistemics: Confidence Under Dispute*.
+It is an empirical first draft, not a certified submission.
 
-## Official requirements, checked 2026-11-14
+## Official requirements, rechecked 2026-11-15
 
 The [live guidelines](https://apartresearch.com/sprints/ai-x-epistemics-research-sprint-2026-11-13-to-2026-11-15#guidelines)
 require the linked official template, a PDF report of at most eight main-text
@@ -30,7 +32,7 @@ guidelines' required ethics appendix. These sources supersede the copied
 October collusion and November swarm requirements.
 
 The active source is `report/epistemics/main.tex`, with layout in `preamble.tex`
-and placeholders in `sections/outline.tex`. `make -C report` builds
+and individual prose files ordered by `sections/outline.tex`. `make -C report` builds
 `report/epistemics/build/main.pdf` using pdfLaTeX via latexmk. The draft adapts
 Letter geometry, title rules, author block, and heading hierarchy, using native
 Computer Modern text and mathematics at Lucas's request. Compare the final populated PDF with the source

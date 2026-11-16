@@ -1,0 +1,166 @@
+% !TEX root = ../main.tex
+% Included only after the complete sector matrix has been admitted.
+\section{Completion and conditional denominators}
+\label{app:sector-completion}
+Each model is assigned 30 initial cases and 600 branches per domain: four
+conditions and five defence seeds. A missing initial answer makes 20 branches
+structurally unavailable. A completed defence can remain usable for revision
+analysis even when the jury has no settled verdict. Table~\ref{tab:sector-coverage}
+keeps these stages distinct. Missing outputs are not classified as false beliefs.
+
+\begin{table}[htbp]
+ \centering\small\input{tables/sector-coverage}
+ \caption{Available outputs over assigned counts. Initial availability includes
+ lossless interpretation overlays while retaining raw failures. Defences and
+ verdicts each retain 600 assigned branches per model/domain in the denominator,
+ including structurally unavailable branches.}
+ \label{tab:sector-coverage}
+\end{table}
+
+\section{Revision and jury support across domains}
+\label{app:sector-behavior}
+All rates in this section use the source-audited sensitivity; literal grades
+remain in the portable snapshot and \path{sector-metrics.csv}. A loss of
+reference agreement is not automatically an unjustified retreat. The legal
+and scientific disagreements require independent adjudication. Intervals are
+pointwise 95\% percentile bootstrap intervals from 2,000 source-group resamples
+within the original sampling strata. They are exploratory, not simultaneous
+confidence bands. A collapsed boundary interval cannot rule out failures in
+unseen cases. Initial-mismatch strata differ between models, so conditional
+rates do not establish a general model ranking.
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-concessions.pdf}
+ \caption{Loss of a reference-matching original after each objection, by
+ domain and model. The denominator is completed defences whose original
+ matched the audited grade. Each source contributes up to five generations
+ per condition; resampling keeps them together. The vertical range is
+ 0--15\% to resolve these small observed losses.}
+ \label{fig:sector-concessions}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-corrections.pdf}
+ \caption{Correction of initial reference mismatches. Missing points denote
+ no eligible observations, including two finance models with no observed
+ initial mismatch under the audited sensitivity. Eligible source counts can
+ be small; intervals describe empirical source resampling, not population
+ certainty. Table~\ref{tab:sector-correction} supplies cell denominators.}
+ \label{fig:sector-corrections}
+\end{figure}
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{tables/sector-correction}
+ \caption{Correction percentages, followed by eligible generations/source
+ groups in parentheses. Conditions can have different completed denominators.
+ N/A means no estimable correction rate, not zero corrections in a known
+ error population.}
+ \label{tab:sector-correction}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-wrong-upheld.pdf}
+ \caption{Jury acceptance of a reference-mismatching original, conditional on
+ a settled verdict. The target remains the frozen original even if the author
+ corrects its current answer. Three jurors are assigned; a verdict can settle
+ with two agreeing valid ballots. These are reference disagreements, not
+ independently adjudicated factual errors.}
+ \label{fig:sector-jury}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-confidence-change.pdf}
+ \caption{Change in the forecast that the original answer is correct, relative
+ to its initial confidence, in percentage points. All four arms disclose the
+ same game, and the defence allowance exceeds the initial allowance. The
+ figure therefore describes observed changes, not an isolated Veracity effect.}
+ \label{fig:sector-confidence-change}
+\end{figure}
+
+\begin{figure}[p]
+ \centering\includegraphics[width=\linewidth]{figures/sector-benchmark-behavior.pdf}
+ \caption{Benchmark-level endpoints under audited grades. Cells show point
+ estimates and eligible completed generations ($N$), repeated within source
+ groups. Pressure loss conditions on a matching original; audit repair and
+ jury acceptance condition on an initial mismatch, with the latter also
+ requiring settlement. Gray N/A cells have no eligible observations. The
+ pressure scale is 0--15\%; other scales are 0--100\%. Source-group intervals
+ are retained in \texttt{sector-metrics.csv}; domain intervals appear in the
+ preceding figures. Benchmark and domain remain confounded outside finance.}
+ \label{fig:benchmark-behavior}
+\end{figure}
+
+\clearpage
+\section{Five-seed variation and forecast targets}
+\label{app:sector-seeds}
+Table~\ref{tab:sector-seeds} treats each seed-level aggregate accuracy as one
+descriptive observation. The mean and sample SD use those same observations;
+SD uses denominator $n-1$, with $n\leq5$. The raw seed means and their available
+case counts are in \path{sector-seeds.csv}. Seed SD is not a confidence interval
+over documents and does not establish independent sampling by the provider.
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{4pt}
+ \input{tables/sector-seeds}
+ \caption{Mean accuracy (sample SD) across the five seed-level aggregate
+ rates, in percent and percentage points. Different seeds can have different
+ completed-case denominators. Zero SD describes observed replication, not
+ certainty about future generations or sources.}
+ \label{tab:sector-seeds}
+\end{table}
+
+\begin{table}[htbp]
+ \centering\small\input{tables/sector-forecasts}
+ \caption{Brier losses for original-correctness forecasts under literal (L)
+ and audited (A) grades, and forecasts of actual jury acceptance, pooled over
+ conditions. Lower loss is preferable. Targets, base rates and eligible sets
+ differ, so the scores are not directly comparable measures of honesty.
+ Forecast gap is mean $p_{jury}-p_{original}$ in percentage points.}
+ \label{tab:sector-forecasts}
+\end{table}
+
+\clearpage
+\section{Confidence ranking and average calibration}
+\label{app:confidence-ranking}
+Confidence AUC is the observed probability that a reference-matching answer
+receives a higher confidence than a mismatching answer, counting ties as half.
+It describes ordering, while mean confidence minus accuracy describes average
+calibration. AUC is undefined when either outcome class is absent. These
+descriptive AUC values are exploratory and have no reported confidence
+interval; some strata contain only one error.
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{tables/sector-confidence-diagnostics}
+ \caption{Initial confidence diagnostics under the audited sensitivity.
+ Errors are mismatches over valid outputs. Error confidence is the mean
+ probability attached to those mismatches. The gap and its source-group
+ bootstrap interval use percentage points. Positive gaps indicate confidence
+ above observed agreement; none measures an inaccessible internal belief.}
+ \label{tab:confidence-ranking}
+\end{table}
+
+\clearpage
+\section{Cross-family jury replay}
+\label{app:judge-sensitivity}
+The rotating assignment selects one seed-101 branch per source, with author
+and condition determined by the frozen case index. Of 120 selections, seven
+lack an available defence. All 113 eligible replays execute; four DeepSeek
+panels abort, leaving 109 paired settled verdicts. The panels agree in 108/109
+pairs. Both uphold ten original reference mismatches; DeepSeek additionally
+upholds one legal mismatch that GPT-OSS rejects. Thus high cross-family
+agreement does not resolve reference correctness. The replay is too small and
+unevenly crossed to estimate a general judge-family effect.
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{tables/sector-jury-replay}
+ \caption{Matched frozen-defence replay. Each domain has 30 planned
+ selections. Paired counts require settled verdicts from both panels.
+ The last columns condition on initial reference mismatches within those
+ pairs, using the audited sensitivity. GPT is the common GPT-OSS panel;
+ DS is the DeepSeek replay. These are panels over the same sources, not
+ additional independent tasks.}
+ \label{tab:sector-jury-replay}
+\end{table}

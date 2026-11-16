@@ -89,6 +89,24 @@ class ProtocolFixtureModel(BaseChatModel):
         return ChatResult(generations=[ChatGeneration(message=message)])
 
 
+@pytest.mark.integration
+async def test_finance_micro_separates_correctness_from_three_juror_outcome(tmp_path):
+    from veracity_harness.finance_micro import Answer, numeric_score, verification_experiment
+
+    answer = Answer(decline_percent="3.80", p_correct=0.9, explanation="Arithmetic fixture")
+    experiment = verification_experiment(answer, tmp_path / "input", "fixture/model", 20261114)
+    directory = await run_experiment(experiment, tmp_path, model=ProtocolFixtureModel())
+    manifest = json.loads((directory / "run.json").read_text())
+    assert manifest["status"] == "complete"
+    episode = manifest["episodes"][0]
+    evidence = json.loads((directory / episode["episode_id"] / "evidence.json").read_text())
+    assert numeric_score(answer)["correct"] is True
+    assert episode["observed_verdict"] == "CHALLENGER_SUPPORTED"
+    assert episode["expected_verdict"] is None
+    assert len(evidence["episode"]["jurors"]) == 3
+    assert all(juror["revealed"] for juror in evidence["episode"]["jurors"])
+
+
 class PassiveModel(BaseChatModel):
     fail: bool = False
     replace_case: str | None = None

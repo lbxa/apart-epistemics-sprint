@@ -1,0 +1,237 @@
+---
+import research from "../data/research.json";
+
+const percent = (value: number) => `${(value * 100).toFixed(1)}%`;
+const x = (value: number) => 16 + value * 468;
+const modelName = (id: string) => research.models.find((model) => model.id === id)?.label ?? id;
+const interval = (low: number, high: number) => `${percent(low)}–${percent(high)}`;
+---
+
+<div class="findings-explorer" data-findings-explorer>
+  <form class="explorer-controls" aria-label="Explore initial results" hidden>
+    <label for="research-domain">Domain
+      <select id="research-domain" name="domain">
+        {research.domains.map((domain) => <option value={domain.id} selected={domain.id === "legal"}>{domain.label}</option>)}
+      </select>
+    </label>
+    <label for="research-model">Model
+      <select id="research-model" name="model">
+        <option value="all">All five models</option>
+        {research.models.map((model) => <option value={model.id}>{model.label}</option>)}
+      </select>
+    </label>
+  </form>
+
+  <div class="chart-legend" aria-label="Chart legend">
+    <span><i class="literal-symbol" aria-hidden="true"></i> Literal reference accuracy</span>
+    <span><i class="audited-symbol" aria-hidden="true"></i> Audit sensitivity</span>
+    <span><i class="confidence-symbol" aria-hidden="true"></i> Mean stated confidence</span>
+  </div>
+
+  <div class="initial-charts">
+    {research.domains.map((domain) => (
+      <figure class="domain-chart" data-domain={domain.id}>
+        <figcaption>
+          <strong>{domain.label}</strong>
+          <span>{domain.benchmarks} · 30 source groups assigned per model</span>
+        </figcaption>
+        <div class="chart-scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+        <div class="model-rows">
+          {research.initial.filter((row) => row.domain === domain.id).map((row) => (
+            <div class="model-row" data-model={row.model}>
+              <div class="model-label">
+                <strong>{modelName(row.model)}</strong>
+                <span>{row.completed}/{row.assigned} usable</span>
+              </div>
+              <svg viewBox="0 0 500 70" role="img" aria-label={`${modelName(row.model)}: literal accuracy ${percent(row.literal.mean)}, audit sensitivity ${percent(row.audited.mean)}, mean confidence ${percent(row.confidence)}.`}>
+                {[0, 0.5, 1].map((tick) => <line x1={x(tick)} y1="5" x2={x(tick)} y2="63" stroke="currentColor" stroke-opacity="0.1" />)}
+                <line x1={x(row.confidence)} y1="5" x2={x(row.confidence)} y2="21" stroke="#795B2B" stroke-width="3" />
+                <line x1={x(row.literal.low)} y1="32" x2={x(row.literal.high)} y2="32" stroke="#64645e" stroke-width="2" />
+                <circle cx={x(row.literal.mean)} cy="32" r="5" fill="#64645e" />
+                <line x1={x(row.audited.low)} y1="51" x2={x(row.audited.high)} y2="51" stroke="#24523f" stroke-width="2" />
+                <path d={`M${x(row.audited.mean)},45 l6,6 l-6,6 l-6,-6 Z`} fill="#24523f" />
+              </svg>
+              <div class="model-values">
+                <span><b>{percent(row.literal.mean)}</b> accuracy</span>
+                <span><b>{percent(row.confidence)}</b> confidence</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </figure>
+    ))}
+  </div>
+  <p class="selection-status" aria-live="polite" data-selection-status></p>
+
+  <p class="chart-note">
+    Lines show 95% source-group bootstrap intervals, with 2,000 resamples within sampling strata.
+    Accuracy is conditional on available answers: <strong>581 of 600 are interpretable</strong>.
+    The green marks apply a post hoc source audit to the same outputs; the literal score stays visible.
+    A collapsed interval at 100% does not imply certainty about new cases.
+  </p>
+
+  <details class="evidence-detail">
+    <summary>Inspect the numbers and uncertainty</summary>
+    <p>
+      Each cell contains 30 assigned initial attempts on 30 source groups. “Audit” is a sensitivity
+      analysis of eight selected source cases, pending independent human review. It changes
+      {research.summary.auditChangedGrades} grades: 25 in finance and five in education.
+      Stated confidence is a prospective verbal estimate, not a readout of internal belief.
+    </p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Initial results data table, horizontally scrollable">
+      <table>
+        <caption>Initial answers by domain and model. Intervals are 95% source-group bootstrap intervals.</caption>
+        <thead><tr><th scope="col">Domain / model</th><th scope="col">Usable</th><th scope="col">Literal correct</th><th scope="col">Literal 95% CI</th><th scope="col">Audit correct</th><th scope="col">Audit 95% CI</th><th scope="col">Mean confidence</th></tr></thead>
+        <tbody>
+          {research.domains.flatMap((domain) => research.initial.filter((row) => row.domain === domain.id).map((row) => (
+            <tr>
+              <th scope="row">{domain.label}<br /><span>{modelName(row.model)}</span></th>
+              <td>{row.completed}/{row.assigned}</td>
+              <td>{row.literalCorrect}/{row.completed}</td>
+              <td>{interval(row.literal.low, row.literal.high)}</td>
+              <td>{row.auditedCorrect}/{row.completed}</td>
+              <td>{interval(row.audited.low, row.audited.high)}</td>
+              <td>{percent(row.confidence)}</td>
+            </tr>
+          )))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+
+  <details class="evidence-detail pilot-detail">
+    <summary>Go deeper: five challenges to the same saved error</summary>
+    <p>
+      In the separate legal pilot, a frozen error branches into five defence generations for
+      each objection. A filled circle means the model corrected its classification; a cross
+      means the error remained. These are repeated generations on <strong>one selected source case</strong>,
+      not five new contracts.
+    </p>
+    <div class="pilot-legend"><span>● Corrected</span><span>× Error remains</span><span>Seeds 101–105, left to right</span></div>
+    {research.models.slice(0, 2).map((model) => (
+      <figure class="pilot-chart">
+        <figcaption>{model.label}</figcaption>
+        {research.pilot.filter((row) => row.model === model.id).map((row) => (
+          <div class="pilot-row">
+            <span class="arm-label">{row.label}</span>
+            <span class="seed-marks" role="img" aria-label={row.seeds.map((seed) => `Seed ${seed.seed}: ${seed.correct ? "corrected" : "error remained"}`).join("; ")}>
+              {row.seeds.map((seed) => <span class:list={["seed", { corrected: seed.correct }]} title={`Seed ${seed.seed}: ${seed.correct ? "corrected" : "error remained"}`} aria-hidden="true">{seed.correct ? "●" : "×"}</span>)}
+            </span>
+            <strong>{row.successes}/{row.completed}</strong>
+            <span class="pilot-interval">95% CI {row.ciLow === null || row.ciHigh === null ? "unobserved" : interval(row.ciLow, row.ciHigh)}</span>
+          </div>
+        ))}
+      </figure>
+    ))}
+    <p class="chart-note">
+      Exact binomial intervals are conditional on this saved answer under a Bernoulli-generation
+      model. DeepSeek’s 5/5 source audits have a 95% interval of 47.8–100%, illustrating how much
+      five repeats leave open. Kimi had no eligible initial error, so its correction behaviour
+      was not observed. An audit changes guidance over the same document; it adds no external fact.
+    </p>
+  </details>
+
+  <details class="evidence-detail provenance-detail">
+    <summary>Follow the evidence</summary>
+    <p>
+      This page is generated from the paper’s frozen snapshots. The ongoing dispute phase is
+      excluded. Source locators, analysis revisions and SHA256 hashes are included in the
+      <a href="/data/research.json" download>downloadable research data</a>.
+      Read the <a href="/data/README.md">data notes</a> for the two cohorts and their units.
+    </p>
+    <ul>
+      <li><a href={research.provenance.sectorRun} target="_blank" rel="noopener noreferrer">Sector study on W&amp;B</a> <span class="artifact-id">{research.provenance.sectorArtifact}</span></li>
+      <li><a href={research.provenance.pilotRun} target="_blank" rel="noopener noreferrer">Legal pilot on W&amp;B</a> <span class="artifact-id">{research.provenance.pilotArtifact}</span></li>
+    </ul>
+    <p class="chart-note">W&amp;B access may require project permissions. The public data download contains the displayed aggregates and their provenance.</p>
+  </details>
+</div>
+
+<script>
+  const explorer = document.querySelector<HTMLElement>("[data-findings-explorer]");
+  if (explorer) {
+    const controls = explorer.querySelector<HTMLFormElement>(".explorer-controls");
+    const domain = explorer.querySelector<HTMLSelectElement>("#research-domain");
+    const model = explorer.querySelector<HTMLSelectElement>("#research-model");
+    const status = explorer.querySelector<HTMLElement>("[data-selection-status]");
+    if (controls && domain && model && status) {
+      const update = () => {
+        explorer.querySelectorAll<HTMLElement>("[data-domain]").forEach((panel) => {
+          panel.hidden = panel.dataset.domain !== domain.value;
+        });
+        explorer.querySelectorAll<HTMLElement>("[data-model]").forEach((row) => {
+          row.hidden = model.value !== "all" && row.dataset.model !== model.value;
+        });
+        status.textContent = `${domain.selectedOptions[0].textContent}: ${model.selectedOptions[0].textContent}.`;
+      };
+      controls.hidden = false;
+      controls.addEventListener("change", update);
+      update();
+    }
+  }
+</script>
+
+<style>
+  .findings-explorer { --green: #24523f; --ink: #242821; --muted: #62665b; color: var(--ink); }
+  .findings-explorer [hidden] { display: none !important; }
+  .evidence-detail p { font-size: .91rem; line-height: 1.75; }
+  .explorer-controls { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.7rem 0 1.3rem; }
+  .explorer-controls label { display: grid; gap: .45rem; flex: 1 1 12rem; font-size: .75rem; color: var(--muted); }
+  select { width: 100%; border: 1px solid #c9cbc2; background: #fff; padding: .65rem .75rem; border-radius: .2rem; color: var(--ink); font: inherit; font-size: .88rem; }
+  select:focus-visible, summary:focus-visible, .table-scroll:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+  .chart-legend { display: flex; flex-wrap: wrap; gap: .75rem 1.2rem; font-size: .73rem; color: var(--muted); margin: 1.25rem 0 1.6rem; }
+  .chart-legend span { display: inline-flex; align-items: center; gap: .45rem; }
+  .chart-legend i { display: inline-block; }
+  .literal-symbol { width: .52rem; height: .52rem; border-radius: 50%; background: #64645e; }
+  .audited-symbol { width: .48rem; height: .48rem; background: var(--green); transform: rotate(45deg); }
+  .confidence-symbol { height: .8rem; border-left: 2px solid #795b2b; }
+  .domain-chart { margin: 0 0 2rem; }
+  .domain-chart figcaption { display: flex; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin-bottom: .85rem; font-size: .9rem; }
+  .domain-chart figcaption strong { font-weight: 500; }
+  .domain-chart figcaption span { font-size: .71rem; color: var(--muted); align-self: center; }
+  .chart-scale { display: flex; justify-content: space-between; margin: 0 0 .25rem 10.2rem; padding: 0 10.5rem 0 .7rem; font-size: .64rem; color: var(--muted); }
+  .model-row { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr) 9.5rem; align-items: center; gap: .7rem; border-bottom: 1px solid #e7e8e2; min-height: 5rem; }
+  .model-label { display: grid; gap: .35rem; }
+  .model-label strong { font-weight: 500; font-size: .81rem; }
+  .model-label span { font-size: .7rem; color: var(--muted); }
+  .model-row svg { width: 100%; height: auto; overflow: visible; }
+  .model-values { display: grid; gap: .4rem; font-size: .7rem; color: var(--muted); justify-self: end; }
+  .model-values b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .selection-status { font-size: .72rem; color: var(--muted); margin: -.8rem 0 1rem; }
+  .chart-note { color: var(--muted); font-size: .75rem; line-height: 1.7; margin: 1rem 0 1.6rem; }
+  .evidence-detail { border-top: 1px solid #d9dcd1; padding: 1rem 0; }
+  .evidence-detail:last-child { border-bottom: 1px solid #d9dcd1; }
+  .evidence-detail summary { font-size: .86rem; cursor: pointer; line-height: 1.6; padding-right: .5rem; }
+  .evidence-detail[open] summary { margin-bottom: 1rem; }
+  .evidence-detail p { margin: .75rem 0; }
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .72rem; text-align: left; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; color: var(--muted); margin-bottom: .8rem; line-height: 1.6; }
+  th, td { padding: .65rem .65rem .65rem 0; border-bottom: 1px solid #e2e4dc; white-space: nowrap; }
+  th { font-weight: 500; }
+  th span { font-weight: 400; color: var(--muted); }
+  .pilot-chart { margin: 1.5rem 0; }
+  .pilot-chart figcaption { font-family: Georgia, serif; font-size: 1.2rem; margin: 0 0 .75rem; }
+  .pilot-row { display: grid; grid-template-columns: 10rem 8rem 2.6rem 1fr; align-items: center; gap: .65rem; padding: .55rem 0; border-bottom: 1px solid #e7e8e2; font-size: .77rem; }
+  .pilot-row strong { font-weight: 500; font-variant-numeric: tabular-nums; }
+  .pilot-interval { color: var(--muted); font-size: .7rem; }
+  .seed-marks { display: flex; gap: .45rem; align-items: center; }
+  .seed { display: inline-flex; width: 1.1rem; height: 1.1rem; align-items: center; justify-content: center; border: 1px solid #8c4b35; border-radius: 50%; font-size: 1rem; color: #8c4b35; }
+  .seed.corrected { color: #536b3f; border-color: #536b3f; font-size: .9rem; }
+  .pilot-legend { display: flex; flex-wrap: wrap; gap: .6rem 1rem; font-size: .7rem; color: var(--muted); }
+  .provenance-detail ul { margin: 1rem 0; padding-left: 1.1rem; font-size: .8rem; line-height: 1.7; }
+  .provenance-detail li + li { margin-top: .8rem; }
+  .artifact-id { display: block; overflow-wrap: anywhere; color: var(--muted); font-size: .67rem; }
+  a { color: var(--green); text-decoration: underline; text-underline-offset: .2em; }
+  @media (max-width: 640px) {
+    .model-row { grid-template-columns: minmax(0, 1fr) auto; gap: .3rem .75rem; padding: .85rem 0 .55rem; }
+    .model-label { grid-column: 1; grid-row: 1; gap: .25rem; }
+    .model-row svg { grid-column: 1 / -1; grid-row: 2; max-height: 4rem; }
+    .model-values { grid-column: 2; grid-row: 1; }
+    .chart-scale { margin-left: 0; padding: 0 .65rem; }
+    .pilot-row { grid-template-columns: minmax(7rem, 1fr) 8rem 2rem; gap: .5rem; }
+    .pilot-interval { grid-column: 1 / -1; padding-left: 0; }
+    .domain-chart figcaption { display: grid; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>

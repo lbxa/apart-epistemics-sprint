@@ -97,14 +97,18 @@ model settings in every run. Workers AI accepts only `[model.reasoning].effort`.
 Its catalog supplies per-token ceiling prices. Returned neuron usage
 (USD 0.011 per 1,000) reconciles each charge only after matching the catalog
 token prices for the reported cached, uncached, and output tokens; missing
-neurons keep the hold and contradictions stop spending. Frontier models served through
-Cloudflare AI Gateway are not wired in.
+neurons keep the hold and contradictions stop spending. General tool-agent runs
+use native-model pricing preflight. The bounded ContractNLI adapter can also
+inspect the unified catalog; catalog access does not establish funded inference.
 
 Use `smoke` instead of `run` for one participant, one episode, and at most four
 model requests. It checks provider/tool integration, not collusion or complete
 multi-agent gameplay. Neither this example nor historical spending approval
-authorises a new paid campaign. Reuse one immutable-cap ledger across a campaign;
-do not create another ledger or raise its cap to bypass exhaustion.
+authorises a new paid campaign. Reuse one ledger across a campaign; ordinary
+construction cannot change its cap. An explicit user-authorised increase uses
+`CampaignSpending.increase_limit`, retains all charges/holds and pricing halts,
+and writes an audit record. Never create a replacement ledger or raise the cap
+without authorization to bypass exhaustion.
 
 The CLI loads host-only `OPENROUTER_API_KEY` from `.env` without overriding the
 environment. `--credential backup` chooses `OPENROUTER_BACKUP_API_KEY` under the
@@ -275,8 +279,102 @@ generated client drift, formatting, lint, contracts, Rust, and hooks.
 
 ## Changelog
 
+### 2026-11-16
+
+- Pin standalone sector tracking clients to the canonical W&B API when
+  `WANDB_BASE_URL` is unset, matching the main runner. Retain chart files in
+  artifacts without installing optional preview dependencies; see the
+  [tracking-host decision](../docs/decisions/standalone-sector-tools-pin-the-canonical-wandb-api.md).
+- Preserve the frozen sector-v1 generator after the numerical answer-encoding
+  audit. The future numeric policy proposes from the original answer and uses
+  the reference only as a veto; it is not integrated into this campaign. See
+  the [leakage decision](../docs/decisions/sector-study-keeps-frozen-objections-and-audits-answer-encoding.md).
+- Admit executed sector records through typed episode/settlement/balance
+  validation and a separate safe archive, preserving missing/partial cases;
+  see the [retention decision](../docs/decisions/sector-admission-retains-contract-evidence-separately.md).
+- Keep the selected arithmetic-context follow-up separate from the sector
+  matrix. It reuses the provider/journal implementation for standalone judge
+  diagnostics and makes no new settlement claim; see the
+  [scope decision](../docs/decisions/sector-study-separates-post-hoc-arithmetic-diagnostics.md).
+- Run the authorized five-family sector study on isolated cloud host
+  `gpu-alder`, using one durable journal and a separate campaign ledger.
+  The [handoff](research/sector-expansion/HANDOFF.md) owns recovery state;
+  local tracking alone is not cloud execution.
+- Preserve raw format failures when applying lossless numeric-string and
+  scale-alias interpretations. These overlays do not make paid replacement
+  calls; see the [phase amendment](../docs/decisions/sector-study-preserves-raw-format-failures-and-phase-budgets.md).
+- Keep literal benchmark grades alongside the separately versioned source
+  audit. Unit defects, precision and questionable references must not silently
+  become claims about model epistemics; see the
+  [grading decision](../docs/decisions/sector-results-retain-literal-and-source-audited-grades.md).
+
+### 2026-11-15
+
+- Native inference-access checks succeeded for GPT-OSS-120B, Inkling 2 Small and
+  DeepSeek V4.1 Flash under a one-cent diagnostic bound on the original $10
+  ledger. Retain failed-attempt reservations and keep shared SDK clients alive
+  until all model checks finish. These checks establish access, not benchmark
+  performance; see the [access record](research/sector-expansion/README.md#authenticated-inference-check--november-15-2026).
+- Keep the [sector expansion proposal](research/sector-expansion/README.md)
+  separate from completed pilot findings. Its initial five-model panel counts four
+  developer families, and native catalog visibility does not establish inference
+  access or authorize additional spending; see the
+  [scope decision](../docs/decisions/sector-expansion-keeps-models-and-families-distinct.md).
+
+- The native ContractNLI trial uses DeepSeek V4 Pro 0813, GLM-5.3 and Kimi K2.6
+  under one US$10 ledger and Lucas's explicit local exception. Preserve saved
+  screens across continuations and keep SDK clients alive until the run ends;
+  per-call closure invalidated LangChain's cached HTTP transport. See the
+  [native model and recovery decision](../docs/decisions/contract-micro-uses-native-frontier-models-and-frozen-recovery.md).
+- Preserve truncated Cloudflare JSON responses and usage through the normal
+  SDK create path. Direct SDK parsing discarded one length-limited jury response;
+  its failed cell remains recorded while settled cells are copied unchanged
+  into continuation outputs. See the [truncation decision](../docs/decisions/contract-micro-keeps-truncated-juries-and-completed-cells.md).
+- The Cloudflare-only adapter supports unified-catalog preflight, but GPT/Opus
+  inference was excluded after billing rejected the first Opus request. Keep
+  usage-based conservative cost bounds distinct from
+  confirmed charges; gateway caching and retries are disabled for paired model
+  observations. See the [Cloudflare-only decision](../docs/decisions/contract-micro-runs-through-cloudflare-only.md).
+- Use the recorded provider, endpoint and canonical model ID for hosting
+  identity. OpenAI-compatible SDK responses can label their adapter `openai`
+  in metadata even when the request and native neuron receipt are Cloudflare's.
+- Diagnose Wrangler OAuth from an empty working directory with API-token
+  environment overrides removed: running in the repository can reload its
+  `.env` token and inspect that credential instead. A refreshed CLI login must
+  also list the supplied experiment account before it can provision a runner.
+- Add the [ContractNLI pressure/evidence micro-experiment](research/contract-micro/README.md)
+  with the original answerer defending its frozen answer before a common
+  three-member jury. Source-reference grading remains independent of settlement;
+  natural errors are selected explicitly and never fabricated. Sampling seeds
+  are passed only for models whose Cloudflare schemas expose them.
+  Bounded plain-text calls reserve against a checked input ceiling; general
+  tool-using agents retain the full-context spending bound. See the
+  [decision](../docs/decisions/contract-micro-uses-source-graded-bounded-text-defences.md).
+- Keep valid quorum settlements, missing juror participation and connection
+  failures separate in finance repetitions. Recovery may fill unresolved cells
+  under the same seed, but cannot replace an existing verdict; preserve all
+  attempts, source versions and spending holds. See the
+  [participation](../docs/decisions/finance-settlement-and-jury-participation-are-separate.md)
+  and [recovery](../docs/decisions/finance-network-recovery-retries-only-unresolved-cells.md)
+  decisions.
+
 ### 2026-11-14
 
+- Finance repetitions send explicit Cloudflare sampling seeds as well as
+  scheduling seeds. The five-seed cohort retains the two original answers and
+  keeps earlier unseeded runs separate; see the
+  [decision](../docs/decisions/finance-repetitions-use-provider-and-scheduling-seeds.md).
+
+- Track API USD costs separately from synthetic Veracity stakes in finance
+  micro-experiments. Explicit cap increases retain charges, holds and an audit
+  trail; 1x/10x stake comparisons reuse validated initial answers and export
+  per-condition measurement CSVs. See
+  [the budget/stake decision](../docs/decisions/api-cap-and-veracity-stakes-are-separate.md).
+- Add the [finance confidence micro-experiment](research/finance-micro/README.md):
+  freeze answers before submission, pair the disclosed submission/control,
+  and score arithmetic correctness separately from a three-juror verdict. The
+  driver shares existing provider budgets, live W&B tracking and jury execution;
+  no paid results are claimed by its fixture tests.
 - Sprint campaigns execute on cloud compute so inspection can resume from
   another device. Use the supplied credential through the environment or
   ignored `.env`; the verified scope is `lbxa-corp/apart-epistemics-sprint` at

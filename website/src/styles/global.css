@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h2 { @apply font-light; }
+}
+
+/* The supplied archive header is unchanged; these styles own the body only. */
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 2rem; }
+.skip-link { position: absolute; z-index: 10; left: 1rem; top: -5rem; padding: .65rem 1rem; background: #193e32; color: #f7f0de; }
+.skip-link:focus { top: 1rem; }
+a:focus-visible, summary:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid #24523f; outline-offset: 4px; }
+
+.research-content p { color: #44403c; font-size: .96rem; line-height: 1.8; }
+.research-content .eyebrow { color: #555b46; font-size: .65rem; font-weight: 600; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; }
+.research-content h2 { margin: .7rem 0 1.2rem; color: #193e32; font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", serif; font-size: clamp(1.85rem, 4vw, 2.65rem); font-weight: 400; line-height: 1.16; letter-spacing: -.025em; text-wrap: balance; }
+.research-intro { max-width: 41rem; margin: 0 auto; text-align: center; }
+.research-intro > .eyebrow { margin-bottom: 1.2rem; }
+.research-intro a { color: #193e32; text-decoration: underline; text-underline-offset: 3px; }
+.research-section { margin-top: 3.5rem; }
+
+.finding-list { border-top: 1px solid #d6d3d1; }
+.finding-list article { padding: 1.3rem 0; border-bottom: 1px solid #d6d3d1; }
+.finding-list h3 { margin: 0 0 .45rem; color: #193e32; font-size: 1.08rem; font-weight: 500; line-height: 1.5; }
+.finding-list p { margin: 0; }
+.finding-list strong { color: #193e32; font-weight: 600; font-variant-numeric: tabular-nums; }
+.research-content .figure-note { margin-top: .85rem; color: #625f58; font-size: .75rem; line-height: 1.7; }
+
+.research-detail { margin-top: 1.3rem; border-bottom: 1px solid #d6d3d1; }
+.research-detail > summary { min-height: 2.75rem; padding: .7rem 0; color: #24523f; font-size: .86rem; line-height: 1.6; cursor: pointer; }
+.research-detail > summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+.research-detail[open] > summary { margin-bottom: 1rem; }
+
+.film-section { margin: 3.5rem 0; }
+.film-section > .figure-note { text-align: center; }
+.resources-section h2 { font-size: clamp(1.75rem, 4vw, 2.2rem); }
+.resource-links { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; margin-top: 1.25rem; }
+.resource-links a { display: inline-flex; align-items: center; min-height: 2.75rem; color: #24523f; font-size: .85rem; text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 540px) {
+  .research-section, .film-section { margin-top: 2.75rem; }
+  .finding-list article { padding: 1.1rem 0; }
+  .resource-links { gap: .2rem 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0s !important; }
+}

@@ -5,9 +5,10 @@ project's LaTeX research report. They encode recurring decisions and observable
 checks; routine LaTeX syntax remains reference material.
 
 The active project is Epistemics Sprint, targeting Apart's AI x Epistemics
-Research Sprint. Its research question and track remain open in the brief.
+Research Sprint. Its current question and Track 1 framing are recorded in the brief.
 Use the `editor` skill while developing the report alongside cloud experiments.
-The active draft remains structural until results support material prose.
+The first empirical draft now admits the frozen ContractNLI pilot's limited
+claims; its Track 1 focus, source mapping and remaining gaps are in the brief.
 Existing reports and evidence registers are imported
 historical material; their old sprint tracks and deadlines do not govern new work.
 
@@ -21,7 +22,7 @@ historical material; their old sprint tracks and deadlines do not govern new wor
 | 4 | [Visuals](visuals.md) | Publication chart style, Matplotlib mean/SD figures, typography, palettes, tables, and diagrams |
 | 5 | [LaTeX](latex.md) | Compiler, packages, notation, equations, and references |
 | 6 | [Review](review.md) | Scientific support, reproducibility, PDF inspection, and completion |
-| Active report | [Epistemics Sprint scaffold](../../report/epistemics/README.md) | Current title, metadata, section placeholders, and build command |
+| Active report | [Epistemics Sprint first draft](../../report/epistemics/README.md) | Pilot findings, generated assets, conditional uncertainty, and build commands |
 | Template | [Apart template provenance](../../report/template/epistemics.md) | User-supplied PDF, formatting, section order, and official source |
 | Report | [Sectioned baseline report](../../report/README.md) | Editable manuscript under `report/`; admitted two-episode smoke evidence, using the supplied preprint style |
 | Report | [Historical seeded recruitment report](../../report/agentic/README.md) | Imported November manuscript, completed C1 results, source-pinned cloud registry, controls and review gaps; October case studies retained separately |

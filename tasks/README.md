@@ -162,6 +162,13 @@ Public benchmarks can have been seen during training. Removing labels and rotati
 
 ## Changelog
 
+### 2026-11-15
+
+- Record the [sector expansion proposal](../harness/research/sector-expansion/README.md):
+  810 eligible text candidates span four occupational domains. Retain source
+  groups and distinguish benchmark format from domain effects before comparing
+  sectors; execution still belongs to the existing harness.
+
 ### 2026-11-14
 
 - Integrate the imported task bank as an independent, dependency-free uv project;
