@@ -121,12 +121,12 @@ over documents and does not establish independent sampling by the provider.
 \end{table}
 
 \clearpage
-\section{Confidence ranking and average calibration}
+\section{Confidence ranking and mean confidence gaps}
 \label{app:confidence-ranking}
 Confidence AUC is the observed probability that a reference-matching answer
 receives a higher confidence than a mismatching answer, counting ties as half.
-It describes ordering, while mean confidence minus accuracy describes average
-calibration. AUC is undefined when either outcome class is absent. These
+It describes ranking, while mean confidence minus accuracy measures the
+average confidence gap. AUC is undefined when either outcome class is absent. These
 descriptive AUC values are exploratory and have no reported confidence
 interval; some strata contain only one error.
 

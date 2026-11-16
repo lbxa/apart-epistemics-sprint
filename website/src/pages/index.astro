@@ -121,16 +121,16 @@ const citation = `@misc{barbosa2026macroepistemics,
               <p>Mean confidence exceeded reference accuracy for four of five models in the selected legal tasks, and all five in science.</p>
             </article>
             <article>
-              <h3>Standing firm can preserve mistakes.</h3>
-              <p>Pressure lost only <strong>{research.summary.pressureLoss.count}/{research.summary.pressureLoss.eligible}</strong> matching originals. But source audits repaired just <strong>{research.summary.auditRepair.count}/{research.summary.auditRepair.eligible}</strong> mismatches. These are repeated defence generations under audited grading.</p>
+              <h3>Stable answers can preserve mismatches.</h3>
+              <p>Under post hoc audited grading, <strong>{research.summary.pressureLoss.count}/{research.summary.pressureLoss.eligible}</strong> pressure defences lost an initial reference match; <strong>{research.summary.auditRepair.count}/{research.summary.auditRepair.eligible}</strong> source-audit defences repaired an initial reference mismatch.</p>
             </article>
             <article>
               <h3>A false defence can sway verification.</h3>
-              <p>In one arithmetic follow-up, adding a false defence cut correct rejections from <strong>{defenceComparison}</strong>. With checked arithmetic: {checkedComparison}. These were standalone calls on one source.</p>
+              <p>In a post hoc, one-source diagnostic, the frozen false defence cut correct rejections from <strong>{defenceComparison}</strong>. With checked arithmetic: {checkedComparison}. These standalone calls made no new Veracity settlements and do not establish a general effect.</p>
             </article>
           </div>
           <p class="figure-note">{research.summary.sourceGroups} source cases · {research.summary.branchesAssigned.toLocaleString("en-US")} assigned branches · {research.summary.executed.toLocaleString("en-US")} executed · {research.summary.validDefences.toLocaleString("en-US")} valid defences · {research.summary.settledVerdicts.toLocaleString("en-US")} settled. Five seeds repeat each saved answer; the diagnostic is separate.</p>
-          <p class="figure-note"><strong>Benchmark limits.</strong> A post hoc audit changed {research.summary.auditChangedGrades} initial grades. Scripted numerical objections encoded {research.benchmarkValidity.recoveredReferences}/{research.benchmarkValidity.numericOriginals} stored references—an offline finding, not observed model exploitation. References and jury verdicts remain separate checks.</p>
+          <p class="figure-note"><strong>Benchmark limits.</strong> A post hoc audit changed {research.summary.auditChangedGrades} initial grades. An offline inverse recovered {research.benchmarkValidity.recoveredReferences}/{research.benchmarkValidity.numericOriginals} numerical references from scripted objections. Model use was not observed; the candidate fix was not deployed. The frozen results retain this flaw.</p>
           <details class="research-detail">
             <summary>Explore the charts, uncertainty and sources</summary>
             <FindingsExplorer />

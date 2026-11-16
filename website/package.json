@@ -9,6 +9,7 @@
     "prepare:assets": "bun scripts/prepare-assets.mjs",
     "sync:research": "bun scripts/sync-research.mjs",
     "test:demo": "bun test src/lib/veracity-demo.test.mjs",
+    "test:research": "bun test scripts/sync-research.test.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

@@ -19,9 +19,8 @@ selected after observing disagreements, uses automated source review, and
 awaits independent human adjudication. Both original and revised grades are
 retained. Categorical legal/scientific disagreements have not been
 independently adjudicated. Some questions admit ambiguity or multiple answer
-representations that a scalar adapter cannot capture. A credible publication
-must keep these limits visible rather than treating every disagreement as
-falsehood.
+representations that a scalar adapter cannot capture. Reference disagreement
+alone therefore does not establish falsehood.
 The aggregate grade concerns the submitted final number or classification,
 not every assertion in an explanation. A whitespace-normalized quotation
 match is only a literal-source diagnostic; it does not establish that an
@@ -143,7 +142,7 @@ The false alternative is generated to disagree with the source reference.
 For classification, it proposes a label distinct from the reference and
 original answer, using an invalid exact-word-matching rule. For arithmetic,
 it perturbs the reference and claims that an independent check justifies it.
-The source audit supplies attention guidance and available original passages,
+The audit objection supplies attention guidance and available original passages,
 not new external facts. All text and schema hashes accompany the source
 artifact. Probability fields are removed before the jury sees the defence.
 
@@ -256,7 +255,7 @@ original is unsupported. This closes the demonstrated deterministic encoding
 channel for these inputs, not every possible exploit. Proposal plausibility,
 other leakage channels and new model behavior remain untested.
 
-The current model campaign is unchanged. Participants receive neither the
+The frozen model campaign is unchanged. Participants received neither the
 generator nor its condition tags, and no evidence establishes that they used
 this attack. The future policy is supplied in
 \path{harness/src/veracity_harness/sector_objections.py} and is not integrated

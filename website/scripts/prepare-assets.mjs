@@ -1,12 +1,29 @@
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readlinkSync, symlinkSync } from 'node:fs';
+import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readlinkSync, symlinkSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const website = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repository = resolve(website, '..');
 const exports = resolve(repository, 'video/exports');
+const research = JSON.parse(readFileSync(resolve(website, 'src/data/research.json'), 'utf8'));
+const reportHash = research.provenance.reportPdfSha256;
+if (typeof reportHash !== 'string' || !/^[a-f0-9]{64}$/.test(reportHash)) {
+  throw new Error('The public research export must pin the admitted report PDF.');
+}
+const reportDestination = resolve(website, 'public/files/macro-epistemics-paper.pdf');
+const existingReportMatches = existsSync(reportDestination)
+  && createHash('sha256').update(readFileSync(reportDestination)).digest('hex') === reportHash;
+if (!existingReportMatches) {
+  const reportBytes = readFileSync(resolve(repository, 'report/epistemics/build/main.pdf'));
+  if (createHash('sha256').update(reportBytes).digest('hex') !== reportHash) {
+    throw new Error('The local report differs from the admitted archive. Restore the verified PDF or explicitly admit the newer report before preparing assets.');
+  }
+  mkdirSync(dirname(reportDestination), { recursive: true });
+  writeFileSync(reportDestination, reportBytes);
+}
+console.log(`Retained admitted PDF: ${research.provenance.reportArtifact}`);
 const copies = [
-  [resolve(repository, 'report/epistemics/build/main.pdf'), resolve(website, 'public/files/macro-epistemics-paper.pdf')],
   [resolve(exports, 'macro-epistemics-draft-01.vtt'), resolve(website, 'public/media/macro-epistemics-draft-01.vtt')],
   [resolve(exports, 'macro-epistemics-draft-01-poster.png'), resolve(website, 'src/assets/images/macro-epistemics-poster.png')],
 ];

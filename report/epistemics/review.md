@@ -1,3 +1,49 @@
+# Publication editorial pass — 2026-11-16
+
+Completed one editorial pass through the main paper, references and all
+appendices at Lucas's request. Collection is complete; this pass changes no
+experimental outputs, grades, analysis or model quotations. All 105 frozen
+data, table, figure, CSV and statistics assets checked against report artifact
+v1 remain byte-identical.
+
+The edit clarifies the assignment equation, valid-output denominators,
+reference-relative Brier targets, and the distinction between audit objections
+and the post hoc source audit. It narrows the encoding-countermeasure claim
+to the audited inputs, replaces an ambiguous inference from selected
+trajectories, distinguishes ranking from the mean confidence gap, and removes
+an orphaned sentence at a main-text page break. The final abstract has 227
+whitespace-delimited words. Bibliographic entries were checked against their
+primary ACL/arXiv pages; LiveBench now uses the revised 2025 title,
+*A Challenging, Contamination-Limited LLM Benchmark*. The official Apart
+requirements were rechecked on November 16.
+
+Final PDF: `report/epistemics/build/main.pdf`, SHA256
+`a27e07ec36b52997bff0aa3f444399c98813c10d9ebf31f2cffb388048b185e8`.
+It retains eight main pages, one reference page and 55 appendix pages.
+Native Computer Modern, author affiliations, correspondence footer, four
+main-text panels, all supplementary readouts and the required ethics appendix
+are preserved. The clean pdfTeX/latexmk build passes with no layout/reference
+warnings or missing glyphs (`/tmp/apart-editor-final-build.log`). All 53 report
+tests pass (`/tmp/apart-editor-tests.log`). Rendered review covers all 64 pages,
+with separate final-size checks of the revised main pages and preserved
+quantitative figures. No clipping, broken panels or unresolved references
+were found.
+
+The full repository verification gate also exits zero: Rust/Solidity tests,
+formatting, Clippy, hooks, builds and 532 harness tests pass in 448.60 seconds
+(`/tmp/apart-editor-verify.log`). Whitespace and decision-index checks pass;
+all 35 PDF fonts are embedded. The bounded entropy review found no new drift.
+
+This is editorial preparation for publication, with independent adjudication
+of disputed references and author scientific approval still open. Neither
+submission nor public release was performed. Prior admitted report versions
+retain their original status and hashes.
+
+The editorial source and PDF are archived in finished report-only W&B run
+`1652b0d5a0a64c2a`, artifact `sector-report-da7e42f28ba54247:v2`, digest
+`5a6c61802b1b27fbbd717e7de8802630`. The external admission register is
+`harness/research/sector-expansion/report-publication-editorial.json`.
+
 # Structural scaffold review — 2026-11-14
 
 - **Stage:** structural draft, not submission-ready.

@@ -2,6 +2,23 @@
 
 ## Active Epistemics Sprint brief — 2026-11-16
 
+Publication editorial pass: collection is complete. The single whole-paper
+edit preserves the SS1--SS11 and INT1--INT8 evidence mappings and all frozen
+numeric assets and model excerpts. It clarifies reference-relative targets,
+assignment versus execution, prospective probabilities and the limited scope
+of the encoding countermeasure. Bibliographic metadata and venue rules are
+rechecked against primary sources. Editorial completion does not imply
+independent adjudication or author scientific approval; those gaps remain open.
+
+The completed editorial revision is report artifact
+`sector-report-da7e42f28ba54247:v2`, digest
+`5a6c61802b1b27fbbd717e7de8802630`, in finished report-only run
+`1652b0d5a0a64c2a`. Its 176-file bundle preserves the earlier evidence and
+archives the edited manuscript, PDF and verification logs. PDF SHA256:
+`a27e07ec36b52997bff0aa3f444399c98813c10d9ebf31f2cffb388048b185e8`.
+The external publication pointer is
+`harness/research/sector-expansion/report-publication-editorial.json`.
+
 This is an independent project built from the imported Veracity codebase.
 The first empirical draft asks how a model's source classification changes
 under different challenges and whether a jury's verdict agrees with the source

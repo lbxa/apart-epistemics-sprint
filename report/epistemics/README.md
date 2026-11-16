@@ -118,6 +118,11 @@ cells remain N/A; the incomplete Kimi defence stays missing.
 
 ### 2026-11-16
 
+- Complete a single publication editorial pass over the main paper and
+  appendices. Clarify assignment counts, reference-relative grading and
+  forecast targets; distinguish audit objections from the post hoc source
+  audit. Preserve every result and exact model excerpt, and retain independent
+  scientific review as an open requirement.
 - Expand the appendix to retain intermediate endpoints, ordinary successes,
   null counts, failures and all source rows. Add fixed confidence bins,
   matched forecast bases, vote margins, categorical confusions, five-seed

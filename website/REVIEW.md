@@ -87,3 +87,43 @@ the demo's static example remains visible and the native chart disclosure opens
 all four domain charts. Lint, type checking, the four demo tests and the static
 build pass after the layout changes. Screenshots are in ignored
 `output/playwright/simple-*.png`.
+
+## Completed-study update
+
+This update supersedes the initial-only evidence scope above. The default page
+keeps the archive header, immediately following scripted demo, three findings
+and closed explorer. It now admits sector artifact v128: 120 source cases,
+12,000 assigned branches, 11,620 executed, 11,483 valid defences and 11,469
+settled verdicts. Failed and unavailable work remains distinguishable.
+
+The explorer covers all 20 initial and 80 dispute cells across five models,
+four domains and four challenge conditions. It shows literal and post hoc
+audited grading, eligible denominators, source-group bootstrap intervals and
+descriptive variation across five defence seeds. The one-source arithmetic
+diagnostic and offline objection-validity audit remain separate; the page
+explicitly identifies the unintegrated candidate fix and the absence of evidence
+that participants exploited the encoding.
+
+Read-only W&B inspection confirmed the completed primary and diagnostic runs
+and their immutable artifact digests. The paper download matches report archive
+v1, SHA256 `9ab732be30fca65d052e027c1e50b1e07e86c0320ebd8d5e077c5c4cb56b9afc`.
+Asset preparation now preserves that admitted PDF when the concurrent working
+manuscript changes.
+
+Chromium checks on the fresh local preview verified all four domain/condition
+examples against exported counts, initial confidence filtering, an unobserved
+0/0 cell, the condition-specific validity notice, arithmetic seed tables,
+provenance links and PDF delivery. At 1440px and 390px there is no horizontal
+page overflow; wide tables scroll within their own regions. With JavaScript
+disabled, the legal audit chart and demo's worked example remain usable. A
+failed lazy data request preserves the static chart and explains the fallback.
+The aggregate loads only after opening the explorer; the MP4 loads only after
+activation and plays with its caption track. A fresh preview also serves the
+native Astro poster correctly; an older running preview had a stale Sharp
+loader failure. Screenshots are in ignored `output/playwright/latest-*.png`.
+
+Research-export tests, demo tests, lint, Astro/TypeScript checks and the static
+build pass. The complete repository verification gate passes, including 532
+harness tests; log: `.harness/verification/website-completed-study.log`.
+No paid model calls or public deployment were performed. Hosted-network
+performance and a full screen-reader review remain outside this local check.

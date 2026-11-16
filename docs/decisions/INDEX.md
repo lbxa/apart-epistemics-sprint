@@ -10,6 +10,7 @@ Every record, newest first. See [README](./README.md) for when and how to write 
 - [Landing page leads with demo and three findings](./landing-page-leads-with-demo-and-three-findings.md) — 2026-11-16
 - [Macro-Epistemics names the project; Veracity remains the instrument](./macro-epistemics-names-the-project-veracity-remains-the-instrument.md) — 2026-11-16
 - [Macro-Epistemics title describes confidence under dispute](./macro-epistemics-title-describes-confidence-under-dispute.md) — 2026-11-16
+- [Publication edit preserves frozen evidence and review status](./publication-edit-preserves-frozen-evidence-and-review-status.md) — 2026-11-16
 - [Research landing page preserves the archive header and frozen evidence](./research-landing-page-preserves-the-archive-header-and-frozen-evidence.md) — 2026-11-16
 - [Sector admission retains contract evidence separately](./sector-admission-retains-contract-evidence-separately.md) — 2026-11-16
 - [Sector arithmetic probe adds five checked author defences](./sector-arithmetic-probe-adds-five-checked-author-defences.md) — 2026-11-16

@@ -6,7 +6,7 @@ Track 2 discussion. Authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc
 The working title is *Macro-Epistemics: Confidence Under Dispute*.
 It is an empirical first draft, not a certified submission.
 
-## Official requirements, rechecked 2026-11-15
+## Official requirements, rechecked 2026-11-16
 
 The [live guidelines](https://apartresearch.com/sprints/ai-x-epistemics-research-sprint-2026-11-13-to-2026-11-15#guidelines)
 require the linked official template, a PDF report of at most eight main-text

@@ -10,8 +10,8 @@ The additional diagnostics are exploratory analyses of the same frozen
 outputs. No new model generation or semantic evaluator is introduced, and no
 failed output is replaced.
 
-The original scalar or label grade is denoted $M$ for a reference match and
-$X$ for a mismatch. These are the source-audited sensitivity unless explicitly
+We denote a scalar or label reference match by $M$ and a mismatch by $X$.
+Grades use the source-audited sensitivity unless explicitly
 marked literal (L). The distinction does not certify every reference as truth.
 In particular, a correct final number does not validate all accompanying
 explanatory claims. All intervals retain source groups, use the original
@@ -401,7 +401,7 @@ Missing initials are outside both original-grade strata.}
 
 \FloatBarrier
 \subsection{Which categorical confusions occur?}
-The categorical matrices retain both kinds of error for each reference class,
+The categorical matrices retain each predicted label for every reference class,
 not just an overall accuracy. Each cell is a count of initial answers;
 missing initials are shown through panel sample sizes and the format table.
 Legal silence versus negation and scientific scope remain annotation-sensitive
@@ -454,8 +454,8 @@ metadata annex; response/error bodies and private SDK reasoning are excluded.
 Logical locators are not claimed to be provider billing request IDs.
 
 Reported output tokens may include provider-specific reasoning accounting.
-Kimi's reasoning setting and the role-specific caps differ from those of
-other conditions, as already disclosed. Token counts do not identify reasoning
+Kimi's reasoning setting differs from the other models; token caps vary by
+role, as described in Appendix~\ref{app:protocol}. Token counts do not identify reasoning
 quality, and no inference-speed ranking is made. The request timing and queue
 latency needed to isolate speed are not present in the admitted projection.
 A length finish reason is a receipt diagnostic, not proof of why a particular
@@ -490,7 +490,7 @@ The short F/L/S/E codes provide readable locators. Full task IDs, references,
 scales, source URLs and hashes are retained in \path{sector-source-ledger.csv}.
 TAT-QA source keys are unambiguous eight-character prefixes in this cohort.
 The 2,400-row source/arm ledger additionally retains each model, condition,
-original hash and five ordered outcome bits (101--105); -- denotes missing
+original hash and five ordered outcome bits (101--105); \texttt{-} denotes missing
 values in those bit strings. These rows let readers reconstruct aggregate
 plots and inspect whether a small number of sources drives them.
 

@@ -20,7 +20,7 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
     <figcaption><strong data-chart-title>Repair of initial mismatches · Legal · Source audit</strong><span data-chart-subtitle>ContractNLI · valid defences of initial reference mismatches</span></figcaption>
     <div class="chart-legend" aria-label="Chart legend">
       <span><i class="literal-symbol" aria-hidden="true"></i> Literal reference grade</span>
-      <span><i class="audited-symbol" aria-hidden="true"></i> Source-audit sensitivity</span>
+      <span><i class="audited-symbol" aria-hidden="true"></i> Audited grading sensitivity</span>
       <span data-confidence-legend hidden><i class="confidence-symbol" aria-hidden="true"></i> Mean stated confidence</span>
     </div>
     <div class="chart-scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
@@ -36,7 +36,7 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
             <g data-audited-mark style={score.audited.mean === null ? "display:none" : undefined}><line x1={x(score.audited.low)} y1="49" x2={x(score.audited.high)} y2="49" stroke="#24523f" stroke-width="2" /><path d={`M${x(score.audited.mean)},43 l6,6 l-6,6 l-6,-6 Z`} fill="#24523f" /></g>
             <line data-confidence-mark x1="0" x2="0" y1="5" y2="19" stroke="#795b2b" stroke-width="3" style="display:none" />
           </svg>
-          <div class="model-values"><span data-literal-value>Literal <b>{score.literal.count}/{score.literal.n}</b></span><span data-audited-value>Audit <b>{score.audited.count}/{score.audited.n}</b></span></div>
+          <div class="model-values"><span data-literal-value>Literal <b>{score.literal.count}/{score.literal.n}</b></span><span data-audited-value>Audited <b>{score.audited.count}/{score.audited.n}</b></span></div>
           <p class="seed-note" data-seed-note hidden></p>
         </div>;
       })}
@@ -60,7 +60,7 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
     <div class="table-scroll" tabindex="0" role="region" aria-label="Selected result numbers, horizontally scrollable">
       <table>
         <caption data-table-caption>Legal source audit: repair of initial reference mismatches. Intervals retain source clustering.</caption>
-        <thead><tr><th scope="col">Model</th><th scope="col">Literal count</th><th scope="col">Literal 95% CI</th><th scope="col">Audit count</th><th scope="col">Audit 95% CI</th><th scope="col">Audit eligible sources</th></tr></thead>
+        <thead><tr><th scope="col">Model</th><th scope="col">Literal count</th><th scope="col">Literal 95% CI</th><th scope="col">Audited count</th><th scope="col">Audited 95% CI</th><th scope="col">Audited eligible sources</th></tr></thead>
         <tbody>{research.models.map((model) => {
           const score = defaultRows.find((row) => row.model === model.id)!.metrics.correction;
           return <tr data-table-model={model.id}><th scope="row">{model.label}</th><td data-table-literal>{score.literal.count}/{score.literal.n}</td><td data-table-literal-ci>{interval(score.literal.low, score.literal.high)}</td><td data-table-audited>{score.audited.count}/{score.audited.n}</td><td data-table-audited-ci>{interval(score.audited.low, score.audited.high)}</td><td data-table-groups>{score.audited.groups}</td></tr>;
@@ -110,6 +110,7 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
       <li><a href={research.provenance.sectorRun} target="_blank" rel="noopener noreferrer">Completed primary run on W&amp;B</a><span class="artifact-id">{research.provenance.sectorArtifact}</span></li>
       <li><a href={research.provenance.arithmeticRun} target="_blank" rel="noopener noreferrer">Separate arithmetic diagnostic</a><span class="artifact-id">{research.provenance.arithmeticArtifact}</span></li>
       <li><a href={research.provenance.validityRun} target="_blank" rel="noopener noreferrer">Offline validity audit</a><span class="artifact-id">{research.provenance.validityArtifact}</span></li>
+      <li><a href={research.provenance.reportRun} target="_blank" rel="noopener noreferrer">Archived paper draft</a><span class="artifact-id">{research.provenance.reportArtifact}</span><span class="artifact-id">PDF SHA256: {research.provenance.reportPdfSha256}</span></li>
     </ul>
     <p class="chart-note">W&amp;B may require project access. The public download has no credentials, raw model calls, private run state or spending ledgers. The misleading-objection inverse is a demonstrated encoding exploit; no evidence establishes that participants used it. Its candidate closure remains unintegrated.</p>
   </details>
@@ -158,7 +159,7 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
             const circle = mark.querySelector("circle");
             if (circle) circle.setAttribute("cx", x(score.mean));
             else mark.querySelector("path")!.setAttribute("d", `M${x(score.mean)},43 l6,6 l-6,6 l-6,-6 Z`);
-            text(row, `[data-${grade}-value]`, `${grade === "literal" ? "Literal" : "Audit"} ${score.count}/${score.n} · ${percent(score.mean)}`);
+            text(row, `[data-${grade}-value]`, `${grade === "literal" ? "Literal" : "Audited"} ${score.count}/${score.n} · ${percent(score.mean)}`);
             text(table, `[data-table-${grade}]`, `${score.count}/${score.n}`);
             text(table, `[data-table-${grade}-ci]`, score.mean === null ? "Unobserved" : interval(score));
           }
@@ -182,10 +183,9 @@ const judgeModels = research.models.filter((model) => research.arithmeticDiagnos
       update();
     };
     const start = () => {
-      loading ??= activate().catch(() => { textFallback(); });
-    };
-    const textFallback = () => {
-      explorer.querySelector("[data-selection-status]")!.textContent = "Interactive data could not load. The legal audit chart and downloadable aggregate remain available.";
+      loading ??= activate().catch(() => {
+        explorer.querySelector("[data-selection-status]")!.textContent = "Interactive data could not load. The legal audit chart and downloadable aggregate remain available.";
+      });
     };
     if (!disclosure || disclosure.open) start();
     disclosure?.addEventListener("toggle", () => { if (disclosure.open) start(); });
