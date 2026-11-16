@@ -267,6 +267,7 @@ must remain distinct observations.
 
 ```sh
 uv run --project harness --locked pytest harness/tests
+uv run --project harness --locked pytest harness/tests/test_integration.py -m integration -n 2 --dist=loadgroup --durations=15
 bash scripts/verify-harness.sh
 bash scripts/verify.sh
 ```
@@ -276,6 +277,19 @@ verification requires Docker and Rust/Anvil; missing infrastructure fails.
 Scripted Deep Agent fixtures test completion, isolation, memory, and failures;
 they provide no evidence of emergent model behaviour. The full gate also checks
 generated client drift, formatting, lint, contracts, Rust, and hooks.
+
+Mechanics fixtures use stepped clocks even when their source research config uses
+real time; the dedicated real-time session test still waits for the host clock.
+Each participant keeps its own container and private network. Sandbox startup and
+cleanup use at most four Docker workers, draining startup before failure/cancellation
+cleanup and removing containers before networks, volumes, and mounted directories.
+The integration gate uses two pytest workers; `--dist=loadgroup` keeps the swarm
+scenarios together so two 17-participant arenas cannot overlap. The integration
+module builds its fixed sandbox image once per worker. Default unit tests keep
+their single-process execution.
+The measured 28-case integration run fell from 22m30s to 14m18s (36.4%);
+environment details and the sequential comparison are in the
+[benchmark notes](../docs/decisions/parallel-sandbox-lifecycle-and-stepped-mechanics-tests.md#measurements).
 
 ## Changelog
 
@@ -385,6 +399,11 @@ generated client drift, formatting, lint, contracts, Rust, and hooks.
   and default raw calls; artifact availability alone does not establish complete
   recovery or experiment coverage. See the
   [cloud experiment decision](../docs/decisions/cloud-experiments-and-evidence-led-apart-report.md).
+- Speed up integration tests with stepped clocks for mechanics, bounded parallel
+  sandbox startup/cleanup, one image build per worker, and two grouped pytest
+  workers in the integration gate. Retain real Docker/Anvil execution, isolation checks, and
+  the dedicated real-time clock regression. See the
+  [decision](../docs/decisions/parallel-sandbox-lifecycle-and-stepped-mechanics-tests.md).
 
 ### 2026-11-09
 
