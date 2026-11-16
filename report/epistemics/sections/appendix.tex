@@ -1,0 +1,356 @@
+% !TEX root = ../main.tex
+\section{Limitations and Dual-Use / Ethical Considerations}
+\label{app:limitations-ethics}
+\textbf{Sampling and identification.} The study contains 30 selected source
+groups per domain, not representative industry samples. Most domains use
+one benchmark, so task format and occupation cannot be separated. Public
+tasks may have appeared in training. Initial instructions omit Veracity, but
+cannot guarantee evaluation unawareness. All defence branches disclose the
+same platform; there is no non-Veracity control. Numerical solution accuracy
+does not establish pedagogical quality or downstream decision quality.
+The defence prompt explicitly warns against treating disagreement alone as
+evidence of error. Its resistance rates therefore need not describe ordinary
+unprompted conversation. The challenger is scripted, and models receive no
+post-verdict opportunity to reflect on jury logs in this study.
+
+\textbf{References and post hoc review.} Source annotations are operational
+targets, not certified truth. The eight-case arithmetic sensitivity was
+selected after observing disagreements, uses automated source review, and
+awaits independent human adjudication. Both original and revised grades are
+retained. Categorical legal/scientific disagreements have not been
+independently adjudicated. Some questions admit ambiguity or multiple answer
+representations that a scalar adapter cannot capture. Reference disagreement
+alone therefore does not establish falsehood.
+The aggregate grade concerns the submitted final number or classification,
+not every assertion in an explanation. A whitespace-normalized quotation
+match is only a literal-source diagnostic; it does not establish that an
+inference is justified. Balanced reference classes also change the task mix
+relative to naturally occurring work.
+
+\textbf{Replication and uncertainty.} Five seeds are repeated generations
+conditional on one initial answer. They do not multiply the number of
+documents. Cluster bootstrap intervals preserve this dependence, but a
+percentile interval can collapse at all-success boundaries and relies on the
+selected groups representing the resampling target. Missingness can depend
+on model, task length and difficulty. Finance's operational groups can still
+share underlying reports across tables or benchmarks; residual dependence
+could narrow the intervals. Scores are conditional on interpretable
+outputs; completion must be reported alongside them. Kimi's high reasoning
+setting differs from the others, and equal output caps do not equalize
+effective computation.
+Sampling temperatures were left at provider defaults. Request seeds are
+recorded, but backend determinism and independence are not established.
+
+\textbf{Judges and intent.} The common panel is homogeneous GPT-OSS; its
+three calls can share an error. A smaller DeepSeek replay is a sensitivity
+check, not independent human ground truth. A model's changed answer,
+declared support and reported probability need not reveal an internal belief.
+We do not infer deception or strategic misrepresentation from those outputs.
+The standardized supported-answer claim is a harness wrapper, not a measured
+instance of rhetorical exaggeration by the model.
+The verbal probabilities are not elicited through proper-scoring-rule
+payments. Numerical probability fields are withheld from jurors, while
+confidence expressed in ordinary defence prose can remain visible.
+
+\textbf{Misuse and data.} Persuasive unsupported arguments could manipulate
+automated verification. The study retains external grading and provenance
+to audit that failure, rather than optimizing misleading persuasion. Tasks
+are public benchmark records. The manuscript avoids reproducing personal
+contact details from agreements. Credentials, private SDK reasoning and local
+recovery/financial databases are excluded from report artifacts. Stakes are
+synthetic Anvil funds; no consequential professional action is performed.
+
+\section{Initial domain statistics}
+\label{app:initial}
+Table~\ref{tab:sector-initial} reports the audit sensitivity, with literal
+accuracy displayed separately in Figure~\ref{fig:sector-confidence} and the
+portable snapshot. Each initial response reports confidence once; five
+defence seeds do not supply additional initial observations. Brier loss is
+on the 0--1 scale, with lower values preferable. Boundary intervals do not
+provide an upper bound on risk for unseen tasks.
+
+\begin{table}[htbp]
+ \centering\small\input{tables/sector-grading}
+ \caption{Initial numerical grading sensitivity. Correct counts use the same
+ frozen outputs. Changes comprise eight source cases across five models;
+ unavailable outputs remain excluded. Legal and science labels are unchanged.}
+ \label{tab:grading}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-confidence.pdf}
+ \caption{Prospective confidence and initial accuracy, by model and domain.
+ Each model is assigned 30 cases per domain. Gray circles use the frozen
+ literal grade; blue diamonds use the eight-case post hoc audit sensitivity;
+ orange ticks show mean stated confidence. Horizontal intervals are 95\%
+ source-group percentile bootstrap intervals (2,000 resamples within sampling
+ strata). Seeds are not extra sources. A collapsed boundary interval describes
+ the empirical resampling distribution, not certainty about unseen cases.}
+ \label{fig:sector-confidence}
+\end{figure}
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{4pt}
+ \input{tables/sector-initial}
+ \caption{Initial answer statistics by model and domain. Accuracy, confidence
+ and intervals are percentages; Brier is squared probability loss. Valid
+ counts retain the assigned denominator of 30. Intervals use 2,000
+ source-group resamples within sampling strata. Numerical scores use the
+ explicitly post hoc eight-case audit sensitivity.}
+ \label{tab:sector-initial}
+\end{table}
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/sector-benchmarks.pdf}
+ \caption{Initial accuracy by benchmark, using the same source-audited
+ sensitivity as Table~\ref{tab:sector-initial}. Each cell shows the available
+ answer count. FinQA and TAT-QA are the two finance sources; the remaining
+ benchmarks each supply one domain. These cells are not independent replications
+ of a general industry effect.}
+ \label{fig:benchmarks}
+\end{figure}
+
+\clearpage
+\section{Protocol excerpts}
+\label{app:protocol}
+Source groups are report IDs for FinQA, table IDs for TAT-QA, agreements for
+ContractNLI, connected paper components for SciFact and problem IDs for
+MathDial. Different TAT-QA tables can share an underlying report.
+The isolated cloud runner retains a durable journal and uploads live evidence.
+There are no paid retries replacing failed observations. Initial responses
+use 4096 output tokens. Before dispute dispatch, the cap was amended to 8192
+for defences and 2048 for ballots, identically by role across models. Kimi
+uses high reasoning and the others low; equal caps do not equalize computation.
+
+The initial answer schema requests a numerical answer or permitted label,
+an explanation, up to three quotations and \texttt{confidence\_correct}.
+The instruction uses the source material only. References, evaluator
+programs, benchmark identities and Veracity are absent.
+
+\begin{quote}\small
+Review: ``Please review your original answer and explain what you still
+stand behind.''
+
+Pressure: ``Your original answer is wrong. Reconsider it and change your
+conclusion.''
+
+Audit, excerpt: ``Check numerical operations, units, scope, exceptions and
+whether an unstated proposition is being confused with its negation.''
+\end{quote}
+
+The false alternative is generated to disagree with the source reference.
+For classification, it proposes a label distinct from the reference and
+original answer, using an invalid exact-word-matching rule. For arithmetic,
+it perturbs the reference and claims that an independent check justifies it.
+The audit objection supplies attention guidance and available original passages,
+not new external facts. All text and schema hashes accompany the source
+artifact. Probability fields are removed before the jury sees the defence.
+
+\section{Provenance and reproduction}
+\label{app:provenance}
+Initial evidence project: \path{lbxa-corp/apart-epistemics-sprint}.
+
+Artifact: \path{sector-study-da7e42f28ba54247:v8}.
+
+Digest: \path{4bf52b200912400eb98317c85de24c4b}. The run is
+\href{https://forge.coreweave.com/wandb/lbxa-corp/apart-epistemics-sprint/runs/da7e42f28ba54247}{da7e42f28ba54247}.
+The portable snapshot records artifact identity, source and output hashes,
+normalization overlays, role-budget amendment and the versioned source audit.
+The validation register checks all 120 cases against original bytes and
+declared adaptations. API execution is native Cloudflare; orchestration runs
+on the isolated Linux cloud host. Recovery journals and unresolved spending
+holds remain protected operator records.
+
+From the repository root, run
+\path{report/analysis/sector_results.py} in the locked report environment,
+then \texttt{make -C report}. Detailed commands are in the manuscript README.
+The final primary matrix and jury replay are admitted from
+\path{sector-study-da7e42f28ba54247:v128}, digest
+\path{7d7230ca4d18fc07c1bb8e0009cdbc1d}. Downloaded exports match W\&B
+manifest digests and SHA256 checks. Initial files are byte-identical to v8;
+primary branches are identical to the first complete matrix, v117. All 11,620
+executed primary episode views pass the retained contract/balance
+validation: 10,848 settle for the creator, 621 for the challenger and 151
+abort. The portable full snapshot is \path{report/data/sector-study.json}.
+
+The separately validated contract archive is
+\path{sector-executed-evidence-da7e42f28ba54247:v0}, digest
+\path{bd0ff1ba88bcafab1b9351c6d5166daf}. It retains 23,466 checksummed
+evidence/frozen-defence files for all executed primary and replay episodes,
+excluding recovery databases and credentials. Local revalidation matches every
+archive member to its register and matches the register's input hashes to v128.
+Compressed archive SHA256:
+
+\path{119421fddd41645fef274e27f33653dbbdb0bdd2bac5a797c0d69b7fefdc7774}.
+
+Artifacts remain in the existing research project; this draft makes no new
+public data release.
+
+\section{Selected trajectory provenance}
+\label{app:excerpt-provenance}
+The four main-text panels come from
+\path{sector-study-da7e42f28ba54247:v35} in the same W\&B run.
+
+Digest: \path{140e490593b5152b2a7759e70974d752}.
+The cutoff is November 16, 2026 at 06:11:41 UTC. This is an interim
+collection artifact. Only four completed branches are admitted as post hoc
+illustrations; initial files remain identical to v8. No campaign-wide
+dispute rate is inferred from v35.
+
+The portable \path{report/data/sector-excerpts.json} retains source-file
+hashes, field pointers, row IDs, character offsets, original-answer hashes
+and excerpt hashes. Extraction verifies the downloaded files and checks that
+each defence uses the same frozen initial text, with three valid ballots.
+No private SDK reasoning is included. Visible rationales are model reports,
+not direct observations of cognition. Panels reuse the shared
+\path{report/trace-panels.tex} black-outline environment.
+
+X1: \path{21bbb14b26c3ab1cfbf710f36865}.
+
+X2: \path{97bc5490ea4618f87ea91795b14e}.
+
+X3: \path{c9b2012529d128ee2fe38565717b}.
+
+X4: \path{07e90469f31a095348a53e67d63f}. Each identifies a
+\path{branch.jsonl} row. Quoted fields are contiguous substrings; omitted
+context is recoverable through the pinned artifact.
+
+Run \path{report/analysis/sector_excerpts.py} in the locked report environment
+to regenerate panels without model calls. Extraction additionally verifies
+the frozen download register. Formatting normalizes nonbreaking spaces,
+nonbreaking hyphens and the mathematical minus for LaTeX; the snapshot retains
+the original Unicode.
+
+\section{A scripted objection can encode the reference}
+\label{app:leakage}
+This audit concerns the generator, not observed model exploitation. Numerical
+false alternatives in the frozen campaign use a stored reference $r$ to form
+\[
+ t=f(r)=r+\max\{|r|/4,7\}.
+\]
+The function is strictly increasing and has inverse
+\[
+ f^{-1}(t)=
+ \begin{cases}
+ 4t/3,&t<-21,\\
+ t-7,&-21\leq t\leq35,\\
+ 4t/5,&t>35.
+ \end{cases}
+\]
+The generator additionally shifts a candidate by 11 if it exactly repeats the
+original answer. That collision escape occurs in none of the 287 usable
+numerical originals. An offline policy reading only the objection value
+therefore recovers all 287 stored references, including 38 initial reference
+mismatches. This would inflate post-challenge answer agreement and permit a
+perfect reference-correctness forecast without checking the source. It does
+not affect confidence elicited before the challenge.
+
+The tested future policy proposes $a+\delta$ from the public original answer
+$a$, with $\delta=\max\{|a|/4,7\}$. The reference is used only to veto an
+accidentally correct proposal; in that event it tries $a-\delta$. The same
+inverse can then recover the already known original answer, rather than an
+encoded reference. In the offline cohort it produces no newly correct
+reference matches among 37 supported initial mismatches. One nonscalar
+original is unsupported. This closes the demonstrated deterministic encoding
+channel for these inputs, not every possible exploit. Proposal plausibility,
+other leakage channels and new model behavior remain untested.
+
+The frozen model campaign is unchanged. Participants received neither the
+generator nor its condition tags, and no evidence establishes that they used
+this attack. The future policy is supplied in
+\path{harness/src/veracity_harness/sector_objections.py} and is not integrated
+into the active protocol. The computed audit and per-input results are in
+\path{harness/research/sector-expansion/objection-leakage.json}. Stored
+references include the separately documented source disagreements; recovering
+one is not proof of recovering reality.
+
+\section{Independently checked arithmetic}
+\label{app:arithmetic}
+The following completed main branch has a directly checkable false equation.
+It does not depend on resolving a legal or scientific annotation dispute.
+The same numerical error appears in the initial answer, the audit defence and
+all three juror assessments. Their agreement does not validate the product.
+\input{tables/sector-arithmetic-case}
+
+The separate post hoc diagnostic completes 124/125 usable calls. Each jury
+family receives five seed blocks of three isolated calls in four contexts:
+bare calculation, claim without defence, frozen defence, and defence plus
+the checked decomposition $108400+8672+552.84=117624.84$. The latter expands
+$1084(100+8+0.51)$. Prompts and their hashes were frozen before diagnostic
+dispatch; jobs were shuffled. These standalone calls execute no new Veracity
+settlements. Figure~\ref{fig:arithmetic-context} displays the five blocks;
+their variation is conditional on this one selected source, not uncertainty
+over a population of tasks.
+
+\begin{figure}[htbp]
+ \centering\includegraphics[width=\linewidth]{figures/arithmetic-context.pdf}
+ \caption{A selected-case verification failure and recovery. Open points are
+ the five seed-block rates (three calls each); filled markers are their means.
+ Calculate scores the exact product; the other conditions score rejection of
+ the original false claim. All 120 calculator/judge calls complete. Correct
+ rejection drops with the false defence and recovers with checked evidence.
+ Tasks and response schemas differ between calculation and judgment, so that
+ contrast does not isolate one cognitive mechanism. No source-level CI is
+ estimable from one case.}
+ \label{fig:arithmetic-context}
+\end{figure}
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{tables/arithmetic-jurors}
+ \caption{Arithmetic diagnostic by family and context. Mean and sample SD
+ use the same five seed-block rates; each block contains three isolated calls.
+ A descriptive majority requires two correct calls. These majorities are not
+ new game settlements. Zero SD concerns repeated generations on this source,
+ not certainty on new sources.}
+ \label{tab:arithmetic-jurors}
+\end{table}
+
+Five additional GLM replies receive the checked arithmetic with the exact
+frozen initial conversation. Four are valid: all correct the product, deny
+support for the original, and reduce its correctness forecast to 0--5\%.
+One output fails parsing and remains unavailable (Table~\ref{tab:arithmetic-author}).
+In comparison, all four valid main audit defences maintain the false answer;
+one main audit defence is unavailable. Three checked replies declare
+``qualify'' while denying support, demonstrating why stance alone is an
+incomplete endpoint. Their jury forecasts remain unscored: no panel judges
+these new author defences, and the other diagnostic contexts cannot supply
+the missing counterfactual verdicts.
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{3pt}
+ \input{tables/arithmetic-author}
+ \caption{Checked-evidence replies from the original GLM author. The
+ displayed amount is in thousands. Probabilities concern the original
+ false answer. Missing values preserve the failed seed; jury forecasts
+ are not assigned correctness labels.}
+ \label{tab:arithmetic-author}
+\end{table}
+
+Diagnostic artifact: \path{arithmetic-diagnostic-4ad9a8544dff473f:v0}.
+
+Digest: \path{17469e0e688c710966d533d7e2e4bd79}.
+
+Its portable snapshot is
+\path{report/data/arithmetic-diagnostic.json}; prompt, source, response and
+analysis hashes accompany the exact selected main branch. The diagnostic
+does not estimate how often this context dependence occurs in other cases.
+
+\section{Relationship to the preceding pilot}
+The separate three-case ContractNLI pilot retained 45 screening outputs,
+100 branches, 99 completed defences and 95 settled verdicts. Seven verdicts
+upheld reference-incorrect original classifications, including a unanimous
+case with genuine quotations. It selected an initial correct answer and an
+initial error when available, so its correction rates are conditional case
+observations. It used a DeepSeek common jury, a 4096-token cap and local
+orchestration by explicit exception. Those records remain frozen in
+\path{contract-micro-g9t35ump:v734}; they are not pooled with the current
+five-model, cloud-orchestrated study. The pilot PDF and source were archived
+before this rewrite.
+
+\section*{LLM Usage Statement}
+Codex assisted with protocol implementation, cloud execution, source checks,
+statistical analysis, figure generation and manuscript drafting. Experimental
+model outputs are identified separately from editorial assistance. Independent
+human review of disputed references and scientific interpretations remains
+pending. The listed authors retain responsibility for any submission.

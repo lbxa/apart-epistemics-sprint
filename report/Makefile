@@ -1,10 +1,19 @@
 PYTHON ?= python3
 LATEXMK ?= latexmk
 
-.PHONY: all baseline agentic figures agentic-figures tables clean
+.PHONY: all baseline agentic figures agentic-figures epistemics-assets sector-assets sector-diagnostics tables clean
 
 all:
 	cd epistemics && $(LATEXMK) -pdf -synctex=1 -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex
+
+epistemics-assets:
+	MPLCONFIGDIR="$(CURDIR)/build/matplotlib" $(PYTHON) analysis/epistemics_pilot.py
+
+sector-assets:
+	MPLCONFIGDIR="$(CURDIR)/build/matplotlib" $(PYTHON) analysis/sector_results.py --snapshot data/sector-study.json --output epistemics
+
+sector-diagnostics:
+	MPLCONFIGDIR="$(CURDIR)/build/matplotlib" $(PYTHON) analysis/sector_diagnostics.py
 
 baseline:
 	$(LATEXMK) -pdf -synctex=1 -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex

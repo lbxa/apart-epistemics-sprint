@@ -1,0 +1,248 @@
+---
+import research from "../data/research.json";
+const percent = (value: number | null) => value === null ? "Unobserved" : `${(value * 100).toFixed(1)}%`;
+const interval = (low: number | null, high: number | null) => low === null || high === null ? "Unobserved" : `${percent(low)}–${percent(high)}`;
+const x = (value: number | null) => 16 + (value ?? 0) * 468;
+const defaultRows = research.disputes.filter((row) => row.domain === "legal" && row.arm === "audit");
+const judgeModels = research.models.filter((model) => research.arithmeticDiagnostic.results.some((row) => row.model === model.id));
+---
+
+<div class="findings-explorer" data-findings-explorer>
+  <form class="explorer-controls" aria-label="Explore completed research results" hidden>
+    <label>View<select name="view"><option value="disputes">After a challenge</option><option value="initial">Initial confidence</option></select></label>
+    <label>Domain<select name="domain">{research.domains.map((domain) => <option value={domain.id} selected={domain.id === "legal"}>{domain.label}</option>)}</select></label>
+    <label>Model<select name="model"><option value="all">All five models</option>{research.models.map((model) => <option value={model.id}>{model.label}</option>)}</select></label>
+    <label data-dispute-control>Condition<select name="arm">{research.arms.map((arm) => <option value={arm.id} selected={arm.id === "audit"}>{arm.label}</option>)}</select></label>
+    <label data-dispute-control>Outcome<select name="endpoint">{research.endpoints.map((endpoint) => <option value={endpoint.id}>{endpoint.label}</option>)}</select></label>
+  </form>
+
+  <figure class="domain-chart">
+    <figcaption><strong data-chart-title>Repair of initial mismatches · Legal · Source audit</strong><span data-chart-subtitle>ContractNLI · valid defences of initial reference mismatches</span></figcaption>
+    <div class="chart-legend" aria-label="Chart legend">
+      <span><i class="literal-symbol" aria-hidden="true"></i> Literal reference grade</span>
+      <span><i class="audited-symbol" aria-hidden="true"></i> Audited grading sensitivity</span>
+      <span data-confidence-legend hidden><i class="confidence-symbol" aria-hidden="true"></i> Mean stated confidence</span>
+    </div>
+    <div class="chart-scale" aria-hidden="true"><span>0%</span><span>50%</span><span>100%</span></div>
+    <div class="model-rows">
+      {research.models.map((model) => {
+        const row = defaultRows.find((entry) => entry.model === model.id)!;
+        const score = row.metrics.correction;
+        return <div class="model-row" data-model-row={model.id}>
+          <div class="model-label"><strong>{model.label}</strong><span data-completion>{row.validDefences}/{row.assigned} valid defences</span></div>
+          <svg viewBox="0 0 500 70" role="img" aria-label={`${model.label}: literal repair ${percent(score.literal.mean)}, source-audited repair ${percent(score.audited.mean)}.`}>
+            {[0, .5, 1].map((tick) => <line x1={x(tick)} y1="5" x2={x(tick)} y2="63" stroke="currentColor" stroke-opacity=".1" />)}
+            <g data-literal-mark style={score.literal.mean === null ? "display:none" : undefined}><line x1={x(score.literal.low)} y1="27" x2={x(score.literal.high)} y2="27" stroke="#64645e" stroke-width="2" /><circle cx={x(score.literal.mean)} cy="27" r="5" fill="#64645e" /></g>
+            <g data-audited-mark style={score.audited.mean === null ? "display:none" : undefined}><line x1={x(score.audited.low)} y1="49" x2={x(score.audited.high)} y2="49" stroke="#24523f" stroke-width="2" /><path d={`M${x(score.audited.mean)},43 l6,6 l-6,6 l-6,-6 Z`} fill="#24523f" /></g>
+            <line data-confidence-mark x1="0" x2="0" y1="5" y2="19" stroke="#795b2b" stroke-width="3" style="display:none" />
+          </svg>
+          <div class="model-values"><span data-literal-value>Literal <b>{score.literal.count}/{score.literal.n}</b></span><span data-audited-value>Audited <b>{score.audited.count}/{score.audited.n}</b></span></div>
+          <p class="seed-note" data-seed-note hidden></p>
+        </div>;
+      })}
+    </div>
+  </figure>
+  <p class="selection-status" aria-live="polite" data-selection-status></p>
+  <p class="chart-note" data-chart-note>
+    Each model was assigned 30 sources × five defence seeds per condition. Lines are pointwise
+    95% source-group bootstrap intervals from 2,000 resamples within sampling strata. Repeats
+    stay within their source. A 0/0 cell is unobserved, not a zero rate. The audit is a post hoc
+    grading sensitivity, pending independent adjudication; a source grade is not infallible truth.
+  </p>
+  <p class="chart-note validity-note" data-leakage-note hidden>
+    Numerical misleading objections encode stored references: an offline inverse recovers
+    {research.benchmarkValidity.recoveredReferences}/{research.benchmarkValidity.numericOriginals}.
+    This is a scripted validity audit, not observed model exploitation. The tested future policy was not deployed in this campaign.
+  </p>
+
+  <details class="evidence-detail">
+    <summary>Inspect the selected denominators and intervals</summary>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Selected result numbers, horizontally scrollable">
+      <table>
+        <caption data-table-caption>Legal source audit: repair of initial reference mismatches. Intervals retain source clustering.</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">Literal count</th><th scope="col">Literal 95% CI</th><th scope="col">Audited count</th><th scope="col">Audited 95% CI</th><th scope="col">Audited eligible sources</th></tr></thead>
+        <tbody>{research.models.map((model) => {
+          const score = defaultRows.find((row) => row.model === model.id)!.metrics.correction;
+          return <tr data-table-model={model.id}><th scope="row">{model.label}</th><td data-table-literal>{score.literal.count}/{score.literal.n}</td><td data-table-literal-ci>{interval(score.literal.low, score.literal.high)}</td><td data-table-audited>{score.audited.count}/{score.audited.n}</td><td data-table-audited-ci>{interval(score.audited.low, score.audited.high)}</td><td data-table-groups>{score.audited.groups}</td></tr>;
+        })}</tbody>
+      </table>
+    </div>
+    <p class="chart-note">
+      Completion is separate from each outcome's eligible denominator: {research.summary.branchesAssigned.toLocaleString("en-US")} assigned,
+      {research.summary.executed.toLocaleString("en-US")} executed, {research.summary.validDefences.toLocaleString("en-US")} valid defences,
+      {research.summary.settledVerdicts.toLocaleString("en-US")} settled verdicts and {research.summary.abortedPanels} aborted executed panels.
+      The {research.summary.structurallyUnavailable} remaining assignments have unavailable initial answers.
+      Collapsed intervals describe this empirical resampling distribution, not certainty about new sources.
+    </p>
+  </details>
+
+  <details class="evidence-detail">
+    <summary>One-source arithmetic diagnostic: when the defence changes verification</summary>
+    <p>
+      The selected claim says <strong>1084 × 108.51 = 117,628.84</strong>; the correct product is
+      <strong>117,624.84</strong>. These standalone checks use five seed blocks of three calls per
+      condition and judge family. They are separate from the primary protocol settlements.
+    </p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Arithmetic diagnostic results, horizontally scrollable">
+      <table><caption>Correct calculations or correct rejections of the false claim, depending on the condition.</caption>
+        <thead><tr><th scope="col">Context</th>{judgeModels.map((model) => <th scope="col">{model.label}</th>)}</tr></thead>
+        <tbody>{research.arithmeticDiagnostic.conditions.map((condition) => <tr><th scope="row">{condition.label}</th>{judgeModels.map((model) => {
+          const result = research.arithmeticDiagnostic.results.find((row) => row.model === model.id && row.condition === condition.id)!;
+          return <td>{result.correctCalls}/{result.validCalls}</td>;
+        })}</tr>)}</tbody>
+      </table>
+    </div>
+    <p class="chart-note">With checked arithmetic, {research.arithmeticDiagnostic.author.corrected}/{research.arithmeticDiagnostic.author.usable} usable author replies correct and withdraw the original; one of five replies fails. These observations concern one source, not a general context effect.</p>
+    <details class="block-detail"><summary>See the five seed blocks</summary>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Arithmetic seed blocks, horizontally scrollable">
+        <table><caption>Correct calls out of three within each block. SD is descriptive across five block rates; no source-level confidence interval is claimed.</caption>
+          <thead><tr><th scope="col">Model / context</th>{[101,102,103,104,105].map((seed) => <th scope="col">{seed}</th>)}<th scope="col">Block SD</th></tr></thead>
+          <tbody>{research.arithmeticDiagnostic.results.map((result) => <tr><th scope="row">{research.models.find((model) => model.id === result.model)?.label}<br /><span>{research.arithmeticDiagnostic.conditions.find((condition) => condition.id === result.condition)?.label}</span></th>{result.blocks.map((block) => <td>{block.correct}/{block.valid}</td>)}<td>{(result.blockSd * 100).toFixed(1)} pp</td></tr>)}</tbody>
+        </table>
+      </div>
+    </details>
+  </details>
+
+  <details class="evidence-detail provenance-detail">
+    <summary>Download the data and follow the evidence</summary>
+    <p>The <a href="/data/research.json" download>public aggregate</a> includes all 20 initial and 80 dispute cells, source-group intervals, five-seed final-agreement rates and separate arithmetic block counts. Read the <a href="/data/README.md">data notes</a> for denominators and limits.</p>
+    <ul>
+      <li><a href={research.provenance.sectorRun} target="_blank" rel="noopener noreferrer">Completed primary run on W&amp;B</a><span class="artifact-id">{research.provenance.sectorArtifact}</span></li>
+      <li><a href={research.provenance.arithmeticRun} target="_blank" rel="noopener noreferrer">Separate arithmetic diagnostic</a><span class="artifact-id">{research.provenance.arithmeticArtifact}</span></li>
+      <li><a href={research.provenance.validityRun} target="_blank" rel="noopener noreferrer">Offline validity audit</a><span class="artifact-id">{research.provenance.validityArtifact}</span></li>
+      <li><a href={research.provenance.reportRun} target="_blank" rel="noopener noreferrer">Archived paper draft</a><span class="artifact-id">{research.provenance.reportArtifact}</span><span class="artifact-id">PDF SHA256: {research.provenance.reportPdfSha256}</span></li>
+    </ul>
+    <p class="chart-note">W&amp;B may require project access. The public download has no credentials, raw model calls, private run state or spending ledgers. The misleading-objection inverse is a demonstrated encoding exploit; no evidence establishes that participants used it. Its candidate closure remains unintegrated.</p>
+  </details>
+</div>
+
+<script>
+  const explorer = document.querySelector<HTMLElement>("[data-findings-explorer]");
+  if (explorer) {
+    // Load the aggregate chunk only when the surrounding native disclosure opens.
+    // The server-rendered legal audit figure remains usable without JavaScript.
+    const disclosure = explorer.closest("details");
+    let loading: Promise<void> | undefined;
+    const activate = async () => {
+      const { default: data } = await import("../data/research.json");
+      const form = explorer.querySelector<HTMLFormElement>(".explorer-controls")!;
+      const select = (name: string) => form.elements.namedItem(name) as HTMLSelectElement;
+      const percent = (value: number | null) => value === null ? "Unobserved" : `${(value * 100).toFixed(1)}%`;
+      const interval = (score: { low: number | null; high: number | null }) => `${percent(score.low)}–${percent(score.high)}`;
+      const x = (value: number | null) => String(16 + (value ?? 0) * 468);
+      const text = (parent: Element, selector: string, value: string) => { parent.querySelector(selector)!.textContent = value; };
+      const update = () => {
+        const initial = select("view").value === "initial";
+        const domain = data.domains.find((entry) => entry.id === select("domain").value)!;
+        const arm = data.arms.find((entry) => entry.id === select("arm").value)!;
+        const endpoint = data.endpoints.find((entry) => entry.id === select("endpoint").value)!;
+        const title = initial ? `Initial confidence · ${domain.label}` : `${endpoint.label} · ${domain.label} · ${arm.label}`;
+        text(explorer, "[data-chart-title]", title);
+        text(explorer, "[data-table-caption]", title + ". Pointwise 95% source-group bootstrap intervals.");
+        text(explorer, "[data-chart-subtitle]", `${domain.benchmarks} · ${initial ? "30 initial source groups assigned per model" : endpoint.denominator}`);
+        explorer.querySelectorAll<HTMLElement>("[data-dispute-control]").forEach((control) => { control.hidden = initial; });
+        explorer.querySelector<HTMLElement>("[data-confidence-legend]")!.hidden = !initial;
+        explorer.querySelector<HTMLElement>("[data-leakage-note]")!.hidden = initial || arm.id !== "misleading";
+        for (const model of data.models) {
+          const row = explorer.querySelector<HTMLElement>(`[data-model-row="${model.id}"]`)!;
+          const table = explorer.querySelector<HTMLElement>(`[data-table-model="${model.id}"]`)!;
+          row.hidden = table.hidden = select("model").value !== "all" && select("model").value !== model.id;
+          const initialCell = data.initial.find((entry) => entry.model === model.id && entry.domain === domain.id)!;
+          const dispute = data.disputes.find((entry) => entry.model === model.id && entry.domain === domain.id && entry.arm === arm.id)!;
+          const scores = initial ? initialCell : dispute.metrics[endpoint.id as keyof typeof dispute.metrics];
+          for (const grade of ["literal", "audited"] as const) {
+            const score = scores[grade];
+            const mark = row.querySelector<SVGGElement>(`[data-${grade}-mark]`)!;
+            mark.style.display = score.mean === null ? "none" : "";
+            const line = mark.querySelector("line")!;
+            line.setAttribute("x1", x(score.low)); line.setAttribute("x2", x(score.high));
+            const circle = mark.querySelector("circle");
+            if (circle) circle.setAttribute("cx", x(score.mean));
+            else mark.querySelector("path")!.setAttribute("d", `M${x(score.mean)},43 l6,6 l-6,6 l-6,-6 Z`);
+            text(row, `[data-${grade}-value]`, `${grade === "literal" ? "Literal" : "Audited"} ${score.count}/${score.n} · ${percent(score.mean)}`);
+            text(table, `[data-table-${grade}]`, `${score.count}/${score.n}`);
+            text(table, `[data-table-${grade}-ci]`, score.mean === null ? "Unobserved" : interval(score));
+          }
+          const tick = row.querySelector<SVGLineElement>("[data-confidence-mark]")!;
+          tick.style.display = initial ? "" : "none";
+          tick.setAttribute("x1", x(initialCell.confidence)); tick.setAttribute("x2", x(initialCell.confidence));
+          text(row, "[data-completion]", initial ? `${initialCell.completed}/${initialCell.assigned} usable · confidence ${percent(initialCell.confidence)}` : `${dispute.validDefences}/${dispute.assigned} valid · ${dispute.settled} settled`);
+          text(table, "[data-table-groups]", String(scores.audited.groups));
+          row.querySelector("svg")!.setAttribute("aria-label", `${model.label}: literal ${percent(scores.literal.mean)}, audit sensitivity ${percent(scores.audited.mean)}${initial ? `, mean confidence ${percent(initialCell.confidence)}` : ""}.`);
+          const seedNote = row.querySelector<HTMLElement>("[data-seed-note]")!;
+          seedNote.hidden = initial;
+          seedNote.textContent = `Final agreement across seeds 101–105 (audited): ${dispute.seedAccuracy.rates.map((rate) => percent(rate)).join(" · ")}. SD ${dispute.seedAccuracy.sd === null ? "unobserved" : (dispute.seedAccuracy.sd * 100).toFixed(1) + " pp"}.`;
+        }
+        text(explorer, "[data-selection-status]", `${title}. ${select("model").selectedOptions[0].textContent}.`);
+        text(explorer, "[data-chart-note]", initial
+          ? "Each model receives 30 initial sources per domain; 581/600 initial answers are interpretable. Confidence is a prospective verbal estimate, not an internal-belief readout. Lines show 95% source-group bootstrap intervals. Source-audit sensitivity is post hoc; literal grades remain visible. Neither reference is infallible truth."
+          : "Thirty sources × five seeds are assigned per condition and model. Lines show pointwise 95% source-group bootstrap intervals (2,000 resamples within strata), retaining repeats within source. The five-seed note reports final agreement, distinct from the selected outcome; its SD is descriptive. A 0/0 cell is unobserved. Collapsed intervals do not imply certainty on new sources. Literal and post hoc audited grades remain separate; neither is infallible truth.");
+      };
+      form.hidden = false;
+      form.addEventListener("change", update);
+      update();
+    };
+    const start = () => {
+      loading ??= activate().catch(() => {
+        explorer.querySelector("[data-selection-status]")!.textContent = "Interactive data could not load. The legal audit chart and downloadable aggregate remain available.";
+      });
+    };
+    if (!disclosure || disclosure.open) start();
+    disclosure?.addEventListener("toggle", () => { if (disclosure.open) start(); });
+  }
+</script>
+
+<style>
+  .findings-explorer { --green: #24523f; --ink: #242821; --muted: #62665b; color: var(--ink); }
+  .findings-explorer [hidden] { display: none !important; }
+  .explorer-controls { display: flex; gap: .85rem; flex-wrap: wrap; margin: 1.3rem 0; }
+  .explorer-controls label { display: grid; gap: .4rem; flex: 1 1 10rem; font-size: .73rem; color: var(--muted); }
+  select { width: 100%; border: 1px solid #c9cbc2; background: #fff; padding: .65rem .7rem; border-radius: .2rem; color: var(--ink); font: inherit; font-size: .82rem; }
+  select:focus-visible, summary:focus-visible, .table-scroll:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+  .domain-chart { margin: 1.5rem 0 1rem; }
+  figcaption { display: grid; gap: .45rem; margin-bottom: .85rem; font-size: .9rem; }
+  figcaption strong { font-weight: 500; }
+  figcaption span { font-size: .73rem; color: var(--muted); }
+  .chart-legend { display: flex; flex-wrap: wrap; gap: .7rem 1rem; font-size: .72rem; color: var(--muted); margin: 1.25rem 0; }
+  .chart-legend span { display: inline-flex; align-items: center; gap: .4rem; }
+  .chart-legend i { display: inline-block; }
+  .literal-symbol { width: .52rem; height: .52rem; border-radius: 50%; background: #64645e; }
+  .audited-symbol { width: .48rem; height: .48rem; background: var(--green); transform: rotate(45deg); }
+  .confidence-symbol { height: .8rem; border-left: 2px solid #795b2b; }
+  .chart-scale { display: flex; justify-content: space-between; margin-left: 9rem; padding: 0 12.4rem 0 .6rem; font-size: .64rem; color: var(--muted); }
+  .model-row { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) 12rem; align-items: center; gap: .5rem; border-bottom: 1px solid #e7e8e2; padding: .85rem 0; }
+  .model-label { display: grid; gap: .35rem; }
+  .model-label strong { font-weight: 500; font-size: .8rem; }
+  .model-label span { font-size: .68rem; color: var(--muted); line-height: 1.5; }
+  .model-row svg { width: 100%; height: auto; min-height: 3rem; overflow: visible; }
+  .model-values { display: grid; gap: .4rem; font-size: .71rem; color: var(--muted); justify-self: end; font-variant-numeric: tabular-nums; }
+  .model-values b { font-weight: 500; color: var(--ink); }
+  .seed-note { grid-column: 1 / -1; margin: .1rem 0 0; font-size: .67rem; color: var(--muted); line-height: 1.6; }
+  .selection-status { font-size: .72rem; color: var(--muted); margin: .5rem 0; }
+  .chart-note { color: var(--muted); font-size: .75rem; line-height: 1.7; margin: 1rem 0 1.4rem; }
+  .validity-note { border-left: 2px solid #795b2b; padding-left: .8rem; }
+  .evidence-detail { border-top: 1px solid #d9dcd1; padding: 1rem 0; }
+  .evidence-detail:last-child { border-bottom: 1px solid #d9dcd1; }
+  summary { font-size: .84rem; cursor: pointer; line-height: 1.6; }
+  .evidence-detail p:not(.chart-note) { font-size: .85rem; line-height: 1.75; margin: 1rem 0; }
+  .evidence-detail[open] > summary { margin-bottom: 1rem; }
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .71rem; text-align: left; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; color: var(--muted); margin-bottom: .8rem; line-height: 1.6; }
+  th, td { padding: .65rem .65rem .65rem 0; border-bottom: 1px solid #e2e4dc; white-space: nowrap; }
+  th { font-weight: 500; }
+  th span { font-weight: 400; color: var(--muted); }
+  .block-detail { margin: 1rem 0 0; }
+  .provenance-detail ul { margin: 1rem 0; padding-left: 1.1rem; font-size: .8rem; line-height: 1.7; }
+  .provenance-detail li + li { margin-top: .8rem; }
+  .artifact-id { display: block; overflow-wrap: anywhere; color: var(--muted); font-size: .67rem; }
+  a { color: var(--green); text-decoration: underline; text-underline-offset: .2em; }
+  @media (max-width: 640px) {
+    .model-row { grid-template-columns: minmax(0, 1fr) auto; gap: .35rem .65rem; }
+    .model-label { grid-column: 1; grid-row: 1; }
+    .model-row svg { grid-column: 1 / -1; grid-row: 2; max-height: 4rem; }
+    .model-values { grid-column: 2; grid-row: 1; font-size: .68rem; }
+    .chart-scale { margin-left: 0; padding: 0 .65rem; }
+    .seed-note { grid-column: 1 / -1; }
+  }
+</style>

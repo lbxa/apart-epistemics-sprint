@@ -1,12 +1,15 @@
 # Epistemics Sprint research report
 
-The active report is the [Epistemics Sprint scaffold](epistemics/README.md),
+The active report is the [Epistemics Sprint first draft](epistemics/README.md),
 with source in `epistemics/main.tex`. `make -C report` builds
 `epistemics/build/main.pdf`. It follows Apart's current
 [official template](https://docs.google.com/document/d/17b3JWki-ZkaqdmqGI5d0gof-HwlGuWU9Mc1_klNZXKs/edit)
-and contains only sprint identity and explicit section placeholders. Develop
-the report alongside cloud experiments using the `editor` skill; material
-contributions and conclusions must wait for evidence.
+and presents the frozen ContractNLI pilot with conditional five-seed
+uncertainty, generated charts/tables and selected prompt/response excerpts.
+Its authors are Lucas Barbosa (NYU) and Stefan. Develop the report using
+`editor`; the current draft keeps reference validity, calibration and
+generalization limits explicit. See the active README for regeneration and
+the review record for remaining checks.
 
 ## Historical reports
 

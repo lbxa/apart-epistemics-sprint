@@ -1,0 +1,100 @@
+% !TEX root = ../main.tex
+\section{Results}
+\label{sec:results}
+\subsection{Stable answers can preserve mismatches}
+All 12,000 primary assignments are accounted for: 11,620 execute and 380 are
+unavailable because 19 initial outputs cannot be interpreted. The 581 usable
+initials include 29 lossless normalizations. There are 11,483 valid defences
+and 11,469 settled verdicts; 151 executed panels abort. Missing outputs remain
+in completion denominators (Appendix~\ref{app:sector-completion}).
+
+Table~\ref{tab:sector-headline} separates initial agreement, answer revision,
+declared support and jury acceptance under the audited sensitivity. Pressure
+loses 20/2,543 matching originals (0.8\%). Stability also preserves
+mismatches: audit repairs 17/334 (5.1\%), while 314/334 replies still support
+their original. These pooled counts describe the cohort, not independent
+documents or a general model ranking.
+
+\begin{table}[htbp]
+ \centering\small\setlength{\tabcolsep}{4pt}
+ \input{tables/sector-headline}
+ \caption{Five-model summary under audited grades. Initial match is over
+ usable initials; pressure loss is over valid pressure defences of matching
+ originals; audit repair and support of the old answer are over audit
+ defences of initial mismatches. Mismatch upheld pools settled verdicts over
+ all four arms. Denominators repeat sources across seeds.}
+ \label{tab:sector-headline}
+\end{table}
+
+Repair rates differ by domain. Legal audit
+repairs 11/153 mismatches, versus 3/158 under review. For GPT-OSS, the paired
+source-level difference is 13.3 percentage points, with a pointwise 95\%
+bootstrap interval [0.0, 31.1]; nine error sources support that contrast.
+Scientific mismatches receive zero repairs in 579 valid defences across all
+arms, yet 539/570 settled panels uphold their originals. The 145
+defence generations in a fully completed error arm arise from just seven distinct
+scientific source groups. Annotation scope is therefore a serious alternative
+to interpreting them as factual errors. Appendices~\ref{app:sector-behavior}--\ref{app:sector-seeds}
+give domain figures and seed SDs; Appendix~\ref{app:intermediate-evidence}
+provides the full intermediate evidence ledger.
+
+\subsection{Confidence depends on the task and scoring target}
+
+Figure~\ref{fig:sector-confidence} compares prospective confidence with both
+grade sets. Mean confidence exceeds reference accuracy for four of five legal
+strata and all five scientific strata. For example, Kimi's legal answers match
+18/26 references (69.2\%) while its mean stated confidence is 95.2\%.
+Inkling's legal accuracy instead exceeds confidence: 86.7\% versus 84.2\%.
+Kimi's legal defence Brier losses are 0.043 for jury acceptance and 0.229 for
+source correctness. Different base rates and eligible sets prevent treating
+this as a direct honesty comparison (Table~\ref{tab:sector-forecasts}). These
+small selected strata do not establish a general model ordering.
+
+\subsection{Explanations in four completed disputes}
+\label{sec:trajectories}
+These post hoc selections from artifact v35 illustrate response patterns,
+not frequencies or treatment effects. Quotes are exact visible excerpts,
+not private reasoning or verified thought. Locators are in
+Appendix~\ref{app:excerpt-provenance}.
+
+\textbf{Correction without new facts.}
+GPT-OSS counts weekend sales twice. Neutral review repairs the answer using
+unchanged evidence; the jury rejects the original.
+\input{tables/sector-case-education}
+
+\begin{samepage}
+\textbf{Resistance despite a failed grade.}
+DeepSeek maintains the source-supported 70 million despite a false alternative
+and a literal adapter failure. The unit-aware sensitivity accepts it.\par
+\end{samepage}
+\input{tables/sector-case-finance}
+
+\textbf{One omission, incompatible inferences.}
+Kimi treats an absent requirement as contradicted. Two jurors distinguish
+silence from negation; one supports Kimi. The NotMentioned reference and
+divided interpretations require independent adjudication.
+\input{tables/sector-case-legal}
+
+\textbf{Revision without accepting the alternative.}
+GLM rejects the false matching rule and proposed Contradicted label, yet
+weakens Supported to InsufficientEvidence. The abstract never names the
+claimed project. Its narrower reading conflicts with SciFact's reference.
+\input{tables/sector-case-science}
+
+\subsection{A false defence changes observed verification}
+\label{sec:grading}
+The numerical audit changes 30 initial grades (Table~\ref{tab:grading}), so
+reference mismatches alone cannot establish factual error. An exact product
+is less ambiguous: GLM states $1084\times108.51=117628.84$, maintains it after
+audit, and receives three supporting GPT-OSS votes. The correct result is
+117624.84.
+
+A separately declared post hoc diagnostic uses five seed blocks of three
+standalone calls per condition and jury family. Both families calculate the
+bare product correctly in 15/15 calls. Without the defence, DeepSeek rejects
+the false claim in 15/15 and GPT-OSS in 14/15. Adding the frozen defence
+reduces correct rejections to 3/15 and 0/15. Appending a checked decomposition
+restores 15/15 for both. Four usable checked-author replies also correct the
+product and withdraw the original; one fails. These are one-source diagnostic
+results, not additional Veracity settlements or a general effect estimate
+(Appendix~\ref{app:arithmetic}).

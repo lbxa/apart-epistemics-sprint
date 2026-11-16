@@ -1,27 +1,271 @@
 # Paper brief
 
-## Active Epistemics Sprint brief — 2026-11-14
+## Active Epistemics Sprint brief — 2026-11-16
+
+Publication editorial pass: collection is complete. The single whole-paper
+edit preserves the SS1--SS11 and INT1--INT8 evidence mappings and all frozen
+numeric assets and model excerpts. It clarifies reference-relative targets,
+assignment versus execution, prospective probabilities and the limited scope
+of the encoding countermeasure. Bibliographic metadata and venue rules are
+rechecked against primary sources. Editorial completion does not imply
+independent adjudication or author scientific approval; those gaps remain open.
+
+The completed editorial revision is report artifact
+`sector-report-da7e42f28ba54247:v2`, digest
+`5a6c61802b1b27fbbd717e7de8802630`, in finished report-only run
+`1652b0d5a0a64c2a`. Its 176-file bundle preserves the earlier evidence and
+archives the edited manuscript, PDF and verification logs. PDF SHA256:
+`a27e07ec36b52997bff0aa3f444399c98813c10d9ebf31f2cffb388048b185e8`.
+The external publication pointer is
+`harness/research/sector-expansion/report-publication-editorial.json`.
 
 This is an independent project built from the imported Veracity codebase.
-The research question, hypothesis, experimental design, authors, and track
-for new work remain open. The venue is Apart's AI x Epistemics Research Sprint,
+The first empirical draft asks how a model's source classification changes
+under different challenges and whether a jury's verdict agrees with the source
+reference. Its working title is **Macro-Epistemics: Confidence Under Dispute**.
+Track 1 (Model Epistemics & Decision-Making Evals) is the primary
+framing; Track 2 supplies the related question of auditable verification signals.
+Authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc), as Lucas
+specified for this draft. The venue is Apart's AI x Epistemics Research Sprint,
 November 13–15, 2026. The existing constitution and benchmark protocol
 describe the implemented starting point; they do not establish the new project's
-research contribution. Specify the new question and claim-to-evidence mapping
-before claiming results. No new Epistemics Sprint empirical claims are admitted.
+research contribution. The frozen pilot below supports its limited conditional
+claims. The five-model, four-domain study is the active expansion; historical
+campaigns and the pilot remain separate cohorts.
 
-The active manuscript is [the structural scaffold](../../report/epistemics/main.tex),
-working title **Epistemics Sprint: Research Report**. It follows the user's
+The active manuscript is [the first empirical draft](../../report/epistemics/main.tex).
+It follows the user's
 recommended structure and supplied Apart PDF. `make -C report` builds
-`report/epistemics/build/main.pdf`. Only title, metadata, layout, and placeholders
-are prepared now. Material contributions and conclusions wait for experiment
-evidence. Develop the report concurrently with cloud runs using `editor`.
+`report/epistemics/build/main.pdf`. Its structural placeholders are now replaced
+by the completed five-model sector study, generated figures and tables,
+source-located visible excerpts and a separate arithmetic diagnostic. The draft does not claim submission
+readiness or a general model ranking. The [first-draft review record](../../report/epistemics/review.md#first-empirical-draft--2026-11-15)
+records numerical, build and rendered-page checks and remaining gaps.
+Develop the report using `editor`.
 
 W&B access was verified read-only on 2026-11-14 for
 `lbxa-corp/apart-epistemics-sprint` at the standard W&B API host. No runs were
 created or changed by that check. New claims must record remote run IDs,
 immutable artifact versions/hashes, analysis revision, eligibility, and cutoff;
-project access alone admits no results. The current claim-to-evidence map is empty.
+project access alone admits no results. CP1--CP3 below are admitted for the
+limited first-draft observations under the
+[uncertainty and excerpt decision](../decisions/epistemics-draft-uses-conditional-seed-uncertainty.md).
+
+### Sector study: complete primary matrix — 2026-11-16
+
+Lucas authorized completion across five native Cloudflare models, with API
+spending as needed and approximately six hours of autonomous cloud execution.
+The isolated Linux runner is `gpu-alder`, directory
+`/workspace/apart-epistemics-sprint-sector-20261115`. Collection runs in
+[`da7e42f28ba54247`](https://forge.coreweave.com/wandb/lbxa-corp/apart-epistemics-sprint/runs/da7e42f28ba54247).
+The [campaign handoff](../../harness/research/sector-expansion/HANDOFF.md)
+records the frozen design, recovery state and budget ledger. The roster adds
+GPT-OSS-120B and Inkling 2 Small to DeepSeek, GLM and Kimi. These are five model
+families, not five equivalent frontier models.
+
+The initial-phase artifact is
+`lbxa-corp/apart-epistemics-sprint/sector-study-da7e42f28ba54247:v8`, digest
+`4bf52b200912400eb98317c85de24c4b`. It contains all 600 initial attempts over
+120 source groups: 30 per occupational domain. Finance uses 15 FinQA and 15
+TAT-QA questions; legal and science each balance three reference classes;
+education includes 15 original erroneous workings and 15 derived correct-work
+controls. All source texts, questions, references and declared adaptations
+match the pinned originals in
+[original-source-validation.json](../../harness/research/sector-expansion/original-source-validation.json).
+These are domain strata, not a representative sample of industries.
+
+There are 581 interpretable initial answers: 552 strict-schema outputs plus
+29 lossless JSON representation normalizations. The raw 48 strict failures
+remain retained; 19 outputs remain unavailable. No new model generation was
+used to replace a failure. The defence phase was amended before its first
+dispatch to use an 8192-token cap; ballots use 2048, initial answers 4096.
+The amendment and exact parser hashes are retained in the artifact.
+
+The [versioned source audit](../../harness/research/sector-expansion/source-audit.json)
+is post hoc, automated and pending independent human review. It distinguishes
+two adapter unit defects, three reported-precision disagreements and three
+source-reference disagreements. Both literal and audited sensitivity scores
+must remain visible. The audit does not change prompts, challenges or outputs.
+All interpretable initial answers receive every treatment regardless of grade.
+
+| Claim ID | Admitted observation | Evidence | Limits / manuscript use |
+| --- | --- | --- | --- |
+| SS1 | The completed initial phase includes all five models and four domains, with 581/600 usable responses. | Artifact v8; `report/data/sector-initial.json`; `sector_results.py` | Missingness is model/domain dependent; conditional accuracy excludes unavailable outputs. |
+| SS2 | Mean stated confidence exceeds literal reference accuracy for four of five models in legal and all five in science. | Twenty-cell generated initial table and confidence figure; 30 source groups per domain | Prospective verbal confidence, not internal belief; source references remain fallible; bootstrap intervals can overlap. |
+| SS3 | Measurement choices change 30 initial grades: 25 in finance and 5 in education. | Eight-case audit v2, original-source validation, generated grading table | Post hoc sensitivity; not a reference-error prevalence estimate. Literal results must remain alongside it. |
+| SS4 | Four completed trajectories illustrate arithmetic correction, resistance to a false financial objection despite an adapter defect, divided interpretation of a missing legal requirement, and scientific revision that rejects the challenger's alternative. | Immutable `sector-study-da7e42f28ba54247:v35`, digest `140e490593b5152b2a7759e70974d752`; `report/data/sector-excerpts.json`; main-text panels X1–X4 | Post hoc four-case selection across four domains/models; visible explanations, not internal beliefs. No treatment rates. Legal/scientific interpretations await independent adjudication. |
+| SS5 | Confidence ordering and average calibration differ: Kimi's legal confidence AUC is 0.792 over 18 reference matches and 8 mismatches, while its mean confidence exceeds accuracy by 25.9 percentage points. | Artifact v8; `sector-confidence-diagnostics.csv`; source-group confidence-gap interval [10.0, 43.7] pp | Exploratory descriptive AUC without an interval; reference-relative, small selected cohort, no internal-belief claim. |
+| SS6 | An offline inversion recovers 287/287 stored numeric references, including 38 initial mismatches, from the legacy objection values. The same attack adds no correct reference matches among 37 supported errors under an original-answer-based candidate policy; one nonscalar input is unsupported. | `harness/research/sector-expansion/objection-leakage.json`; tested `sector_objections.py`; initial artifact v8 | Scripted policy, not observed model exploitation. Generator was not supplied to current participants. Future policy is unintegrated; closure is limited to this deterministic encoding attack. |
+| SS7 | GLM states the false product `1084 × 108.51 = 117628.84`, initially reports confidence 1.0, maintains it after audit, and receives three supporting GPT-OSS votes repeating the same product. The exact product is 117624.84. | Immutable v35 branch `11c495e81bb48bcc53c14f421794`; `report/data/arithmetic-diagnostic.json`; retained contract views checked on the cloud runner | One post hoc selected case, not an error-rate estimate or an internal-belief claim. Its completed follow-up is separately admitted as SS11. |
+| SS8 | All 12,000 primary assignments are accounted for: 11,620 executed, 380 structurally unavailable; 11,483 valid defences and 11,469 settled verdicts. Pressure loses 20/2,543 matching originals. Audit repairs 17/334 initial mismatches; 314/334 still support their original. | Immutable `sector-study-da7e42f28ba54247:v117`, digest `efac632306fc5496238031b734369bcd`; `report/data/sector-study.json`; all 11,620 retained contract views validated | Conditional generations repeat 120 source groups; not independent documents. Audit/reference sensitivity is post hoc. No non-Veracity control. |
+| SS9 | All four arms produce zero scientific reference repairs over 579 valid defences of initial mismatches; 539/570 settled juries uphold those originals. Legal audit repairs 11/153 versus 3/158 under review. | Complete primary artifact v117; source-group bootstrap, paired seed/source contrasts, generated domain figures and metrics CSV | Scientific disagreement may reflect annotation/scope ambiguity. Legal gains are sparse; unpaired rates are not the paired effect estimate. Source-group intervals can collapse within small label strata. |
+| SS10 | The predeclared cross-family replay executes 113/120 selected branches; 109 have both verdicts, agreeing in 108. Both panels uphold 10 reference mismatches; DeepSeek upholds one additional mismatch. | Final `sector-study-da7e42f28ba54247:v128`, digest `7d7230ca4d18fc07c1bb8e0009cdbc1d`; frozen main files byte-identical to v117; replay defence hashes match | One rotating branch per source, not a full crossed-family experiment. Four DeepSeek panels abort; seven selected defences are unavailable. Agreement does not establish correctness. |
+| SS11 | In a selected arithmetic case, both jury families calculate correctly in 15/15 bare calls. Claim-only correct rejections are 15/15 DeepSeek and 14/15 GPT-OSS; adding the frozen false defence yields 3/15 and 0/15, respectively. Appending a checked decomposition restores 15/15 for both. Four usable GLM checked-author replies correct and withdraw the original; one fails. | Separate run `4ad9a8544dff473f`; `arithmetic-diagnostic-4ad9a8544dff473f:v0`, digest `17469e0e688c710966d533d7e2e4bd79`; 124/125 usable calls; frozen selected branch SHA matches v35 | Post hoc one-source diagnostic, five seed blocks of three standalone calls; no new protocol settlements. No document-level CI or internal-mechanism claim. GLM acceptance forecasts are unscored, not matched to a different defence context. |
+
+The analysis uses 2,000 source-group bootstrap resamples within sampling
+strata, retaining five seeds within their source. Paired arm contrasts use only
+matched seed observations and average within source before resampling. Sample
+SD across the five seed-level aggregate rates is descriptive. A collapsed
+bootstrap interval at an all-success boundary does not establish population
+certainty. No population-wide calibration or industry ranking is claimed.
+
+The final main/replay export is `sector-study-da7e42f28ba54247:v128`, digest
+`7d7230ca4d18fc07c1bb8e0009cdbc1d`, completed at 09:22:39 UTC. Its frozen
+initial and primary branch files match the earlier admitted bytes. The separate
+executed-evidence artifact is `sector-executed-evidence-da7e42f28ba54247:v0`,
+digest `bd0ff1ba88bcafab1b9351c6d5166daf`, produced by audit run
+`e0de63bb41b8419b`. All 23,466 archive members match their hashes; archive inputs
+match v128. The post hoc arithmetic run is `4ad9a8544dff473f`; its own v0
+artifact has digest `17469e0e688c710966d533d7e2e4bd79`. Main, replay, validity
+audit and diagnostic remain distinct evidence selections.
+
+The validity audit was recomputed on the cloud runner without model calls in
+[`79009dae600f475d`](https://forge.coreweave.com/wandb/lbxa-corp/apart-epistemics-sprint/runs/79009dae600f475d).
+Its immutable artifact is
+`lbxa-corp/apart-epistemics-sprint/sector-validity-audit-da7e42f28ba54247:v0`,
+digest `698f703d0ff227544c8bb9f7d4e833ff`. It pins the source-audit registry,
+normalization and original-source checks, numerical leakage audit, tests and
+the associated grading/diagnostic code. This is distinct from new model results.
+
+### Comprehensive intermediate evidence — 2026-11-16
+
+Lucas requested an expanded technical appendix that includes intermediate,
+ordinary and negative results, rather than selecting only striking findings.
+`sector_diagnostics.py` reuses the frozen v128 exports, the source-bank SQLite
+file in read-only mode, the existing source-group statistics, and the separate
+125-call diagnostic. These are new exploratory analyses, not new model runs.
+The source-bank hash, parent-export hashes, whitelisted call projection and
+exact visible excerpt offsets are retained in `sector-diagnostic-inputs.json`.
+
+| Claim ID | Admitted intermediate observation | Evidence | Limits |
+| --- | --- | --- | --- |
+| INT1 | The source catalog contains 2,061 records, 827 self-contained records and an 810-record joined frame after the seventeen flagged exclusions; the study selects 120 groups from five sources. | Read-only SQLite inventory and frozen selected IDs | Occupational tags can overlap; registry breadth is not executed study coverage. The catalog's empty experiment tables are distinct from the campaign journal. |
+| INT2 | Settled verdicts comprise 9,767 upheld matches, 361 rejected matches, 1,081 upheld mismatches and 260 rejected mismatches. Of 46 repaired originals with verdicts, two are upheld and 44 rejected. | Full reference-transition/jury contingency tables | Targets are original answers under the post hoc audited sensitivity; repeated generations and ambiguous references do not establish population truth. |
+| INT3 | Five of 112 initially certain outputs and 41 of 487 outputs with confidence at least 0.9 mismatch the audited reference. | Initial confidence bins and high-confidence counts | Selected cohort, one initial per model/source, operational reference grades; not internal-belief measurement. |
+| INT4 | No valid reply declares maintain while withdrawing support; no repaired mismatch still declares support for the old answer. Twenty-three outputs withdraw the original while preserving the matching scalar/label grade. | Structured stance/support tables and deterministic visible examples | Preserving a final number does not preserve every explanatory claim; these fields need not have identical semantics. |
+| INT5 | Eight hundred forty-six defences retain a reference mismatch while supplying only literally matched quotations; 698 of 837 settled originals in that subset are upheld. | Whitespace-normalized quotation diagnostic and jury joins | Literal matching is not inference validity. Nonmatching quotations can be paraphrases; no semantic citation judge is added. |
+| INT6 | Complete five-seed groups include 1,977 initially matching and 252 initially mismatching case-condition groups; 71 and 24 further groups are incomplete. Full histograms retain all 0/5 through 5/5 outcomes. | Source-condition seed histograms and 2,400-row source/arm ledger | Four conditions share each frozen initial; groups are descriptive, not additional independent documents. |
+| INT7 | The frozen exports account for all 47,008 primary/replay calls and 125 separate diagnostic calls. | Whitelisted usage/status projection checked against the campaign request ledger | Reported tokens can include provider-specific reasoning accounting; no inference-speed ranking or invoice reconstruction. |
+| INT8 | Six trace patterns include routine support, rejection of a mismatch, pressure loss, repair with original upheld, matching original rejected, and withdrawal without grade loss. | Lowest eligible branch ID per pattern, excluding previously illustrated sources; exact prefix offsets/hashes | Patterns overlap and examples illustrate mechanisms only; population counts are over generations. Visible statements are not private cognition. |
+
+The appendix reports all paired concession/correction contrasts, including
+zero and imprecise estimates, and identifies the machine-readable location of
+all other planned endpoints. It adds categorical confusion tables, matched
+forecast base rates and current-answer Brier losses, grading sensitivities,
+per-source ledgers, completion failures and the preceding pilot's full
+conditional readouts. The main argument and admitted source labels remain
+unchanged. See the [coverage decision](../decisions/comprehensive-appendix-retains-intermediate-endpoints.md).
+
+The expanded offline analysis and report are archived as
+`lbxa-corp/apart-epistemics-sprint/sector-report-da7e42f28ba54247:v1`, digest
+`1e687f354c1e79d4f6ab05ad157fce52`, in finished report run
+[`23ef1e166c254fcc`](https://forge.coreweave.com/wandb/lbxa-corp/apart-epistemics-sprint/runs/23ef1e166c254fcc).
+The 175-file bundle retains the 64-page PDF, portable inputs, full CSV readouts,
+analysis, source, generated assets, review and verification logs. PDF SHA256:
+`9ab732be30fca65d052e027c1e50b1e07e86c0320ebd8d5e077c5c4cb56b9afc`.
+All 53 report tests and the full repository gate pass; repeating the offline
+analysis preserves all 53 checked output hashes. All rendered pages were
+inspected. This remains a research draft pending independent adjudication and
+author scientific review. The preceding v0 report remains immutable; this
+expansion uses no new model calls. The external publication register is
+`harness/research/sector-expansion/report-publication-expanded.json`.
+
+The selected trajectory admission is separate from the initial aggregate
+artifact. V35's cutoff is 2026-11-16 06:11:41 UTC, during ongoing collection.
+All six downloaded exports match W&B manifest digests and SHA256 hashes; each
+selected defence matches its frozen original answer and three recorded ballots.
+Only exact visible explanation/challenge/juror fields enter the report; private
+SDK reasoning, whole agreements, credentials and ledgers remain excluded.
+The [panel decision](../decisions/sector-report-retains-source-located-visible-trajectories.md)
+records why these examples supplement, rather than replace, aggregate evidence.
+
+### Admitted Epistemics pilot — 2026-11-15
+
+The current pilot asks whether an answerer revises a benchmark classification
+differently after neutral review, evidence-free pressure, an invalid argument,
+or a source audit. It uses three ContractNLI document/proposition cases, with
+five screening generations per model. The first valid correct answer and first
+valid error, when present, are frozen and each branched into five defence
+replicates per condition. This selection supports conditional case studies of
+revision; it does not estimate error prevalence across contracts or occupations.
+
+The native Cloudflare roster is DeepSeek V4 Pro 0813, GLM-5.3 and Kimi K2.6.
+The original model supplies each defence before a common three-member DeepSeek
+jury sees it. The jury votes on the original frozen classification through the
+actual Rust/Anvil protocol. Original ContractNLI labels grade classifications
+separately from the jury. A literal quotation match is a separate diagnostic
+and cannot establish that the inference from the quotation is justified.
+
+Collection completed in
+[`g9t35ump`](https://forge.coreweave.com/wandb/lbxa-corp/apart-epistemics-sprint/runs/g9t35ump),
+at 2026-11-16 00:56:33 UTC, retaining earlier attempted cells from `bt478zw1`.
+The frozen artifact is
+`lbxa-corp/apart-epistemics-sprint/contract-micro-g9t35ump:v734`, digest
+`fc3d2a8f00f10f0ffb65e3fcc795a92b`. All 1,237 downloaded files matched the local
+evidence. The [evidence register](../../harness/research/contract-micro/evidence-register.json)
+pins individual SHA256 hashes and the analysis revision. The
+[protocol](../../harness/research/contract-micro/README.md),
+[handoff](../../harness/research/contract-micro/HANDOFF.md) and directly authored
+[analysis](../../harness/research/contract-micro/analyze.py) own detailed
+operational provenance. The final audit matched all three cases to the pinned
+original ContractNLI test archive and checked source hashes, unique branches,
+frozen answers, defence ordering and executed settlement records.
+
+The claim-to-evidence map is deliberately narrow:
+
+- **CP1 — Revision counts depend on the challenge in this saved-error case.**
+  DeepSeek corrected 1/5 neutral reviews and 5/5 source audits; GLM corrected
+  4/5 in each, but 0/5 misleading-argument branches. The generated comparison
+  and all four conditions are in `findings.csv`; all selected errors concern
+  `293/nda-1`. This supports conditional case observations, not population
+  effects or a universal advantage from an audit.
+- **CP2 — Jury acceptance can disagree with the reference.** Seven of 95
+  settled verdicts upheld a reference-wrong original classification. GLM's
+  `dispute-0076` received three creator votes; the frozen defence, ballots and
+  executed evidence are retained. This is a selected unanimity failure, not a
+  jury error-rate estimate across tasks.
+- **CP3 — These explicit-clause controls show no pressure-induced loss of a
+  correct answer.** Each model retained its saved correct classification in
+  all five empty-pressure and five misleading-argument branches. Those
+  controls concern `117/nda-1`; they do not establish general resistance.
+
+The [findings note](../../harness/research/contract-micro/FINDINGS.md) records
+the complete cohort, limitations and locators. There were 45 completed screens,
+99/100 completed defences and 95/100 settled verdicts. Kimi matched all 15
+screening references, so its error-correction behaviour was not observed.
+
+Keep a failed jury distinct from a changed model answer. One retained cell has
+a frozen defence but no settled verdict after an SDK truncation exception;
+its defence informs revision counts while its jury remains incomplete. Three
+other panels lacked enough valid votes for a verdict, and a Kimi defence hit
+the output limit. One GLM verdict settled with two valid ballots. Failures were
+retained and never replaced.
+Five branches of one saved answer and three jurors are not independent tasks.
+Kimi uses high reasoning while DeepSeek/GLM use low, reflecting their exposed
+native settings. Local orchestration was explicitly authorised for this trial;
+all model calls remain on Cloudflare under one US$10 ledger.
+
+The pilot does not elicit numerical confidence, establish calibration, reveal
+faithful internal beliefs, or identify a Veracity effect relative to ordinary
+review outside the protocol. Correctness means agreement with the benchmark's
+reference; disputed legal interpretations or annotations require their own
+review. The first draft's contribution is the separated measurement protocol,
+conditional revision observations and an auditable reference/jury disagreement.
+
+Five defence seeds are repeated generations conditional on one saved answer.
+The draft reports their individual outcomes, sample variance/SD with denominator
+`n-1`, and nominal 95% exact binomial intervals under an independent Bernoulli
+generation assumption. Those intervals do not measure document-level
+uncertainty, model self-confidence or uncertainty about internal beliefs. No
+paired bootstrap or pooled-juror interval is used to manufacture precision.
+
+The official Track 1 questions structure the interpretation: assertion--defence
+revision is directly probed; confidence calibration and downstream decision
+quality are unmeasured; benchmark maintenance motivates an external source
+grade and versioned records, but no adaptive exploit or refresh intervention
+was executed. The proposed next study uses new documents, prospective source
+confidence, a separate jury forecast and crossed judge families. It is a
+proposal and authorizes no new model calls.
 
 The records below are historical briefs for imported manuscripts. Their counts,
 author decisions, tracking projects, and claim identifiers apply only to those

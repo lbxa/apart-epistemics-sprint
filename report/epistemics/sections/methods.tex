@@ -1,0 +1,81 @@
+% !TEX root = ../main.tex
+\section{Methodology}
+\label{sec:methods}
+\subsection{Source strata and models}
+The frozen cohort contains 120 distinct source groups, 30 per domain. Finance
+uses 15 FinQA and 15 numerical TAT-QA cases. Legal reasoning uses ten
+ContractNLI cases per label: Entailment, Contradiction and NotMentioned.
+Science uses ten SciFact cases per mapped reference class: Supported,
+Contradicted and InsufficientEvidence. The last class means no annotated
+support in the supplied evidence, not a universal judgment of scientific
+truth. Education uses 30 distinct MathDial problems: 15 original erroneous
+student workings and 15 controls replacing the working with the reference
+solution. We score the numerical solution, not pedagogical quality.
+
+Fixed hash ordering selects cases before inspecting model outputs; prior pilot
+agreements are excluded. All records and controls were checked against pinned
+originals. Group identities and operational settings are in
+Appendix~\ref{app:protocol}. Domain balance is not employment weighting.
+
+The answering models are DeepSeek V4 Pro 0813, GLM-5.3, Kimi K2.6,
+GPT-OSS-120B and Inkling 2 Small, all through native Cloudflare endpoints.
+These are five families with different capabilities, not five equivalent
+frontier systems. Every model answers every case once before Veracity is
+mentioned. It supplies an answer, explanation, quotations and a scalar
+probability of correctness. Exact visible responses are frozen.
+
+\subsection{Branches, forecasts and executed verdicts}
+The design assigns four objections and defence seeds 101--105 to each
+model/case pair: $5\times120\times4\times5=12{,}000$ branches.
+Only pairs with an interpretable initial answer proceed to defence.
+Review requests reconsideration; pressure asserts error without evidence;
+the false-alternative arm proposes an explicitly reference-wrong answer using
+a scripted invalid rationale; audit requests checking operations, units,
+scope and exceptions, with gold source spans for ContractNLI when available.
+The false alternatives are controlled errors, not independently validated
+naturalistic objections. Every branch retains the same source material, and
+all defence prompts warn that disagreement alone is not evidence of error.
+
+After Veracity is disclosed, the model reports its current answer, declared
+stance and whether it still supports the original. It separately forecasts
+the original answer's correctness and jury acceptance. A standardized wrapper
+publishes the original answer as supported by the material; this wrapper is
+authored by the harness and is not evidence of model-authored rhetorical
+overstatement. The defence is frozen before jurors run. The common panel
+contains three separate GPT-OSS calls with source, original claim, objection
+and defence. Identity, reference grades, peer ballots and all probability
+fields are withheld. Votes execute through actual Rust/HTTP registration,
+commitment, reveal and Solidity/Anvil settlement, at fixed 1$\times$ synthetic
+stakes. A predeclared rotating subset replays one frozen branch per case
+with three DeepSeek jurors; it never regenerates the defence.
+
+The cloud journal preserves failed observations without replacement. Role
+token allowances are fixed across models; Kimi uses high reasoning and the others low.
+Lossless representation normalization preserves raw failures and parser hashes.
+
+\subsection{Grades, endpoints and uncertainty}
+\label{sec:uncertainty}
+Literal grades use the frozen numerical adapter or categorical reference.
+An explicitly post hoc, versioned source-audit sensitivity additionally checks
+eight numerical cases (Section~\ref{sec:grading}). It does not alter
+assignment, source material or model outputs. We preserve both grade sets;
+neither constitutes independent expert adjudication.
+
+For an original reference-match indicator $C\in\{0,1\}$, a prospective
+probability $p\in[0,1]$ is scored by the Brier loss $(p-C)^2$.
+Defence forecasts of source correctness
+and jury acceptance have separate binary targets. A concession is a
+reference-correct original followed by an incorrect current answer; a
+correction is a reference-incorrect original followed by a correct answer.
+Declared support is recorded separately from answer changes. Verdicts concern
+the frozen original, including after a correction. Missing answers and
+unsettled panels have explicit denominators and are never recoded as beliefs.
+
+We use 2,000 percentile bootstrap resamples of whole source groups within the
+original sampling strata. Repeated seeds remain inside their source group.
+Paired arm contrasts first match defence seeds, then average differences
+within source. We also report sample SD across the five seed-level aggregate
+rates, using denominator four when all five are available. Bootstrap intervals
+describe the selected case distribution under source-group resampling;
+collapsed intervals at observed boundaries do not imply population certainty.
+Provider seed controls do not prove independent generations.
