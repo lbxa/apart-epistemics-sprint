@@ -40,6 +40,7 @@ Every record, newest first. See [README](./README.md) for when and how to write 
 - [Finance micro-experiment freezes answers before jury submission](./finance-micro-freezes-answers-before-jury-submission.md) — 2026-11-14
 - [Finance repetitions use provider and scheduling seeds](./finance-repetitions-use-provider-and-scheduling-seeds.md) — 2026-11-14
 - [Finance settlement and jury participation are separate](./finance-settlement-and-jury-participation-are-separate.md) — 2026-11-14
+- [Parallel sandbox lifecycle and stepped mechanics tests](./parallel-sandbox-lifecycle-and-stepped-mechanics-tests.md) — 2026-11-14
 - [Report uses native Computer Modern](./report-uses-native-computer-modern.md) — 2026-11-14
 - [Task bank keeps an independent uv project](./task-bank-keeps-an-independent-uv-project.md) — 2026-11-14
 - [Completed C1 results extend the frozen paper cohort](./completed-c1-results-extend-the-frozen-paper-cohort.md) — 2026-11-09
