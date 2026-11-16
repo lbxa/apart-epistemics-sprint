@@ -22,6 +22,7 @@ Every record, newest first. See [README](./README.md) for when and how to write 
 - [Storyboard leads with human agency and a shared future](./storyboard-leads-with-human-agency-and-a-shared-future.md) — 2026-11-16
 - [Video production uses Community Manim and the frozen pilot](./video-production-uses-community-manim-and-the-frozen-pilot.md) — 2026-11-16
 - [Video uses on-screen guidance and relaxed instrumental music](./video-uses-on-screen-guidance-and-relaxed-instrumental-music.md) — 2026-11-16
+- [Website admits completed study and separate diagnostics](./website-admits-completed-study-and-separate-diagnostics.md) — 2026-11-16
 - [Contract micro allows one local orchestration trial](./contract-micro-allows-one-local-orchestration-trial.md) — 2026-11-15
 - [Contract micro keeps truncated juries and completed cells](./contract-micro-keeps-truncated-juries-and-completed-cells.md) — 2026-11-15
 - [Contract micro runs through Cloudflare only](./contract-micro-runs-through-cloudflare-only.md) — 2026-11-15

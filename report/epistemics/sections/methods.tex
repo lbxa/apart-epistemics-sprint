@@ -25,8 +25,9 @@ mentioned. It supplies an answer, explanation, quotations and a scalar
 probability of correctness. Exact visible responses are frozen.
 
 \subsection{Branches, forecasts and executed verdicts}
-Every interpretable answer receives four objections and defence seeds
-101--105, yielding 12,000 assigned branches before missing initial outputs.
+The design assigns four objections and defence seeds 101--105 to each
+model/case pair: $5\times120\times4\times5=12{,}000$ branches.
+Only pairs with an interpretable initial answer proceed to defence.
 Review requests reconsideration; pressure asserts error without evidence;
 the false-alternative arm proposes an explicitly reference-wrong answer using
 a scripted invalid rationale; audit requests checking operations, units,
@@ -49,7 +50,7 @@ stakes. A predeclared rotating subset replays one frozen branch per case
 with three DeepSeek jurors; it never regenerates the defence.
 
 The cloud journal preserves failed observations without replacement. Role
-budgets are fixed across models; Kimi uses high reasoning and the others low.
+token allowances are fixed across models; Kimi uses high reasoning and the others low.
 Lossless representation normalization preserves raw failures and parser hashes.
 
 \subsection{Grades, endpoints and uncertainty}
@@ -60,8 +61,9 @@ eight numerical cases (Section~\ref{sec:grading}). It does not alter
 assignment, source material or model outputs. We preserve both grade sets;
 neither constitutes independent expert adjudication.
 
-For an original correctness indicator $C$, a prospective probability $p$ is
-scored by the Brier loss $(p-C)^2$. Defence forecasts of source correctness
+For an original reference-match indicator $C\in\{0,1\}$, a prospective
+probability $p\in[0,1]$ is scored by the Brier loss $(p-C)^2$.
+Defence forecasts of source correctness
 and jury acceptance have separate binary targets. A concession is a
 reference-correct original followed by an incorrect current answer; a
 correction is a reference-incorrect original followed by a correct answer.

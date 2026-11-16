@@ -22,17 +22,27 @@ const artifactButtons = [
   { label: "Explore the findings", href: "#explore" },
   { label: "Code", href: codeUrl },
 ];
-const deepseekReview = research.pilot.find((row) => row.model === research.models[0].id && row.arm === "neutral");
-const deepseekAudit = research.pilot.find((row) => row.model === research.models[0].id && row.arm === "source_audit");
-if (!deepseekReview || !deepseekAudit) throw new Error("The admitted DeepSeek pilot comparison is missing.");
+const diagnosticComparisons = research.models
+  .filter((model) => ["@cf/deepseek-ai/deepseek-v4-pro-0813", "@cf/openai/gpt-oss-120b"].includes(model.id))
+  .map((model) => {
+    const before = research.arithmeticDiagnostic.results.find((row) => row.model === model.id && row.condition === "claim_only");
+    const defended = research.arithmeticDiagnostic.results.find((row) => row.model === model.id && row.condition === "defended");
+    const checked = research.arithmeticDiagnostic.results.find((row) => row.model === model.id && row.condition === "checked_evidence");
+    if (!before || !defended || !checked) throw new Error("The admitted arithmetic comparison is missing.");
+    return { label: model.id.includes("deepseek") ? "DeepSeek" : "GPT-OSS", before, defended, checked };
+  });
+if (diagnosticComparisons.length !== 2) throw new Error("The two admitted diagnostic families are required.");
+const defenceComparison = diagnosticComparisons.map((row) => `${row.before.correctCalls}/${row.before.validCalls} to ${row.defended.correctCalls}/${row.defended.validCalls} (${row.label})`).join(" and ");
+const checkedComparison = diagnosticComparisons.map((row) => `${row.checked.correctCalls}/${row.checked.validCalls} (${row.label})`).join(" and ");
 const citation = `@misc{barbosa2026macroepistemics,
   title = {Macro-Epistemics: Confidence Under Dispute},
   author = {Barbosa, Lucas and Gazzana, Stefan},
   year = {2026},
   version = {Draft 2026-11-16},
   note = {Apart AI x Epistemics Research Sprint. Frozen cohorts:
-    sector-study-da7e42f28ba54247:v8;
-    contract-micro-g9t35ump:v734},
+    sector-study-da7e42f28ba54247:v128;
+    arithmetic-diagnostic-4ad9a8544dff473f:v0;
+    sector-validity-audit-da7e42f28ba54247:v0},
   url = {https://github.com/lbxa/apart-epistemics-sprint}
 }`;
 ---
@@ -103,7 +113,7 @@ const citation = `@misc{barbosa2026macroepistemics,
         <VeracityDemo />
 
         <section id="explore" class="research-section">
-          <p class="eyebrow">Early findings</p>
+          <p class="eyebrow">Completed study · {research.summary.modelCount} models · {research.summary.domainCount} domains</p>
           <h2>Three things we learned.</h2>
           <div class="finding-list">
             <article>
@@ -111,15 +121,16 @@ const citation = `@misc{barbosa2026macroepistemics,
               <p>Mean confidence exceeded reference accuracy for four of five models in the selected legal tasks, and all five in science.</p>
             </article>
             <article>
-              <h3>A jury’s agreement needs checking.</h3>
-              <p><strong>{research.summary.juryDisagreements} of {research.summary.settledVerdicts}</strong> settled pilot verdicts upheld answers the benchmark marked wrong. There were 100 assigned branches and five without a verdict.</p>
+              <h3>Standing firm can preserve mistakes.</h3>
+              <p>Pressure lost only <strong>{research.summary.pressureLoss.count}/{research.summary.pressureLoss.eligible}</strong> matching originals. But source audits repaired just <strong>{research.summary.auditRepair.count}/{research.summary.auditRepair.eligible}</strong> mismatches. These are repeated defence generations under audited grading.</p>
             </article>
             <article>
-              <h3>Different scrutiny can change an answer.</h3>
-              <p>On one saved error, DeepSeek corrected itself in <strong>{deepseekReview.successes}/{deepseekReview.completed}</strong> neutral reviews and <strong>{deepseekAudit.successes}/{deepseekAudit.completed}</strong> source audits. Five repeats are not five independent cases.</p>
+              <h3>A false defence can sway verification.</h3>
+              <p>In one arithmetic follow-up, adding a false defence cut correct rejections from <strong>{defenceComparison}</strong>. With checked arithmetic: {checkedComparison}. These were standalone calls on one source.</p>
             </article>
           </div>
-          <p class="figure-note">Initial study: {research.summary.initialCompleted}/{research.summary.initialAssigned} usable answers · {research.summary.sourceGroups} cases · {research.summary.modelCount} models · {research.summary.domainCount} domains. The legal pilot is a separate cohort. These findings do not establish general reliability.</p>
+          <p class="figure-note">{research.summary.sourceGroups} source cases · {research.summary.branchesAssigned.toLocaleString("en-US")} assigned branches · {research.summary.executed.toLocaleString("en-US")} executed · {research.summary.validDefences.toLocaleString("en-US")} valid defences · {research.summary.settledVerdicts.toLocaleString("en-US")} settled. Five seeds repeat each saved answer; the diagnostic is separate.</p>
+          <p class="figure-note"><strong>Benchmark limits.</strong> A post hoc audit changed {research.summary.auditChangedGrades} initial grades. Scripted numerical objections encoded {research.benchmarkValidity.recoveredReferences}/{research.benchmarkValidity.numericOriginals} stored references—an offline finding, not observed model exploitation. References and jury verdicts remain separate checks.</p>
           <details class="research-detail">
             <summary>Explore the charts, uncertainty and sources</summary>
             <FindingsExplorer />
