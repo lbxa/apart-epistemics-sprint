@@ -4,14 +4,19 @@
 
 Every record, newest first. See [README](./README.md) for when and how to write one.
 
+- [Chart scroll motion preserves static data](./chart-scroll-motion-preserves-static-data.md) — 2026-11-17
+- [Header links follow the VLA pill reference](./header-links-follow-the-vla-pill-reference.md) — 2026-11-17
+- [Select controls use compact registry dimensions](./select-controls-use-compact-registry-dimensions.md) — 2026-11-17
+- [Website builds restore the pinned film outside Git](./website-builds-restore-pinned-film-outside-git.md) — 2026-11-17
 - [Astro uses native PostCSS to preserve the template](./astro-uses-native-postcss-to-preserve-the-template.md) — 2026-11-16
+- [Base UI selects hydrate only the filter controls](./base-ui-selects-hydrate-only-the-filter-controls.md) — 2026-11-16
 - [Comprehensive appendix retains intermediate endpoints](./comprehensive-appendix-retains-intermediate-endpoints.md) — 2026-11-16
 - [Landing page demo is a browser-only teaching round](./landing-page-demo-is-a-browser-only-teaching-round.md) — 2026-11-16
 - [Landing page leads with demo and three findings](./landing-page-leads-with-demo-and-three-findings.md) — 2026-11-16
 - [Macro-Epistemics names the project; Veracity remains the instrument](./macro-epistemics-names-the-project-veracity-remains-the-instrument.md) — 2026-11-16
 - [Macro-Epistemics title describes confidence under dispute](./macro-epistemics-title-describes-confidence-under-dispute.md) — 2026-11-16
-- [Publication edit preserves frozen evidence and review status](./publication-edit-preserves-frozen-evidence-and-review-status.md) — 2026-11-16
 - [Research landing page preserves the archive header and frozen evidence](./research-landing-page-preserves-the-archive-header-and-frozen-evidence.md) — 2026-11-16
+- [Results lead the website without hidden sections](./results-lead-the-website-without-hidden-sections.md) — 2026-11-16
 - [Sector admission retains contract evidence separately](./sector-admission-retains-contract-evidence-separately.md) — 2026-11-16
 - [Sector arithmetic probe adds five checked author defences](./sector-arithmetic-probe-adds-five-checked-author-defences.md) — 2026-11-16
 - [Sector report retains source-located visible trajectories](./sector-report-retains-source-located-visible-trajectories.md) — 2026-11-16
@@ -19,11 +24,13 @@ Every record, newest first. See [README](./README.md) for when and how to write 
 - [Sector study keeps frozen objections and audits answer encoding](./sector-study-keeps-frozen-objections-and-audits-answer-encoding.md) — 2026-11-16
 - [Sector study preserves raw format failures and phase budgets](./sector-study-preserves-raw-format-failures-and-phase-budgets.md) — 2026-11-16
 - [Sector study separates post hoc arithmetic diagnostics](./sector-study-separates-post-hoc-arithmetic-diagnostics.md) — 2026-11-16
+- [Shadcn controls render on the server](./shadcn-controls-render-on-the-server.md) — 2026-11-16
 - [Standalone sector tools pin the canonical W&B API](./standalone-sector-tools-pin-the-canonical-wandb-api.md) — 2026-11-16
 - [Storyboard leads with human agency and a shared future](./storyboard-leads-with-human-agency-and-a-shared-future.md) — 2026-11-16
 - [Video production uses Community Manim and the frozen pilot](./video-production-uses-community-manim-and-the-frozen-pilot.md) — 2026-11-16
 - [Video uses on-screen guidance and relaxed instrumental music](./video-uses-on-screen-guidance-and-relaxed-instrumental-music.md) — 2026-11-16
 - [Website admits completed study and separate diagnostics](./website-admits-completed-study-and-separate-diagnostics.md) — 2026-11-16
+- [Website summary distinguishes grading from jury acceptance](./website-summary-distinguishes-grading-from-jury-acceptance.md) — 2026-11-16
 - [Contract micro allows one local orchestration trial](./contract-micro-allows-one-local-orchestration-trial.md) — 2026-11-15
 - [Contract micro keeps truncated juries and completed cells](./contract-micro-keeps-truncated-juries-and-completed-cells.md) — 2026-11-15
 - [Contract micro runs through Cloudflare only](./contract-micro-runs-through-cloudflare-only.md) — 2026-11-15

@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readlinkSync, symlinkSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readlinkSync, renameSync, symlinkSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,17 +29,38 @@ const copies = [
 ];
 
 for (const [source, destination] of copies) {
-  if (!existsSync(source)) throw new Error(`Required local research artifact is missing: ${relative(repository, source)}`);
-  mkdirSync(dirname(destination), { recursive: true });
-  copyFileSync(source, destination);
-  console.log(`Prepared ${relative(website, destination)}`);
+  if (existsSync(source)) {
+    mkdirSync(dirname(destination), { recursive: true });
+    copyFileSync(source, destination);
+  } else if (!existsSync(destination)) {
+    throw new Error(`Required research artifact is missing: ${relative(website, destination)}`);
+  }
+  console.log(`Available ${relative(website, destination)}`);
 }
 
 // Keep the actual production movie in the user-designated ignored video folder.
 // Astro/Vite copies the linked file into ignored dist/ for a static deployment.
 const movie = resolve(exports, 'macro-epistemics-draft-01.mp4');
 const link = resolve(website, 'public/media/macro-epistemics-draft-01.mp4');
-if (!existsSync(movie)) throw new Error('Render video/exports/macro-epistemics-draft-01.mp4 before preparing the site assets.');
+const movieHash = '9ed3928994e23df2ecc14bf032cbf88654e44733c9edf10d4fbc400f850fa68d';
+const movieUrl = 'https://github.com/lbxa/apart-epistemics-sprint/releases/download/website-assets-v1/macro-epistemics-draft-01.mp4';
+let movieBytes;
+if (existsSync(movie)) {
+  movieBytes = readFileSync(movie);
+} else {
+  const response = await fetch(movieUrl, { signal: AbortSignal.timeout(60_000) });
+  if (!response.ok) throw new Error(`Published film download failed: HTTP ${response.status}`);
+  movieBytes = new Uint8Array(await response.arrayBuffer());
+}
+if (createHash('sha256').update(movieBytes).digest('hex') !== movieHash) {
+  throw new Error('The film differs from the pinned website release asset.');
+}
+if (!existsSync(movie)) {
+  mkdirSync(exports, { recursive: true });
+  writeFileSync(`${movie}.download`, movieBytes);
+  renameSync(`${movie}.download`, movie);
+  console.log('Restored the pinned film into ignored video/exports/.');
+}
 if (existsSync(link)) {
   if (!lstatSync(link).isSymbolicLink() || resolve(dirname(link), readlinkSync(link)) !== movie) {
     throw new Error('Refusing to replace an unrelated movie in public/media.');

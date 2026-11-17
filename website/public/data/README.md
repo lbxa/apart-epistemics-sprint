@@ -4,6 +4,10 @@
 landing page. It keeps the completed primary study, a one-source arithmetic
 diagnostic and an offline validity audit distinct.
 
+The landing page plots the primary study directly. The separate diagnostic,
+seed-block detail and provenance remain available in this download and the
+paper rather than in expandable page sections.
+
 - **Completed primary study:** 600 initial attempts, 581 interpretable initial
   answers, 120 source groups, five model families and four domains. There are
   12,000 assigned branches: 11,620 execute, 11,483 have valid defences and 11,469
