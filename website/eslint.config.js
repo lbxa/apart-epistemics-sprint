@@ -18,12 +18,13 @@ export default [
   
   // TypeScript and JavaScript files
   {
-    files: ['**/*.{js,ts}'],
+    files: ['**/*.{js,ts,tsx}'],
     languageOptions: {
       parser: typescriptEslintParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: { jsx: true },
       },
     },
     rules: {
@@ -31,6 +32,13 @@ export default [
       'no-console': 'warn',
       'no-unused-vars': 'warn',
       'prefer-const': 'error',
+    },
+  },
+  {
+    files: ['**/*.tsx'],
+    rules: {
+      // TypeScript checks React props/types and JSX references reliably.
+      'no-unused-vars': 'off',
     },
   },
   

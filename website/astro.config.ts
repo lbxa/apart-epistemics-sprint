@@ -3,6 +3,8 @@ import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import icon from 'astro-icon';
+import react from '@astrojs/react';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,7 +13,10 @@ export default defineConfig({
   // Research PDFs and video load only when requested, never on viewport entry.
   prefetch: false,
 
+  vite: { plugins: [tailwindcss()] },
+
   integrations: [
+    react(),
     mdx({
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeKatex],

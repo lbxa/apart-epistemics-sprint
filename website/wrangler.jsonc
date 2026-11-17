@@ -1,8 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "veracity",
+  "name": "epistemics",
   "compatibility_date": "2026-06-28",
   "workers_dev": true,
+  "previews": {},
   "routes": [
     {
       "pattern": "epistemics.lbxa.net",
