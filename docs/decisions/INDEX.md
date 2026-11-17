@@ -5,6 +5,7 @@
 Every record, newest first. See [README](./README.md) for when and how to write one.
 
 - [Chart scroll motion preserves static data](./chart-scroll-motion-preserves-static-data.md) — 2026-11-17
+- [Cloudflare branch previews need explicit configuration](./cloudflare-branch-previews-need-explicit-configuration.md) — 2026-11-17
 - [Header links follow the VLA pill reference](./header-links-follow-the-vla-pill-reference.md) — 2026-11-17
 - [Select controls use compact registry dimensions](./select-controls-use-compact-registry-dimensions.md) — 2026-11-17
 - [Website builds restore the pinned film outside Git](./website-builds-restore-pinned-film-outside-git.md) — 2026-11-17

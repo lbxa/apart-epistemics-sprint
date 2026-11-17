@@ -34,6 +34,8 @@ linked into ignored `public/media/` and copied into Astro's static output.
 publishes main to the existing `epistemics` Worker at `epistemics.lbxa.net`.
 Wrangler's name matches that target. Large assets remain outside Git history;
 the public release supplies reproducible cloud builds.
+The empty `previews` block enables Cloudflare's configured branch-preview
+command, `npx wrangler preview`; static assets stay at the top level.
 
 ```sh
 bunx astro sync
@@ -120,6 +122,8 @@ writing identical `src/data/research.json` and `public/data/research.json`.
 
 ## Changelog
 
+- 2026-11-17: Added the explicit previews block required by Wrangler 4.163's
+  branch-preview command after the production-style build succeeded in Cloudflare.
 - 2026-11-17: Prepared publication through the existing Cloudflare main-branch
   integration. Restore and verify the ignored film from its pinned release asset
   in clean builds, and align Wrangler with the production epistemics Worker.
