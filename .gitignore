@@ -15,6 +15,10 @@
 /harness/.venv/
 # Run results are archived in W&B (veracity-harness-wandb), not in git.
 /harness/results/
+# Generated review inputs are distributed in stages through the operator.
+/harness/research/sector-expansion/peer-review/adjudication/operator-only/
+/harness/research/sector-expansion/peer-review/adjudication/reviewer/stage-1/sources.json
+/harness/research/sector-expansion/peer-review/adjudication/reviewer/stage-2/responses.json
 /harness/build/
 /harness/dist/
 /harness/*.egg-info/

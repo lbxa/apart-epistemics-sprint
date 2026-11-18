@@ -1,6 +1,104 @@
 # Paper brief
 
-## Active Epistemics Sprint brief — 2026-11-16
+## Concision revision — 2026-11-17
+
+The current editorial revision removes repeated summaries and shortens long
+paragraphs without changing the evidence map below. Main Results retain both
+figures and all four frozen model panels; supplementary tables and figures
+remain complete. Replication counts belong in Results, their interpretation
+in Discussion. Independent adjudication and publication gates remain open.
+The archived v0 manuscript below predates this local editorial revision;
+the [review record](../../report/epistemics/review.md) identifies the new PDF.
+The second pass consolidates pilot context with its readouts and shortens the
+main arithmetic illustration; all tables, figures and model excerpts remain.
+
+## Peer-review revision — 2026-11-16
+
+The active working title is **Confidence, Correction, and Consensus:
+Evaluating Language Models Under Dispute**. The central question is whether
+confidence, answer revision and jury acceptance reliably distinguish
+reference-matching answers from errors under dispute. The completed primary
+cohort remains five model families, five benchmarks, four domains and 120
+source groups; it is not being replaced or enlarged to address the one-case
+diagnostic's narrower scope.
+
+The revision targets AI/NLP reliability and evaluation readers. TMLR is the
+proposed journal route; no submission or final venue choice is implied. The
+Apart manuscript and its archived v2 remain historical versions. The new
+working revision may exceed the sprint's eight-page limit to explain the
+evidence without shrinking plots or hiding essential qualifications.
+
+Four feedback items have separate completion criteria:
+
+| Item | Required evidence | Current status |
+| --- | --- | --- |
+| Ground truth | Two blinded source-first human reviews, resolution of disagreements, and retained original labels | Complete packet prepared; zero human reviews |
+| Judge diagnostic | Fixed-source claim-only/defended/checked-evidence replication, two judge families, five seeds; original trigger reported separately | 720 calls admitted; original large penalty does not recur on three new sources |
+| Objection leakage | Fresh versioned numerical-v2 branches from the same frozen originals and seeds, with separate ledger and paired legacy comparison | 1,500 assignments admitted; historical branches unchanged |
+| Contribution and reproducibility | One research question, verified related work, offline reproduction commands, evidence manifest and explicit release gaps | Prose revised; three immutable artifacts verified; final PDF bundle under review |
+
+Numerical checked-evidence cases require a source-grounded calculation, not
+merely repeating a reference answer. Legal and scientific reference
+disagreements remain annotation-relative until independent adjudication.
+Neither a model panel nor an agent audit supplies independent human review.
+The admitted extension evidence is mapped below before it changes the conclusions.
+
+### Admitted targeted replications
+
+The standard W&B API supplied immutable downloads of three completed artifacts:
+
+- Numerical collection `sector-study-6cffaa22ee0c470a:v20`, digest
+  `179811a3578576b63d2d3c313f08a5e9`.
+- Judge comparison `numeric-judge-extension-37ae1979dd144603:v0`, digest
+  `f039f58c821a1c3241a168e5405c0444`.
+- Executed numerical evidence
+  `sector-objection-executed-evidence-6cffaa22ee0c470a:v0`, digest
+  `682131423c15be7a17d4cf6108c90376`, producer `2dad059d286a4612`.
+
+All are in `lbxa-corp/apart-epistemics-sprint`. The combined API-verified
+[admission register](../../harness/research/sector-expansion/peer-review/admission.json)
+has SHA256 `844a2fd0078b2823a1a8196a5c9d07fae1cc63445d76073c90eab88a30f07a56`.
+Consumed files match its hashes and the independent execution register.
+The safe receipt projection is embedded for offline verification; no SQLite,
+spending ledger, signing material or private SDK reasoning is included.
+
+| Claim ID | Finding | Evidence and limits | Manuscript location |
+| --- | --- | --- | --- |
+| PR1 | Replacing the numerical proposal policy leaves few reference transitions in matched outputs | 1,500 assigned branches; 1,430 executed, 1,400 valid defences and settled panels, 30 aborted. Under automated audited grades, pooled paired loss is 3/1,333 legacy versus 1/1,333 v2, repair 3/32 versus 4/32. Source-weighted contrasts differ from pooled changes when valid seed counts vary. Collection times differ and source labels remain fallible. | Targeted Results; replication appendix |
+| PR2 | The complete GPT-OSS extension does not reproduce a large defence penalty; DeepSeek is incomplete | 720 assigned standalone calls, 681 valid and 39 failed (all DeepSeek: 37 output limits, two timeouts). On three new errors, GPT-OSS has all 45 pairs, −2.2 pp [−6.7, +2.2]. DeepSeek has 27/45 pairs across only two eligible sources, with change 0.0 pp; its hot-dog comparison is unpaired. All-assigned missing-outcome bounds are [−28.9, +31.1] pp, not a CI. One-source strata and selective missingness prevent broad inference. | Main replication figure and case-level table |
+| PR3 | Added correct calculations improve rejection on some selected errors while controls remain accepted | All four correct controls receive 60/60 correct judgments per model/context. On the three new errors, both MathDial cases were usually rejected already; the GS buffer-share case drives remaining recovery. DeepSeek is only 3/7 correct on that checked case, versus GPT-OSS 15/15. Correct evidence does not universally repair judging, nor distinguish calculation verification from deference to the supplied correction. | Replication Results; complete task-by-judge readout |
+| PR4 | Independent reference adjudication is prepared, not complete | All 120 source groups and 581 usable originals are packaged in physically separated stages, with zero human reviews. A new MathDial ambiguity is flagged operator-side without changing primary grades. | Methods; independent-review appendix |
+
+The original one-case effect recurs on fresh calls to that same source, but
+the new sources do not reproduce a comparably large defence penalty. This
+negative generalization result must remain prominent; it cannot be replaced
+with a claim of benchmark-wide judge vulnerability. None of PR1--PR4 changes
+the frozen primary counts, references or four quoted main-text panels.
+
+The revised paper and 13,341,482-byte supplement are archived in finished
+report-only run `be3b408f03d8402e`, artifact
+`sector-peer-review-report-da7e42f28ba54247:v0`, digest
+`c7fe3d37428f6455487b558d1bec6912`. Its manifest SHA256 is
+`dba4d3e04edccc61abb7991d5f6bda7890e6c8adffb3ab2074f16d5a8f1b33c4`;
+the 213 payload files include the source, portable results and safe receipt
+projection. The external [publication record](../../harness/research/sector-expansion/peer-review/publication.json)
+retains PDF/supplement hashes and fresh-download verification. Independent
+human adjudication, author approval and anonymous venue release remain open.
+
+The cloud parent was recovered read-only before dispatch: run
+`da7e42f28ba54247` is finished, no W&B experiment runs are active, and
+`gpu-alder:/workspace/apart-epistemics-sprint-sector-20261115` retains the
+complete journal. Old charges and unresolved holds remain in their original
+ledger. The new extensions use separate finite ceilings of $50 (objection
+rerun) and $20 (judge diagnostic), within Lucas's instruction to implement
+the targeted experimental feedback.
+
+Historical presentation update (2026-11-16): the domain-stratified loss-of-reference
+agreement figure now appears in main Results §4.1, beside the headline table.
+Its evidence, estimates and intervals were unchanged; the appendix refers
+back to it. That layout retained eight main pages before the peer-review revision.
+
+## Completed Epistemics Sprint brief — 2026-11-16
 
 Publication editorial pass: collection is complete. The single whole-paper
 edit preserves the SS1--SS11 and INT1--INT8 evidence mappings and all frozen

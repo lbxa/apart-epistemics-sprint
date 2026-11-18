@@ -293,6 +293,29 @@ environment details and the sequential comparison are in the
 
 ## Changelog
 
+### 2026-11-17
+
+- Expand studies through declared case/model/control/seed matrices, with
+  independent cases supporting generalization and repeated seeds measuring
+  within-case variation. Freeze extensions before dispatch and retain failures;
+  the [shared workflow](../docs/reporting/research-maturation.md) applies to
+  earlier studies with their own experimental units and spending authority.
+- Keep numerical objection-policy replications in new namespaces and ledgers,
+  reusing frozen originals without replacing terminal failures. The original
+  campaign remains reproducible; see the
+  [replication decision](../docs/decisions/numeric-objection-replication-retains-frozen-parent.md).
+- Validate imported initial and interpretation rows before paid dispatch.
+  An interrupted unpaid import must fail closed rather than silently changing
+  the cohort's eligibility denominator.
+- Give receipt tests a private engine working directory: concurrent campaigns
+  also create `.harness/runs` stores, and protocol-derived episode IDs can recur
+  on isolated chains. Global directory differences cannot prove fixture ownership.
+- Export receipt-backed evidence through typed contract views, confirmed
+  receipts and public-log hashes, retaining aborted and partial outcomes
+  separately. Recovery stores contain signing material and are not research
+  artifacts; see the
+  [receipt-retention and isolation decision](../docs/decisions/replication-evidence-exports-public-receipts-only.md).
+
 ### 2026-11-16
 
 - Pin standalone sector tracking clients to the canonical W&B API when

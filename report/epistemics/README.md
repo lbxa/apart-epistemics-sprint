@@ -1,12 +1,31 @@
 # Epistemics Sprint report
 
-This is the first empirical draft for Apart's **AI x Epistemics Research
-Sprint, November 13–15, 2026**. It follows the current linked template's order
-and visual conventions; see [template provenance](../template/epistemics.md).
-The working title is *Macro-Epistemics: Confidence Under Dispute*.
+## Peer-review working revision
+
+The active paper is now titled *Confidence, Correction, and Consensus:
+Evaluating Language Models Under Dispute*. It retains the completed primary
+study and adds targeted replications as separate evidence. The original
+sprint layout and archived v2 remain historical; the current working version
+is not an anonymized journal submission and may exceed the old page cap.
+See the [revision brief](../../docs/reporting/paper-brief.md) and
+[independent-review protocol](../../harness/research/sector-expansion/peer-review/ADJUDICATION.md).
+Human adjudication and author approval remain incomplete.
+
+The numerical replication retains 1,500 assignments and validates 1,430
+executions. The eight-source judge comparison retains 720 calls, including
+39 failed DeepSeek outputs. The large defence penalty does not recur in
+GPT-OSS's complete three-new-source comparison; DeepSeek's third comparison
+is unresolved. See the [admission register](../../harness/research/sector-expansion/peer-review/admission.json)
+and [offline reproduction guide](../REPRODUCIBILITY.md).
+
+The historical Apart **AI x Epistemics Research Sprint, November 13–15, 2026**
+draft used the title *Macro-Epistemics: Confidence Under Dispute* and the
+supplied sprint template; see [template provenance](../template/epistemics.md).
+The peer-review revision above supersedes that scientific title and page cap.
 Authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc), as supplied by
-Lucas. Track 1 is the main framing; Track 2 informs the jury-validity and
-provenance discussion. It is a first draft, not a certified submission.
+Lucas. The sprint framing centered on Track 1, with Track 2 informing the
+jury-validity and provenance discussion. Neither version is a certified
+submission.
 
 The [review record](review.md) preserves the original scaffold checks and the
 first empirical draft's evidence, numerical, compilation and visual checks.
@@ -116,8 +135,43 @@ cells remain N/A; the incomplete Kimi defence stays missing.
 
 ## Changelog
 
+### 2026-11-17
+
+- Put the clickable correspondence address in a first-page footnote attached
+  to Lucas Barbosa's name. This replaces the earlier footer presentation.
+- Keep historical pilot context with its full supplementary readouts, and
+  reference the selected arithmetic diagnostic from the main text. Avoid
+  repeating those counts while preserving their evidence and scope.
+- Prefer concise prose with one job per paragraph and section; retain complete
+  evidence in the appendix and essential qualifications beside findings. See
+  the [concision decision](../../docs/decisions/report-concision-preserves-evidence.md).
+- Frame the peer-review revision around reference agreement, confidence,
+  revision and jury acceptance as separate measurements. Preserve the main
+  domain figure and four source-located panels; the historical sprint page cap
+  does not govern the working journal revision. See the
+  [cohort-preservation decision](../../docs/decisions/peer-review-revision-preserves-primary-cohort.md).
+- Match judge comparisons by source, judge, seed and call index before
+  interpreting changes. Equal valid counts in two contexts can come from
+  disjoint successful calls; deterministic missing-outcome bounds are not
+  bootstrap confidence intervals. Rerunning failed calls with a higher output
+  budget requires a separate cohort.
+- Keep reference adjudication source-first and human: freeze both independent
+  source reviews before releasing model responses, then assess answers,
+  explanations and citation support separately. A prepared packet or additional
+  model votes is not completed human review; see the
+  [adjudication decision](../../docs/decisions/reference-adjudication-is-source-first-and-human.md).
+
 ### 2026-11-16
 
+- Preserve the confirmed author names, affiliations and clickable title-page
+  correspondence footer. Do not restore the removed first-draft title footnote
+  or sprint-status paragraph during report rewrites; scientific limitations
+  and review status remain explicit elsewhere. See the
+  [front-matter decision](../../docs/decisions/report-title-page-omits-sprint-draft-markers.md).
+- Move the domain reference-loss figure into the main Results, retaining its
+  appendix cross-reference. Keep numerical inputs and model excerpts frozen;
+  use a shorter canvas at the original type sizes and tighten repeated prose
+  to preserve the main-text page limit.
 - Complete a single publication editorial pass over the main paper and
   appendices. Clarify assignment counts, reference-relative grading and
   forecast targets; distinguish audit objections from the post hoc source
@@ -136,11 +190,11 @@ cells remain N/A; the incomplete Kimi defence stays missing.
   Preserve structural missingness, aborted panels, literal grades and post hoc
   source-audit sensitivities. The selected-case arithmetic follow-up remains
   separate from the primary estimates.
-- Restore four black-outline model-output panels to the main Results. The
-  sector rewrite removed their inputs while retaining the shared style;
-  panels now retain their source notes inside the frame and stay unbroken.
-  Excerpts are checked against pinned W&B records, and a regression check
-  requires all four panel inputs in the main section. See the
+- Keep four substantive, source-located LLM exchanges in the main findings,
+  using the shared black-outline panels to show objections, visible model
+  explanations and observed outcomes. The sector rewrite dropped panel inputs
+  while retaining the style; keep source notes inside their frames and preserve
+  the four-input regression check. See the
   [trajectory decision](../../docs/decisions/sector-report-retains-source-located-visible-trajectories.md).
 - Adopt *Macro-Epistemics: Confidence Under Dispute* as the report title. The
   project name gives it a distinctive identity; the subtitle describes the

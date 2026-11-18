@@ -4,13 +4,13 @@ Use these standards when planning, writing, illustrating, or reviewing the
 project's LaTeX research report. They encode recurring decisions and observable
 checks; routine LaTeX syntax remains reference material.
 
-The active project is Epistemics Sprint, targeting Apart's AI x Epistemics
-Research Sprint. Its current question and Track 1 framing are recorded in the brief.
+The active project is Epistemics Sprint. Its peer-review working revision
+contains the five-model study and separately admitted numerical extensions;
+the brief records the supported claims and remaining scientific gaps.
 Use the `editor` skill while developing the report alongside cloud experiments.
-The first empirical draft now admits the frozen ContractNLI pilot's limited
-claims; its Track 1 focus, source mapping and remaining gaps are in the brief.
-Existing reports and evidence registers are imported
-historical material; their old sprint tracks and deadlines do not govern new work.
+The venue record distinguishes the proposed publication route from the earlier
+Apart sprint target. Imported reports retain their own evidence identities;
+old sprint tracks and deadlines do not govern a new submission.
 
 ## Table of contents
 
@@ -22,15 +22,16 @@ historical material; their old sprint tracks and deadlines do not govern new wor
 | 4 | [Visuals](visuals.md) | Publication chart style, Matplotlib mean/SD figures, typography, palettes, tables, and diagrams |
 | 5 | [LaTeX](latex.md) | Compiler, packages, notation, equations, and references |
 | 6 | [Review](review.md) | Scientific support, reproducibility, PDF inspection, and completion |
-| Active report | [Epistemics Sprint first draft](../../report/epistemics/README.md) | Pilot findings, generated assets, conditional uncertainty, and build commands |
+| Active report | [Epistemics Sprint working revision](../../report/epistemics/README.md) | Primary study, targeted replications, uncertainty, and build commands |
 | Template | [Apart template provenance](../../report/template/epistemics.md) | User-supplied PDF, formatting, section order, and official source |
-| Report | [Sectioned baseline report](../../report/README.md) | Editable manuscript under `report/`; admitted two-episode smoke evidence, using the supplied preprint style |
+| Report | [Historical baseline report](../../report/README.md#earlier-baseline-report) | Two-episode smoke evidence in `report/main.tex`; build separately with `make -C report baseline` |
 | Report | [Historical seeded recruitment report](../../report/agentic/README.md) | Imported November manuscript, completed C1 results, source-pinned cloud registry, controls and review gaps; October case studies retained separately |
 | Archive | [Historical venues](historical-venues.md) | Original sprint rules and template provenance for imported manuscripts |
 | Lookup | [Writing sources](sources/writing-sources.md) | Knuth; Peyton Jones; Gopen and Swan; Williams and Bizup; Pinker; The Craft of Research |
 | Lookup | [Visual sources](sources/visual-sources.md) | Rougier; Booktabs; PGF/TikZ |
 | Lookup | [LaTeX sources](sources/latex-sources.md) | AMS guide; The LaTeX Companion; official venue sources |
 | Reuse | [LaTeX example](templates/report-example.tex) | A minimal illustrative argument, equation, table, figure, and diagram |
+| Reuse | [Research revision workflow](research-maturation.md) | Strengthen exploratory studies through experimental breadth, evaluator audits, seeded replication and iterative rewriting |
 | Reuse | [Plot style](templates/figure.mplstyle) and [plot script](templates/figure-example.py) | Regenerable vector figure at an explicit publication width |
 
 ## Authority and provenance
@@ -89,6 +90,17 @@ source directory. The example is a smoke check of the conventions; it does not
 complete review of a future manuscript.
 
 ## Changelog
+
+### 2026-11-17
+
+- Prefer the shortest complete argument: remove repeated summaries while
+  keeping evidence and qualifications. See the
+  [concision decision](../decisions/report-concision-preserves-evidence.md).
+- Capture the full experimental and editorial revision process in
+  [research-maturation.md](research-maturation.md), so earlier projects can
+  repeat it with their own claims and evidence. Preserve the distinction
+  between working infrastructure, completed experiments, scientific support
+  and submission readiness.
 
 ### 2026-10-25
 

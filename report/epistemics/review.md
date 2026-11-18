@@ -1,3 +1,189 @@
+# First-page correspondence footnote — 2026-11-17
+
+Lucas Barbosa's author name links to the correspondence footnote. The email
+address has a verified mailto annotation on page one. The fixed-epoch
+`make -C report` build passes without warnings. Rendered review covers pages
+one and two, which contain the footnote and the reflowed introduction. Text
+layout on pages 3–65 matches the prior draft.
+
+Repository verification reaches the Docker-dependent harness checks and times
+out. The Docker daemon also times out on a separate probe. Log
+`/tmp/apart-correspondence-verify.log`.
+
+PDF SHA256 `04fe75d345d73b686af306aee2e69554fcf535b2d84854b935635005232d93af`.
+
+# Second concision pass — 2026-11-17
+
+Codex-assisted editorial review at base revision
+`6088e01ebdf77766fae9f9a80ea1e716a3973111`, preserving the dirty research
+checkout. This pass changes prose and float placement, not admitted evidence.
+
+| Prose estimate / pages | Before | After |
+| --- | ---: | ---: |
+| Main prose | 2,565 | 2,018 |
+| Main and appendix prose | 9,543 | 7,985 |
+| Main pages | 11 | 10 |
+| Total pages | 68 | 65 |
+
+The same TeXcount `-sum -brief` method excludes generated table/panel inputs
+and bibliography, retaining section headings, captions and mathematical
+expressions. Reductions are 21.3% and 16.3%, respectively. Comparison copy:
+`/tmp/apart-concision-pass2-before`; computed audit:
+`report/epistemics/build/editor-pass2-audit.json`.
+
+Pilot context now accompanies its supplementary readouts; the main arithmetic
+illustration points to the full diagnostic. Methods and interpretations are
+shorter without dropping selection rules, missingness, grade uncertainty or
+source weighting. All 113 data-derived files, 17 citation keys, 98 labels,
+19 figures, 38 tables and four frozen main panels are preserved. The human
+review protocol explicitly freezes both source reviews before releasing answers.
+
+The fixed-epoch clean Makefile build exits zero with no layout/reference
+warnings (`/tmp/apart-editor-pass2-clean-build.log`). PDF SHA256:
+`ee86a04a9a84aeaaaf29e0cc3ead336dec598ae7f6ab75eee25af3b7bedbcd87`.
+It contains ten main pages, two reference pages and 53 appendix pages.
+All 65 rendered pages were checked in contact sheets, with full-page checks
+of main figures/panels, provenance and the adjudication protocol. Fonts,
+margins and numerical assets are unchanged.
+
+Verification: 71 report tests and 554 harness regressions pass. The initial
+restricted harness attempt encountered loopback denials; the permitted rerun
+passes. The full `bash scripts/verify.sh` passes Foundry/Rust checks, formatting,
+Clippy and builds, then stalls at `docker info`. Bounded daemon probes time
+out despite opening Docker. The gate was interrupted (exit 130); its 36
+Docker integration checks remain unverified for this pass. Logs:
+`/tmp/apart-editor-pass2-tests.log`,
+`/tmp/apart-editor-pass2-harness-unit-local.log` and
+`/tmp/apart-editor-pass2-verify.log`. Whitespace and decision-index checks pass.
+
+Decision: **editorially reviewed draft; full verification blocked by Docker**.
+Human adjudication, author approval and venue/release checks remain open.
+No new experiments, paid calls or public release; archived manuscripts remain unchanged.
+
+# Concision revision — 2026-11-17
+
+Codex-assisted editorial and rendered-page review of the current dirty
+checkout, following Lucas's request for concise, high-signal prose. The
+scientific evidence selection is unchanged. Independent human scientific
+approval remains pending.
+
+| Measure | Before | After |
+| --- | ---: | ---: |
+| Main prose estimate | 4,044 | 2,565 |
+| Main and appendix prose estimate | 11,485 | 9,543 |
+| Main pages | 13 | 11 |
+| Total pages, including references and appendices | 72 | 68 |
+
+Word estimates use TeXcount `-sum -brief` on the same section files in both
+versions, including headings and captions but excluding generated inputs
+(tables and quoted panels) and bibliography. Main prose decreases 36.6%;
+all section prose decreases 16.9%. The pre-edit copy is retained at
+`/tmp/apart-concision-before` for this comparison.
+
+The introduction states the question and contribution; Results retain the
+counts; Discussion interprets them; Conclusion states the implication.
+Repeated caveats and operational detail are condensed without dropping
+grading uncertainty, concentrated missingness or replication limits. All
+113 data-derived figure, table, CSV and JSON files match the pre-edit bytes;
+all 17 citation keys and four frozen main panels remain. The appendix's
+outdated description of the revised objection policy now points to its
+completed, separately admitted rerun.
+
+Clean build: `latexmk -C -outdir=build main.tex` in `report/epistemics`, then
+`SOURCE_DATE_EPOCH=1794821400 FORCE_SOURCE_DATE=1 make -C report`, exit zero.
+Compiler remains pdfTeX 1.40.27 / TeX Live 2025. Log:
+`/tmp/apart-concision-clean-build.log`. No layout, citation or reference
+warnings remain. Current PDF: `report/epistemics/build/main.pdf`, SHA256
+`1e50e0f2627c8ab32f42edbc0949294dbf8ce4406074ebb41956c3a5d60731fc`.
+It comprises 11 main pages, two reference pages and 55 appendix pages.
+
+Rendered review covers all 68 pages in contact sheets, with full-page checks
+of both main figures, all four main panels and the repaired appendix reading
+order. Panel explanations stay with their boxes. The domain figure remains
+in Results §4.1. Pilot figures no longer interrupt the independent-review
+protocol. Existing type sizes and margins are unchanged.
+
+The report suite passes all 71 tests. `bash scripts/verify.sh` exits zero,
+including 554 harness regressions and 36 Docker-isolated integration tests,
+plus Rust, Solidity, hooks, formatting, Clippy and builds. Logs:
+`/tmp/apart-concision-report-tests.log` and `/tmp/apart-concision-verify.log`.
+Diff whitespace checks pass. No model calls or new experiments were run.
+
+Decision: **editorially validated research draft; not submission-ready**.
+Human adjudication, author approval and venue/release checks remain open.
+The archived v0 PDF and supplementary ZIP below predate this local editorial
+revision and remain unchanged.
+
+# Peer-review revision — 2026-11-16
+
+Implemented the publication feedback through delegated prose, evidence,
+experiment and independent code-review work. The title is now *Confidence,
+Correction, and Consensus: Evaluating Language Models Under Dispute*.
+The primary cohort, four quoted panels and domain figure remain intact.
+Expanded primary-source related work and two separately admitted numerical
+replications support a narrower interpretation of the selected judge failure.
+
+Three immutable artifacts were downloaded through the standard W&B API and
+checked against their digests and file hashes. `peer-review/admission.json`
+binds them to the portable results and receipt-backed execution register.
+The projection contains no recovery databases, signing material, private
+transcripts or SDK reasoning. All 1,500 numerical assignments and 720 judge
+calls remain accounted for; 39 failed DeepSeek calls remain missing.
+
+The main text reports both the complete GPT-OSS near-null replication and
+the incomplete DeepSeek comparison. Its zero paired change covers two
+sources, not three. All-assigned missing-outcome bounds [−28.9, +31.1] pp
+are distinguished from confidence intervals. Source weighting, original
+education strata, grading sensitivities, single-source intervals and
+unequal completion are disclosed. No independent human labels are invented.
+
+Final PDF SHA256:
+`dff73414aa279b7c0e633060684576a8a3c79520e30297aa4ebb7f0d4fc8eb9b`.
+There are 72 pages: 13 main, two references and 57 appendix. This working
+revision supersedes the historical sprint page cap; it is not a journal
+submission. The fixed-epoch Makefile build passes without layout/reference
+warnings. Rendered checks cover the changed main text, both main quantitative
+figures, all four quoted panels and the new appendix tables/plots. Original
+numerical assets and source-located panels remain unchanged.
+
+The full repository gate passes with 554 default harness tests and 36
+Docker-isolated integration tests, plus Rust, Solidity, hooks, formatting,
+Clippy and builds. The offline report suite passes 71 tests; focused analysis
+and adjudication tests pass 38. Ruff checks pass for the added report and
+operational scripts. Offline reproduction of historical statistics remains
+unchanged; the portable extension rows reproduce their new source summaries.
+
+Open publication gates are qualified independent reference adjudication,
+author scientific approval, source reuse checks, final venue selection and
+anonymous venue formatting. A prespecified larger-output-budget sensitivity
+could resolve the truncated DeepSeek comparisons without replacing this
+cohort. No submission, reviewer contact or public release was performed.
+
+Post-archive check: finished report run `be3b408f03d8402e` retains
+`sector-peer-review-report-da7e42f28ba54247:v0`, digest
+`c7fe3d37428f6455487b558d1bec6912`. Its 213 payload files and manifest
+were verified before packaging. A fresh standard-API download of the PDF,
+13,341,482-byte supplement and manifest matches their recorded SHA256s.
+The external `peer-review/publication.json` supplies the immutable pointer;
+this admission note does not alter the archived manuscript or its review status.
+
+# Main-text figure placement — 2026-11-16
+
+Moved the four-domain reference-loss plot into Results §4.1 (Figure 1,
+page 5), beside the headline table. Removed its appendix duplicate and kept
+a cross-reference. The shorter chart canvas retains the original font sizes,
+values and intervals. Condensed repeated main-text prose to preserve the
+eight-page limit and all four model-output panels; class-label definitions
+remain in the protocol appendix.
+
+The rebuilt PDF has 63 pages: eight main, one references and 54 appendix.
+SHA256: `b38b2282e6fac380962bdd0779644aae810b0391476acee31326fa2085dfc59f`.
+Inspected the rendered figure page; the build reports no layout or reference
+warnings. Frozen statistics and numerical tables remain unchanged. The full
+repository verification passes, including 502 harness unit tests and 36
+integration tests. This local layout revision supersedes the PDF below;
+the archived v2 manuscript remains immutable. Scientific review gaps remain.
+
 # Publication editorial pass — 2026-11-16
 
 Completed one editorial pass through the main paper, references and all

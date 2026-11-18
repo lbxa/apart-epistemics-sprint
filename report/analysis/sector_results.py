@@ -983,7 +983,11 @@ def render(data, stats, destination):
         else ()
     ):
         fig, axes = plt.subplots(
-            2, 2, figsize=(6.5, 4.8), sharey=True, layout="constrained"
+            2,
+            2,
+            figsize=(6.5, 3.6 if endpoint == "concession" else 4.8),
+            sharey=True,
+            layout="constrained",
         )
         for ax, (domain, title) in zip(axes.flat, DOMAINS.items()):
             for i, (model, label) in enumerate(MODELS.items()):

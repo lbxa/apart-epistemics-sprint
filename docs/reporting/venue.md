@@ -1,5 +1,27 @@
 # Epistemics Sprint venue record
 
+## Peer-review working revision — 2026-11-16
+
+Lucas requested implementing external feedback toward a peer-reviewed
+publication. The proposed journal is TMLR; a focused non-archival workshop is
+an alternative. No submission is authorized by this revision, and the final
+venue is not selected. The active manuscript is a working revision in its
+existing typography, not a TMLR-formatted submission. The sprint's eight-page
+limit applies to the archived sprint version, not this expanded revision.
+
+The official [TMLR author guide](https://www.jmlr.org/tmlr/author-guide.html),
+[acceptance criteria](https://www.jmlr.org/tmlr/acceptance-criteria.html) and
+[editorial policies](https://www.jmlr.org/tmlr/editorial-policies.html) were
+checked on November 16. TMLR requires convincing evidence, clear communication,
+anonymization and its LaTeX template. It has no fixed manuscript page limit,
+but length must be justified. Anonymized supplementary material can be up to
+100 MB. Non-archival workshop overlap is permitted; overlapping archival
+publication is not. Before submission, confirm the sprint's archival status,
+author approvals, conflicts and licensing, and prepare the anonymous template
+and reproducibility bundle. These are open release steps, not completed work.
+
+## Historical sprint submission target
+
 The selected venue is **Apart Research: AI x Epistemics Research Sprint,
 November 13–15, 2026**. The first draft is anchored on Track 1, with a related
 Track 2 discussion. Authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc).

@@ -32,6 +32,12 @@ Organize the report for the reader's understanding rather than the chronology
 of the investigation. Required venue structure takes precedence; see
 [venue.md](venue.md).
 
+Prefer the shortest complete argument. Introduce the question, describe the
+method, report the evidence, then interpret it; do not repeat the full results
+in every section. Keep qualifications beside the findings they limit and
+operational detail in supplementary material. Concision removes repetition,
+not uncertainty, evidence or the reasoning needed to understand a result.
+
 ## Explain the mathematics
 
 Apply these checks to every major definition, proposition, and derivation.

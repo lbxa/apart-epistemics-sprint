@@ -1,15 +1,16 @@
 # Epistemics Sprint research report
 
-The active report is the [Epistemics Sprint first draft](epistemics/README.md),
+The active report is the [peer-review working revision](epistemics/README.md),
 with source in `epistemics/main.tex`. `make -C report` builds
-`epistemics/build/main.pdf`. It follows Apart's current
-[official template](https://docs.google.com/document/d/17b3JWki-ZkaqdmqGI5d0gof-HwlGuWU9Mc1_klNZXKs/edit)
-and presents the frozen ContractNLI pilot with conditional five-seed
-uncertainty, generated charts/tables and selected prompt/response excerpts.
-Its authors are Lucas Barbosa (NYU) and Stefan. Develop the report using
-`editor`; the current draft keeps reference validity, calibration and
-generalization limits explicit. See the active README for regeneration and
-the review record for remaining checks.
+`epistemics/build/main.pdf`. It presents the frozen five-model, four-domain
+study and separately versioned numerical replications; the ContractNLI pilot
+remains a separate earlier cohort. The working layout retains the supplied
+Apart template while a final peer-reviewed venue remains unselected.
+Its authors are Lucas Barbosa (NYU) and Stefan Gazzana (Roundarc). Develop
+the report using `editor`; preserve reference validity, calibration and
+generalization limits. See the active README and
+[reproduction guide](REPRODUCIBILITY.md) for regeneration, and the
+[review record](epistemics/review.md) for remaining publication requirements.
 
 ## Historical reports
 
@@ -184,6 +185,32 @@ fictional results are excluded. The 20-episode first pass and all treatment
 comparisons remain future work. This is not a submission-ready empirical study.
 
 ## Changelog
+
+### 2026-11-17
+
+- Remove repeated results and caveats across sections while preserving the
+  complete evidence; see the [concision decision](../docs/decisions/report-concision-preserves-evidence.md).
+- Develop empirical papers through a repeating run--audit--analyse--rewrite
+  cycle, updating the claim-to-evidence map before conclusions and retaining
+  null or incomplete replications. The
+  [research revision workflow](../docs/reporting/research-maturation.md) captures
+  this process for reuse in earlier projects; polished presentation does not
+  replace independent scientific validation.
+- Use the [active manuscript README](epistemics/README.md) and
+  [offline reproduction guide](REPRODUCIBILITY.md) for the peer-review revision;
+  imported reports and the original sprint artifact remain separate evidence.
+- Require `peer_review_results.py` inputs to match the API-verified admission
+  register and executed-evidence register before generating assets. Report
+  bundles derive parent artifact/digest pairs from that admitted provenance,
+  not free-form caller metadata; an execution artifact may also retain its
+  validated helper source alongside the required archive and register.
+- Reuse `sector_results.sampling_stratum` for paired replication bootstraps:
+  MathDial working/control variants are distinct strata. Report pooled counts
+  alongside equal-source estimates, since unequal valid seed counts can make
+  their changes differ in direction.
+- Keep the report bundle's source-review allowlist exact (`sources.json` and
+  blank `source-reviews.csv`). Exclude operator join keys and stage-2 responses;
+  source-first raters receive only stage 1, not the complete paper bundle.
 
 ### 2026-10-28
 

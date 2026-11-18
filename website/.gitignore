@@ -10,6 +10,7 @@ latex-export/
 
 # generated types
 .astro/
+.wrangler/
 
 # dependencies
 node_modules/

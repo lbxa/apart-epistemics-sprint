@@ -350,3 +350,31 @@ mobile row, with no horizontal overflow. Captures are in ignored
 build pass. The full repository gate passes in
 `.harness/verification/center-bottom-resources.log`. The bounded entropy review
 found no new drift.
+
+## Matching research 404 pages
+
+Added `src/pages/404.astro` to match the Collusion companion's simple error
+page, retaining Epistemics branding and a link to this site's home page.
+Astro emits `dist/404.html`; both Workers configurations already use
+`not_found_handling: "404-page"`.
+
+Production-style local Workers checks cover both sites at 1280 × 844 and
+390 × 844. Nested missing URLs return the custom HTML with a 404 status,
+no horizontal overflow and no client scripts. Each home link reaches the
+correct research site by keyboard and with JavaScript disabled. Both pages
+include `noindex`. Screenshots are in ignored `output/playwright/404-*.png`.
+
+Epistemics lint, type checks and the production build pass. Its full repository
+gate also passes, including all 36 Docker integration tests; log:
+`.harness/verification/website-404.log`. Collusion's unchanged page retains its
+previous passing full gate and passes the paired browser check. Local Wrangler
+state is now ignored. Frozen research exports, papers and film are unchanged;
+no public deployment was performed.
+
+# November 18 paper checkpoint
+
+The paper links resolve to `/files/confidence-correction-and-consensus.pdf`.
+The built asset matches the reviewed 65-page manuscript, SHA-256
+`04fe75d345d73b686af306aee2e69554fcf535b2d84854b935635005232d93af`.
+The earlier Macro-Epistemics PDF still matches the hash in the public data.
+Astro and TypeScript checks, four research tests and the static build pass.

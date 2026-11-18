@@ -51,12 +51,14 @@ Historical reports, decision records, frozen campaign configurations, and remote
 artifact URLs retain their original identities. Renaming those sources would
 break audit links or imply that old results were obtained here.
 
-The research question and evidence admission criteria remain to be specified
-in the [paper brief](docs/reporting/paper-brief.md). The target is Apart's
-AI x Epistemics Research Sprint, November 13–15, 2026; the
-[active report](report/epistemics/README.md) uses its supplied template.
-Old sprint tracks and deadlines do not govern new work. No new research findings
-are claimed by this migration.
+The active research separates reference agreement, confidence, answer revision
+and jury acceptance. The [paper brief](docs/reporting/paper-brief.md) records
+admitted evidence and remaining scientific gaps. The
+[active report](report/epistemics/README.md) retains the original Apart layout
+as a working revision; the [venue record](docs/reporting/venue.md) distinguishes
+the proposed peer-review route from the November 13–15, 2026 sprint target.
+Historical tracks and deadlines do not govern a new submission. New findings
+require their own admitted evidence; the migration itself establishes none.
 
 The full standardized scenario suite, human annotation workflow, and benchmark
 session scorer remain incomplete. Imported payoff-only campaigns and fictional
@@ -158,9 +160,14 @@ uv run --project harness --locked ruff format --check harness/src harness/tests
 
 ## Research records
 
-The [reporting guide](docs/reporting/README.md) defines research report standards.
-Read it before writing or reviewing reports. Compact numeric snapshots and
-report sources are versioned. Raw campaigns, traces, checkpoints, ledgers, and
+The [reporting guide](docs/reporting/README.md) defines research report standards;
+read it before writing or reviewing reports. The
+[research revision workflow](docs/reporting/research-maturation.md) captures
+how to strengthen exploratory studies through replication, evaluator audits
+and iterative writing, including when revisiting earlier projects.
+
+Compact numeric snapshots and report sources are versioned. Raw campaigns,
+traces, checkpoints, ledgers, and
 archives under `harness/results/` stay local and ignored, including the imported
 2026-10-26 campaign. Raw evidence must be obtained separately for a full audit;
 Git LFS is not required for this source repository. The imported payoff-only
@@ -168,6 +175,14 @@ campaign and fictional teaching examples do not establish constitution-condition
 benchmark performance.
 
 ## Changelog
+
+### 2026-11-17
+
+- Adopt the [reusable research revision workflow](docs/reporting/research-maturation.md)
+  for taking exploratory studies toward peer review: broaden the evidence needed
+  by the claim, audit the evaluator and revise the paper as results arrive.
+  Transfer the method to earlier projects with their own provenance and
+  authorizations; see the [decision](docs/decisions/research-maturation-transfers-method-not-findings.md).
 
 ### 2026-11-14
 

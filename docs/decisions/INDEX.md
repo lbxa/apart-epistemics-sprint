@@ -4,18 +4,28 @@
 
 Every record, newest first. See [README](./README.md) for when and how to write one.
 
+- [The current website paper has its own asset](./current-website-paper-has-its-own-asset.md) — 2026-11-18
 - [Chart scroll motion preserves static data](./chart-scroll-motion-preserves-static-data.md) — 2026-11-17
 - [Cloudflare branch previews need explicit configuration](./cloudflare-branch-previews-need-explicit-configuration.md) — 2026-11-17
+- [Concise prose preserves the complete evidence](./report-concision-preserves-evidence.md) — 2026-11-17
 - [Header links follow the VLA pill reference](./header-links-follow-the-vla-pill-reference.md) — 2026-11-17
+- [Reference adjudication is source-first and human](./reference-adjudication-is-source-first-and-human.md) — 2026-11-17
+- [Research maturation transfers the method, not the findings](./research-maturation-transfers-method-not-findings.md) — 2026-11-17
 - [Select controls use compact registry dimensions](./select-controls-use-compact-registry-dimensions.md) — 2026-11-17
 - [Website builds restore the pinned film outside Git](./website-builds-restore-pinned-film-outside-git.md) — 2026-11-17
 - [Astro uses native PostCSS to preserve the template](./astro-uses-native-postcss-to-preserve-the-template.md) — 2026-11-16
 - [Base UI selects hydrate only the filter controls](./base-ui-selects-hydrate-only-the-filter-controls.md) — 2026-11-16
 - [Comprehensive appendix retains intermediate endpoints](./comprehensive-appendix-retains-intermediate-endpoints.md) — 2026-11-16
+- [Domain stability figure belongs in main Results](./domain-stability-figure-belongs-in-main-results.md) — 2026-11-16
 - [Landing page demo is a browser-only teaching round](./landing-page-demo-is-a-browser-only-teaching-round.md) — 2026-11-16
 - [Landing page leads with demo and three findings](./landing-page-leads-with-demo-and-three-findings.md) — 2026-11-16
 - [Macro-Epistemics names the project; Veracity remains the instrument](./macro-epistemics-names-the-project-veracity-remains-the-instrument.md) — 2026-11-16
 - [Macro-Epistemics title describes confidence under dispute](./macro-epistemics-title-describes-confidence-under-dispute.md) — 2026-11-16
+- [Numerical objection replication retains its frozen parent](./numeric-objection-replication-retains-frozen-parent.md) — 2026-11-16
+- [Peer-review revision preserves the primary cohort](./peer-review-revision-preserves-primary-cohort.md) — 2026-11-16
+- [Publication edit preserves frozen evidence and review status](./publication-edit-preserves-frozen-evidence-and-review-status.md) — 2026-11-16
+- [Replication evidence exports public receipts only](./replication-evidence-exports-public-receipts-only.md) — 2026-11-16
+- [Report title page omits sprint draft markers](./report-title-page-omits-sprint-draft-markers.md) — 2026-11-16
 - [Research landing page preserves the archive header and frozen evidence](./research-landing-page-preserves-the-archive-header-and-frozen-evidence.md) — 2026-11-16
 - [Results lead the website without hidden sections](./results-lead-the-website-without-hidden-sections.md) — 2026-11-16
 - [Sector admission retains contract evidence separately](./sector-admission-retains-contract-evidence-separately.md) — 2026-11-16

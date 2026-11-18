@@ -6,6 +6,11 @@ import { fileURLToPath } from 'node:url';
 const website = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const repository = resolve(website, '..');
 const exports = resolve(repository, 'video/exports');
+const currentReport = resolve(website, 'public/files/confidence-correction-and-consensus.pdf');
+if (createHash('sha256').update(readFileSync(currentReport)).digest('hex') !==
+    '04fe75d345d73b686af306aee2e69554fcf535b2d84854b935635005232d93af') {
+  throw new Error('The current paper differs from the approved website PDF.');
+}
 const research = JSON.parse(readFileSync(resolve(website, 'src/data/research.json'), 'utf8'));
 const reportHash = research.provenance.reportPdfSha256;
 if (typeof reportHash !== 'string' || !/^[a-f0-9]{64}$/.test(reportHash)) {

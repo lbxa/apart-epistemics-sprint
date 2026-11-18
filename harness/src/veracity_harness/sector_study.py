@@ -305,9 +305,26 @@ class SectorStudy:
             identity, "complete" if call["status"] == "complete" else "failed", result
         )
 
-    async def dispute(self, case, model, arm, seed, *, replay=None):
+    async def dispute(
+        self,
+        case,
+        model,
+        arm,
+        seed,
+        *,
+        replay=None,
+        challenge_override=None,
+        identity_namespace=None,
+    ):
         kind = "sensitivity" if replay else "branch"
-        identity = job_key(kind, case.case_id, model, arm, seed)
+        identity = job_key(
+            kind,
+            *((identity_namespace,) if identity_namespace else ()),
+            case.case_id,
+            model,
+            arm,
+            seed,
+        )
         payload = {
             "model": model,
             "case_id": case.case_id,
@@ -318,7 +335,16 @@ class SectorStudy:
             "seed": seed,
             "jury_model": MODELS[0] if replay else JURY_MODEL,
         }
-        if self.journal.get(identity):
+        if identity_namespace:
+            payload["identity_namespace"] = identity_namespace
+        if challenge_override is not None:
+            payload["challenge_sha256"] = hashlib.sha256(challenge_override.encode()).hexdigest()
+        existing = self.journal.get(identity)
+        if existing:
+            if existing["payload"] != payload and (
+                identity_namespace or challenge_override is not None
+            ):
+                raise ValueError("A frozen dispute cannot change its explicit objection")
             return
         async with self.engine_slots:
             if time.time() >= self.deadline:
@@ -333,7 +359,9 @@ class SectorStudy:
                 )
                 return
             answer = Answer.model_validate(original["parsed"])
-            challenge, _ = challenge_text(case, answer, arm)
+            challenge = challenge_override
+            if challenge is None:
+                challenge, _ = challenge_text(case, answer, arm)
             claim = (
                 "For the supplied task, my answer is "
                 + answer.answer

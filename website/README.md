@@ -21,10 +21,10 @@ bun run prepare:assets
 bun run dev
 ```
 
-`prepare:assets` retains the report PDF pinned by the public evidence export;
-it accepts a replacement local build only when its hash matches that admission.
-A concurrent working PDF cannot silently replace the verified archive. The
-film stays in the ignored root `video/` directory. If absent in a clean checkout,
+`prepare:assets` verifies the committed working paper and the archive PDF
+pinned by the public evidence export. The paper links point to the working
+paper, refreshed by explicitly copying a reviewed build and updating its hash.
+The film stays in the ignored root `video/` directory. If absent in a clean checkout,
 asset preparation downloads `website-assets-v1`'s public GitHub release asset and
 checks its pinned SHA-256 before caching it there. Existing committed poster and
 captions are retained when local render exports are absent. The verified MP4 is
@@ -36,6 +36,9 @@ Wrangler's name matches that target. Large assets remain outside Git history;
 the public release supplies reproducible cloud builds.
 The empty `previews` block enables Cloudflare's configured branch-preview
 command, `npx wrangler preview`; static assets stay at the top level.
+The custom `src/pages/404.astro` builds to `dist/404.html`, which Workers serves
+with a 404 status for missing paths, including nested URLs. It matches the
+Collusion companion's error page, with this project's own title and home link.
 
 ```sh
 bunx astro sync
@@ -111,9 +114,9 @@ are not supported by these snapshots.
 
 Disclose the frozen numerical objection encoding flaw alongside the findings.
 Its 287 recovered references come from a scripted offline audit, not observed
-model exploitation. The candidate repair remains unintegrated. The linked PDF
-matches the latest archived report, `sector-report-da7e42f28ba54247:v1`, SHA256
-`9ab732be30fca65d052e027c1e50b1e07e86c0320ebd8d5e077c5c4cb56b9afc`.
+model exploitation. The plotted primary cohort retains the original generator.
+The current paper includes a separately collected numerical rerun with the
+repaired policy. The public data export retains its original archive PDF pin.
 
 Run `bun scripts/sync-research.mjs` to regenerate the aggregate data from the
 paper's admitted snapshots. It validates hashes, artifact identity, assigned
@@ -122,6 +125,18 @@ writing identical `src/data/research.json` and `public/data/research.json`.
 
 ## Changelog
 
+### 2026-11-18
+
+- Link the approved working paper at `/files/confidence-correction-and-consensus.pdf`.
+  Keep the earlier Macro-Epistemics PDF at its existing URL so the public
+  evidence export continues to reproduce its archived report hash. See the
+  [asset decision](../docs/decisions/current-website-paper-has-its-own-asset.md).
+
+### Earlier updates
+
+- 2026-11-17: Added the matching static 404 page for both research companions.
+  Epistemics retains its own identity and returns visitors to its own home
+  page; the existing Workers 404 routing needs no additional server code.
 - 2026-11-17: Added the explicit previews block required by Wrangler 4.163's
   branch-preview command after the production-style build succeeded in Cloudflare.
 - 2026-11-17: Prepared publication through the existing Cloudflare main-branch
